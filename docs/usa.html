@@ -3,138 +3,1468 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eSIM Comparison - USA</title>
+    <title>USA eSIM Plans - eSim Scanner AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-6">
-            <h1 class="text-3xl font-bold text-gray-900">eSIM Comparison</h1>
-            <p class="text-gray-600 mt-1">Find the best eSIM plans for your travels</p>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                    eSim Scanner AI
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="index.html#destinations" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Top Destinations</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-700 hover:text-blue-600" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="hidden md:hidden pb-4" id="mobile-menu">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                <a href="index.html#destinations" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Top Destinations</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-2">USA eSIM Plans</h2>
-            <p class="text-gray-600">Compare prices and data plans from top providers</p>
+    <main class="flex-grow">
+        
+<!-- Country Hero Section -->
+<section class="relative bg-cover bg-center bg-no-repeat py-20 md:py-28" 
+         style="background-image: url('https://source.unsplash.com/1600x900/?usa,travel');">
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 text-center">
+        <div class="flex items-center justify-center mb-6">
+            <a href="index.html" class="text-white hover:text-blue-300 mr-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </a>
+            <span class="text-gray-200">Home</span>
+            <span class="mx-2 text-gray-400">/</span>
+            <span class="text-white font-medium">USA</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+            Best eSIM Plans for USA
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md">
+            Compare prices and data plans from top providers
+        </p>
+    </div>
+</section>
+
+<!-- Sticky Filter Bar -->
+<nav class="sticky top-0 z-40 bg-white shadow-lg border-b-2 border-gray-300">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+            <!-- All Plans Button -->
+            <button onclick="filterPlans('all')" 
+                    class="filter-btn active px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full transition-all duration-200 whitespace-nowrap">
+                All Plans
+            </button>
+            <!-- Data Amount Filter Buttons -->
+            
+            
+            <button onclick="filterPlans('1gb')" 
+                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                    data-filter="1gb">
+                1GB
+            </button>
+            
+            
+            <button onclick="filterPlans('3gb')" 
+                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                    data-filter="3gb">
+                3GB
+            </button>
+            
+            
+            <button onclick="filterPlans('5gb')" 
+                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                    data-filter="5gb">
+                5GB
+            </button>
+            
+            
+            <button onclick="filterPlans('10gb')" 
+                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                    data-filter="10gb">
+                10GB
+            </button>
+            
+            
+            <button onclick="filterPlans('unlimited')" 
+                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                    data-filter="unlimited">
+                Unlimited
+            </button>
+            
+        </div>
+    </div>
+</nav>
+
+<!-- Comparison Sections by Data Amount -->
+<section class="container mx-auto px-4 py-12">
+    
+    
+    <div class="plan-section mb-12" data-filter="1gb">
+        <!-- Section Header -->
+        <div class="mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">1GB Plans</h2>
+            <p class="text-gray-600">Compare all providers for 1GB</p>
         </div>
 
-        <!-- eSIM Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Plans Grid - 5 columns on xl screens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Airalo</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-blue-600">$4.50</span>
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                    BEST PRICE
+                </div>
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/airalo.com" 
+                             alt="Airalo logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            1GB
-                        </span>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.8</span>
+                        <span class="text-xs text-gray-500">(27k)</span>
                     </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-green-600">$4.50</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
                     <a href="https://example.com/airalo-usa" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        View Plan
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
                     </a>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Maya Mobile</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-blue-600">$6.00</span>
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/maya.net" 
+                             alt="Maya Mobile logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            2GB
-                        </span>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(28k)</span>
                     </div>
-                    <a href="https://example.com/maya-usa" 
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$5.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/maya-mobile-usa" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        View Plan
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
                     </a>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Nomad</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-blue-600">$8.50</span>
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/getnomad.app" 
+                             alt="Nomad logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Nomad</h3>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            3GB
-                        </span>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.8</span>
+                        <span class="text-xs text-gray-500">(383)</span>
                     </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$5.50</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
                     <a href="https://example.com/nomad-usa" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        View Plan
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
                     </a>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Holafly</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-blue-600">$10.00</span>
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/holafly.com" 
+                             alt="Holafly logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Holafly</h3>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            5GB
-                        </span>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">5.0</span>
+                        <span class="text-xs text-gray-500">(40k)</span>
                     </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$6.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
                     <a href="https://example.com/holafly-usa" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        View Plan
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
                     </a>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Klook</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-blue-600">$5.50</span>
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/klook.com" 
+                             alt="Klook logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            1.5GB
-                        </span>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.5</span>
+                        <span class="text-xs text-gray-500">(6.9k)</span>
                     </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$4.75</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
                     <a href="https://example.com/klook-usa" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
-                        View Plan
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
                     </a>
                 </div>
             </div>
             
         </div>
+    </div>
+    
+    
+    <div class="plan-section mb-12" data-filter="3gb">
+        <!-- Section Header -->
+        <div class="mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">3GB Plans</h2>
+            <p class="text-gray-600">Compare all providers for 3GB</p>
+        </div>
+
+        <!-- Plans Grid - 5 columns on xl screens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                    BEST PRICE
+                </div>
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/airalo.com" 
+                             alt="Airalo logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.6</span>
+                        <span class="text-xs text-gray-500">(55k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-green-600">$9.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/airalo-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/maya.net" 
+                             alt="Maya Mobile logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(6.2k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$10.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/maya-mobile-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/getnomad.app" 
+                             alt="Nomad logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Nomad</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">5.0</span>
+                        <span class="text-xs text-gray-500">(203)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$11.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/nomad-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/holafly.com" 
+                             alt="Holafly logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Holafly</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(7.8k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$12.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/holafly-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/klook.com" 
+                             alt="Klook logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(5.1k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$9.50</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/klook-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    <div class="plan-section mb-12" data-filter="5gb">
+        <!-- Section Header -->
+        <div class="mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">5GB Plans</h2>
+            <p class="text-gray-600">Compare all providers for 5GB</p>
+        </div>
+
+        <!-- Plans Grid - 5 columns on xl screens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                    BEST PRICE
+                </div>
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/airalo.com" 
+                             alt="Airalo logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.8</span>
+                        <span class="text-xs text-gray-500">(69k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-green-600">$12.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/airalo-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/maya.net" 
+                             alt="Maya Mobile logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">5.0</span>
+                        <span class="text-xs text-gray-500">(71k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$13.50</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/maya-mobile-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/getnomad.app" 
+                             alt="Nomad logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Nomad</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(67k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$14.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/nomad-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/holafly.com" 
+                             alt="Holafly logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Holafly</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.8</span>
+                        <span class="text-xs text-gray-500">(61k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$15.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/holafly-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/klook.com" 
+                             alt="Klook logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.6</span>
+                        <span class="text-xs text-gray-500">(8.2k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$12.50</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/klook-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    <div class="plan-section mb-12" data-filter="10gb">
+        <!-- Section Header -->
+        <div class="mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">10GB Plans</h2>
+            <p class="text-gray-600">Compare all providers for 10GB</p>
+        </div>
+
+        <!-- Plans Grid - 5 columns on xl screens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                    BEST PRICE
+                </div>
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/airalo.com" 
+                             alt="Airalo logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(34k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-green-600">$18.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/airalo-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/maya.net" 
+                             alt="Maya Mobile logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.8</span>
+                        <span class="text-xs text-gray-500">(265)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$20.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/maya-mobile-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/getnomad.app" 
+                             alt="Nomad logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Nomad</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.5</span>
+                        <span class="text-xs text-gray-500">(18k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$22.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/nomad-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/holafly.com" 
+                             alt="Holafly logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Holafly</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(46k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$24.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/holafly-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/klook.com" 
+                             alt="Klook logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(8.8k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$19.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/klook-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    <div class="plan-section mb-12" data-filter="unlimited">
+        <!-- Section Header -->
+        <div class="mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Unlimited Plans</h2>
+            <p class="text-gray-600">Compare all providers for Unlimited</p>
+        </div>
+
+        <!-- Plans Grid - 5 columns on xl screens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                    BEST PRICE
+                </div>
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/airalo.com" 
+                             alt="Airalo logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.6</span>
+                        <span class="text-xs text-gray-500">(59k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-green-600">$35.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/airalo-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/maya.net" 
+                             alt="Maya Mobile logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">5.0</span>
+                        <span class="text-xs text-gray-500">(3.8k)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$38.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/maya-mobile-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/getnomad.app" 
+                             alt="Nomad logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Nomad</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(973)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$40.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/nomad-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/holafly.com" 
+                             alt="Holafly logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Holafly</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.5</span>
+                        <span class="text-xs text-gray-500">(220)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$45.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/holafly-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <div class="flex items-center gap-2 mb-2 pr-10">
+                        <img src="https://logo.clearbit.com/klook.com" 
+                             alt="Klook logo" 
+                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    </div>
+                    
+                    <!-- Star Rating Trust Signal -->
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.6</span>
+                        <span class="text-xs text-gray-500">(433)</span>
+                    </div>
+                    
+                    <!-- Price - Prominent Element -->
+                    <div class="my-2">
+                        <span class="text-3xl font-bold text-blue-600">$36.00</span>
+                    </div>
+                    
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            
+                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- Buy Now Button - High CTA -->
+                    <a href="https://example.com/klook-usa" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                        Buy Now
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</section>
+
+<!-- Filter JavaScript -->
+<script>
+    function filterPlans(filterValue) {
+        // Get all plan sections
+        const sections = document.querySelectorAll('.plan-section');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-blue-600', 'text-white');
+            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-blue-100');
+        });
+        
+        // Show/hide sections based on filter
+        if (filterValue === 'all') {
+            // Show all sections
+            sections.forEach(section => {
+                section.style.display = 'block';
+            });
+            // Activate "All Plans" button (first button)
+            const allPlansBtn = document.querySelector('button[onclick="filterPlans(\'all\')"]');
+            if (allPlansBtn) {
+                allPlansBtn.classList.add('active', 'bg-blue-600', 'text-white');
+                allPlansBtn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-blue-100');
+            }
+        } else {
+            // Hide all sections first
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show only matching section
+            const targetSection = document.querySelector(`.plan-section[data-filter="${filterValue}"]`);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+            
+            // Activate the clicked button
+            const clickedButton = document.querySelector(`button[data-filter="${filterValue}"]`);
+            if (clickedButton) {
+                clickedButton.classList.add('active', 'bg-blue-600', 'text-white');
+                clickedButton.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-blue-100');
+            }
+        }
+        
+        // No auto-scroll - keep user's current scroll position
+    }
+    
+    // Initialize: show all plans by default
+    document.addEventListener('DOMContentLoaded', function() {
+        filterPlans('all');
+    });
+</script>
+
+<style>
+    /* Hide scrollbar for filter bar */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-12">
-        <div class="container mx-auto px-4 py-6">
-            <p class="text-center text-gray-600 text-sm">
-                &copy; 2024 eSIM Comparison. All rights reserved.
-            </p>
+    <footer class="bg-gray-900 text-gray-300 mt-auto border-t-4 border-blue-600">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">eSim Scanner AI</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Find the best eSIM plans for your travels. Compare prices and data plans from top providers worldwide.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-blue-400 transition-colors inline-block">Home</a></li>
+                        <li><a href="index.html#destinations" class="hover:text-blue-400 transition-colors inline-block">Top Destinations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">Support</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors inline-block">About Us</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors inline-block">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
+                <p>&copy; 2025 eSim Scanner AI. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

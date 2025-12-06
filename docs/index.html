@@ -3,62 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eSim Scanner AI</title>
+    <title>eSim Scanner AI - Stay Connected Anywhere</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-6">
-            <h1 class="text-3xl font-bold text-gray-900">eSim Scanner AI</h1>
-            <p class="text-gray-600 mt-1">Find the best eSIM plans for your travels</p>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                    eSim Scanner AI
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="index.html#destinations" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Top Destinations</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-700 hover:text-blue-600" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="hidden md:hidden pb-4" id="mobile-menu">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                <a href="index.html#destinations" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Top Destinations</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <div class="mb-8 text-center">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Select a Country</h2>
-            <p class="text-gray-600">Choose a destination to compare eSIM plans</p>
+    <main class="flex-grow">
+        
+<!-- Hero Section -->
+<section class="relative bg-cover bg-center bg-no-repeat py-24 md:py-32" 
+         style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');">
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">Stay Connected Anywhere</h1>
+        <p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto drop-shadow-md">
+            Compare and find the best eSIM plans for your next adventure. Instant activation, no physical SIM needed.
+        </p>
+        
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto">
+            <div class="flex items-center bg-white rounded-full shadow-2xl overflow-hidden">
+                <input type="text" 
+                       placeholder="Where are you going?" 
+                       class="flex-1 px-6 py-4 text-gray-700 focus:outline-none text-lg">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 transition-colors duration-200 flex items-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
+    </div>
+</section>
 
-        <!-- Country Links Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            
-            <a href="usa.html" 
-               class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden block">
-                <div class="p-8 text-center">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">USA</h3>
-                    <p class="text-blue-600 font-medium">View Plans →</p>
+<!-- Popular Destinations Section -->
+<section id="destinations" class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
+        <p class="text-gray-600 text-lg">Choose your destination to compare eSIM plans</p>
+    </div>
+
+    <!-- Country Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        
+        
+        <a href="usa.html" 
+           class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 hover:-translate-y-1">
+            <div class="p-8 text-center">
+                <!-- Large Flag Emoji -->
+                <div class="text-8xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                    🇺🇸
                 </div>
-            </a>
-            
-            <a href="japan.html" 
-               class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden block">
-                <div class="p-8 text-center">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">Japan</h3>
-                    <p class="text-blue-600 font-medium">View Plans →</p>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">USA</h3>
+                <!-- Enhanced View Plans Button -->
+                <div class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-xl transform group-hover:scale-105 transition-all duration-200">
+                    View Plans
+                    <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-            </a>
-            
-            <a href="france.html" 
-               class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden block">
-                <div class="p-8 text-center">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">France</h3>
-                    <p class="text-blue-600 font-medium">View Plans →</p>
+            </div>
+        </a>
+        
+        
+        <a href="japan.html" 
+           class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 hover:-translate-y-1">
+            <div class="p-8 text-center">
+                <!-- Large Flag Emoji -->
+                <div class="text-8xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                    🇯🇵
                 </div>
-            </a>
-            
-        </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Japan</h3>
+                <!-- Enhanced View Plans Button -->
+                <div class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-xl transform group-hover:scale-105 transition-all duration-200">
+                    View Plans
+                    <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="france.html" 
+           class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 hover:-translate-y-1">
+            <div class="p-8 text-center">
+                <!-- Large Flag Emoji -->
+                <div class="text-8xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                    🇫🇷
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">France</h3>
+                <!-- Enhanced View Plans Button -->
+                <div class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-xl transform group-hover:scale-105 transition-all duration-200">
+                    View Plans
+                    <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+</section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-12">
-        <div class="container mx-auto px-4 py-6">
-            <p class="text-center text-gray-600 text-sm">
-                &copy; 2024 eSim Scanner AI. All rights reserved.
-            </p>
+    <footer class="bg-gray-900 text-gray-300 mt-auto border-t-4 border-blue-600">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">eSim Scanner AI</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Find the best eSIM plans for your travels. Compare prices and data plans from top providers worldwide.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-blue-400 transition-colors inline-block">Home</a></li>
+                        <li><a href="index.html#destinations" class="hover:text-blue-400 transition-colors inline-block">Top Destinations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-lg">Support</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors inline-block">About Us</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors inline-block">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
+                <p>&copy; 2025 eSim Scanner AI. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
