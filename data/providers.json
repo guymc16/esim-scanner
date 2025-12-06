@@ -1,0 +1,73 @@
+[
+  {
+    "name": "Airalo",
+    "logo_url": "https://logo.clearbit.com/airalo.com",
+    "base_rating": 4.8,
+    "affiliate_link_template": "https://airalo.com/{country_slug}",
+    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
+    "base_prices": {
+      "1GB": 4.50,
+      "3GB": 9.00,
+      "5GB": 12.00,
+      "10GB": 18.00,
+      "Unlimited": 35.00
+    }
+  },
+  {
+    "name": "Maya Mobile",
+    "logo_url": "https://logo.clearbit.com/maya.net",
+    "base_rating": 4.7,
+    "affiliate_link_template": "https://mayamobile.com/{country_slug}",
+    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
+    "base_prices": {
+      "1GB": 5.00,
+      "3GB": 10.00,
+      "5GB": 13.50,
+      "10GB": 20.00,
+      "Unlimited": 38.00
+    }
+  },
+  {
+    "name": "Nomad",
+    "logo_url": "https://logo.clearbit.com/getnomad.app",
+    "base_rating": 4.9,
+    "affiliate_link_template": "https://getnomad.app/{country_slug}",
+    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
+    "base_prices": {
+      "1GB": 5.50,
+      "3GB": 11.00,
+      "5GB": 14.00,
+      "10GB": 22.00,
+      "Unlimited": 40.00
+    }
+  },
+  {
+    "name": "Holafly",
+    "logo_url": "https://logo.clearbit.com/holafly.com",
+    "base_rating": 4.6,
+    "affiliate_link_template": "https://holafly.com/{country_slug}",
+    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
+    "base_prices": {
+      "1GB": 6.00,
+      "3GB": 12.00,
+      "5GB": 15.00,
+      "10GB": 24.00,
+      "Unlimited": 45.00
+    }
+  },
+  {
+    "name": "Klook",
+    "logo_url": "https://logo.clearbit.com/klook.com",
+    "base_rating": 4.8,
+    "affiliate_link_template": "https://klook.com/{country_slug}",
+    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
+    "base_prices": {
+      "1GB": 4.75,
+      "3GB": 9.50,
+      "5GB": 12.50,
+      "10GB": 19.00,
+      "Unlimited": 36.00
+    }
+  }
+]
+

@@ -16,7 +16,8 @@ def main():
     project_root = Path(__file__).parent.parent
     
     # Define paths
-    data_path = project_root / "data" / "esim_data.json"
+    providers_path = project_root / "data" / "providers.json"
+    countries_path = project_root / "data" / "countries.json"
     templates_path = project_root / "templates"
     output_path = project_root / "docs"
     
@@ -24,8 +25,12 @@ def main():
     output_path.mkdir(exist_ok=True)
     
     # Load JSON data
-    print(f"Loading data from {data_path}...")
-    with open(data_path, 'r', encoding='utf-8') as f:
+    print(f"Loading providers from {providers_path}...")
+    with open(providers_path, 'r', encoding='utf-8') as f:
+        providers_data = json.load(f)
+    
+    print(f"Loading countries from {countries_path}...")
+    with open(countries_path, 'r', encoding='utf-8') as f:
         countries_data = json.load(f)
     
     # Setup Jinja2 environment
@@ -33,68 +38,53 @@ def main():
     index_template = env.get_template('index.html')
     country_template = env.get_template('country.html')
     
+    # Standard data amounts
+    standard_data_amounts = ["1GB", "3GB", "5GB", "10GB", "Unlimited"]
+    
+    # Country price multipliers (to vary prices by country)
+    # Base multiplier is 1.0, adjust for specific countries
+    country_multipliers = {
+        'USA': 1.0,
+        'Japan': 1.15,
+        'France': 1.05,
+        'Switzerland': 1.20,
+        'United Arab Emirates': 1.10
+    }
+    
     # Generate index.html homepage
-    countries_list = [country_data['country'] for country_data in countries_data]
-    index_html = index_template.render(countries=countries_list)
+    # Template will show top 9 from all_countries
+    all_countries = countries_data
+    index_html = index_template.render(
+        all_countries=all_countries
+    )
     index_file = output_path / "index.html"
     with open(index_file, 'w', encoding='utf-8') as f:
         f.write(index_html)
     generated_count = 1
     print(f"Generated: index.html")
     
-    # Define standard data amounts and providers
-    standard_data_amounts = ["1GB", "3GB", "5GB", "10GB", "Unlimited"]
-    all_providers = ["Airalo", "Maya Mobile", "Nomad", "Holafly", "Klook"]
-    
-    # Provider-specific benefits mapping
-    provider_benefits = {
-        'Airalo': ['⚡ 5G Speed', '📅 30 Days'],
-        'Maya Mobile': ['⚡ 5G Speed', '📅 30 Days'],
-        'Nomad': ['⚡ 5G Speed', '📅 30 Days'],
-        'Holafly': ['⚡ 5G Speed', '📅 30 Days'],
-        'Klook': ['⚡ 5G Speed', '📅 30 Days']
-    }
-    
-    # Provider logo URLs (Clearbit API)
-    provider_logos = {
-        'Airalo': 'https://logo.clearbit.com/airalo.com',
-        'Maya Mobile': 'https://logo.clearbit.com/maya.net',
-        'Nomad': 'https://logo.clearbit.com/getnomad.app',
-        'Holafly': 'https://logo.clearbit.com/holafly.com',
-        'Klook': 'https://logo.clearbit.com/klook.com'
-    }
-    
-    # Base price structure (varies by provider and data amount)
-    # Format: {provider: {data_amount: base_price}}
-    base_prices = {
-        'Airalo': {'1GB': 4.50, '3GB': 9.00, '5GB': 12.00, '10GB': 18.00, 'Unlimited': 35.00},
-        'Maya Mobile': {'1GB': 5.00, '3GB': 10.00, '5GB': 13.50, '10GB': 20.00, 'Unlimited': 38.00},
-        'Nomad': {'1GB': 5.50, '3GB': 11.00, '5GB': 14.00, '10GB': 22.00, 'Unlimited': 40.00},
-        'Holafly': {'1GB': 6.00, '3GB': 12.00, '5GB': 15.00, '10GB': 24.00, 'Unlimited': 45.00},
-        'Klook': {'1GB': 4.75, '3GB': 9.50, '5GB': 12.50, '10GB': 19.00, 'Unlimited': 36.00}
-    }
-    
-    # Country price multipliers (to vary prices by country)
-    country_multipliers = {
-        'USA': 1.0,
-        'Japan': 1.15,
-        'France': 1.05
-    }
-    
     # Generate HTML for each country
-    for country_data in countries_data:
-        country = country_data['country']
-        multiplier = country_multipliers.get(country, 1.0)
+    for country_info in countries_data:
+        country_name = country_info['name']
+        country_slug = country_info['slug']
+        country_code = country_info.get('code', '')
+        image_url = country_info.get('image_url', '')
+        intro_text = country_info.get('intro_text', '')
+        multiplier = country_multipliers.get(country_name, 1.0)
         
         # Generate plans for ALL providers and ALL data amounts
         all_plans = []
-        for provider in all_providers:
+        for provider_info in providers_data:
+            provider_name = provider_info['name']
+            base_prices = provider_info['base_prices']
+            base_rating = provider_info['base_rating']
+            
             for data_amount in standard_data_amounts:
-                base_price = base_prices[provider][data_amount]
+                base_price = base_prices[data_amount]
                 final_price = round(base_price * multiplier, 2)
                 
-                # Generate random rating between 4.5 and 5.0
-                rating = round(random.uniform(4.5, 5.0), 1)
+                # Generate random rating around base rating (between base_rating and 5.0)
+                rating = round(random.uniform(base_rating, 5.0), 1)
                 
                 # Generate random review count (formatted)
                 review_counts = [
@@ -108,13 +98,18 @@ def main():
                 else:
                     review_count_str = review_count
                 
+                # Generate affiliate link
+                affiliate_link = provider_info['affiliate_link_template'].format(
+                    country_slug=country_slug
+                )
+                
                 plan = {
-                    'name': provider,
+                    'name': provider_name,
                     'price': final_price,
                     'data_amount': data_amount,
-                    'link': f"https://example.com/{provider.lower().replace(' ', '-')}-{country.lower()}",
-                    'benefits': provider_benefits[provider],
-                    'logo_url': provider_logos[provider],
+                    'link': affiliate_link,
+                    'benefits': provider_info['benefits'],
+                    'logo_url': provider_info['logo_url'],
                     'rating': rating,
                     'review_count': review_count_str
                 }
@@ -158,22 +153,17 @@ def main():
                 'plans': plans
             })
         
-        # Generate filename (lowercase with .html extension)
-        filename = f"{country.lower()}.html"
+        # Generate filename using slug
+        filename = f"{country_slug}.html"
         output_file = output_path / filename
-        
-        # Get flag emoji for country
-        flag_map = {
-            'USA': '🇺🇸',
-            'Japan': '🇯🇵',
-            'France': '🇫🇷'
-        }
-        country_flag = flag_map.get(country, '🌍')
         
         # Render template
         html_content = country_template.render(
-            country=country,
-            country_flag=country_flag,
+            country=country_name,
+            country_code=country_code,
+            country_slug=country_slug,
+            image_url=image_url,
+            intro_text=intro_text,
             grouped_plans=grouped_plans_sorted
         )
         

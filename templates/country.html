@@ -5,7 +5,7 @@
 {% block content %}
 <!-- Country Hero Section -->
 <section class="relative bg-cover bg-center bg-no-repeat py-20 md:py-28" 
-         style="background-image: url('https://source.unsplash.com/1600x900/?{{ country.lower() }},travel');">
+         style="background-image: url('{% if image_url %}{{ image_url }}{% else %}https://source.unsplash.com/1600x900/?{{ country_slug }},travel{% endif %}');">
     <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     
@@ -24,8 +24,16 @@
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
             Best eSIM Plans for {{ country }}
         </h1>
+        {% if country_code %}
+        <div class="flex items-center justify-center gap-2 mb-4">
+            <img src="https://flagcdn.com/w40/{{ country_code|lower }}.png" 
+                 alt="{{ country }} flag"
+                 class="w-10 h-7 object-cover rounded shadow-md"
+                 onerror="this.style.display='none'">
+        </div>
+        {% endif %}
         <p class="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md">
-            Compare prices and data plans from top providers
+            {% if intro_text %}{{ intro_text }}{% else %}Compare prices and data plans from top providers{% endif %}
         </p>
     </div>
 </section>

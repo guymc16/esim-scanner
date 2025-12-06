@@ -16,18 +16,30 @@
             Compare and find the best eSIM plans for your next adventure. Instant activation, no physical SIM needed.
         </p>
         
-        <!-- Search Bar -->
-        <div class="max-w-2xl mx-auto">
-            <div class="flex items-center bg-white rounded-full shadow-2xl overflow-hidden">
-                <input type="text" 
-                       placeholder="Where are you going?" 
-                       class="flex-1 px-6 py-4 text-gray-700 focus:outline-none text-lg">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 transition-colors duration-200 flex items-center">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        <!-- Seamless Search Bar with Autocomplete -->
+        <div class="relative w-full max-w-2xl mx-auto">
+            <div class="flex items-center w-full bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                <input 
+                    type="text" 
+                    id="country-search"
+                    class="flex-grow w-full bg-transparent border-none outline-none focus:ring-0 focus:border-none focus:outline-none px-6 py-4 text-gray-700 placeholder-gray-400 m-0 h-full appearance-none"
+                    placeholder="Where are you going?"
+                >
+                <button 
+                    id="searchButton" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 font-bold border-none outline-none focus:outline-none h-full m-0 rounded-none cursor-pointer flex-shrink-0 transition-colors duration-200 flex items-center"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
             </div>
+            
+            <!-- Autocomplete Dropdown -->
+            <ul id="autocomplete-dropdown" 
+                class="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 max-h-64 overflow-y-auto z-50 hidden">
+                <!-- Results will be populated here by JavaScript -->
+            </ul>
         </div>
     </div>
 </section>
@@ -39,32 +51,136 @@
         <p class="text-gray-600 text-lg">Choose your destination to compare eSIM plans</p>
     </div>
 
-    <!-- Country Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {% for country in countries %}
-        {% set flag_map = {
-            'USA': '🇺🇸',
-            'Japan': '🇯🇵',
-            'France': '🇫🇷'
-        } %}
-        <a href="{{ country.lower() }}.html" 
-           class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 hover:-translate-y-1">
-            <div class="p-8 text-center">
-                <!-- Large Flag Emoji -->
-                <div class="text-8xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                    {{ flag_map.get(country, '🌍') }}
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ country }}</h3>
-                <!-- Enhanced View Plans Button -->
-                <div class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-xl transform group-hover:scale-105 transition-all duration-200">
-                    View Plans
-                    <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
+    <!-- Airbnb-Style Country Cards Grid - Top 9 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        {% for country in all_countries[:9] %}
+        <a href="{{ country.slug }}.html" 
+           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center"
+                 style="background-image: url('{% if country.image_url %}{{ country.image_url }}{% else %}https://source.unsplash.com/600x400/?{{ country.slug }},travel{% endif %}');">
+            </div>
+            
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            
+            <!-- Content at Bottom-Left -->
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="flex items-center gap-3">
+                    <!-- Flag Image -->
+                    <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" 
+                         alt="{{ country.name }} flag"
+                         class="w-8 h-6 object-cover rounded shadow-md"
+                         onerror="this.style.display='none'">
+                    <!-- Country Name -->
+                    <h3 class="text-xl font-bold text-white drop-shadow-lg">{{ country.name }}</h3>
                 </div>
             </div>
         </a>
         {% endfor %}
     </div>
+    
+    <!-- All Countries Section -->
+    {% if all_countries|length > 9 %}
+    <div class="mt-16 text-center">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">All {{ all_countries|length }} Destinations</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
+            {% for country in all_countries %}
+            <a href="{{ country.slug }}.html" 
+               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" 
+                     alt="{{ country.name }} flag"
+                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
+                     onerror="this.style.display='none'">
+                <h4 class="text-sm font-semibold text-gray-900">{{ country.name }}</h4>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </section>
+
+<!-- Autocomplete Search Functionality -->
+<script>
+    // All countries data for autocomplete
+    const allCountries = [
+        {% for country in all_countries %}
+        {
+            name: "{{ country.name }}",
+            slug: "{{ country.slug }}",
+            code: "{{ country.code|lower }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+    
+    const searchInput = document.getElementById('country-search');
+    const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+    
+    function renderAutocompleteResults(matches) {
+        if (matches.length === 0) {
+            autocompleteDropdown.classList.add('hidden');
+            return;
+        }
+        
+        autocompleteDropdown.innerHTML = '';
+        autocompleteDropdown.classList.remove('hidden');
+        
+        matches.forEach(country => {
+            const li = document.createElement('li');
+            li.className = 'flex items-center gap-3 px-6 py-3 hover:bg-gray-100 cursor-pointer transition-colors';
+            li.innerHTML = `
+                <img src="https://flagcdn.com/w40/${country.code}.png" 
+                     alt="${country.name} flag"
+                     class="w-8 h-6 object-cover rounded shadow-sm"
+                     onerror="this.style.display='none'">
+                <span class="text-gray-900 font-medium">${country.name}</span>
+            `;
+            
+            li.addEventListener('click', function() {
+                window.location.href = `${country.slug}.html`;
+            });
+            
+            autocompleteDropdown.appendChild(li);
+        });
+    }
+    
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        
+        if (searchTerm === '') {
+            autocompleteDropdown.classList.add('hidden');
+            return;
+        }
+        
+        // Filter countries that match search term
+        const matches = allCountries.filter(country => 
+            country.name.toLowerCase().includes(searchTerm)
+        ).slice(0, 8); // Limit to 8 results
+        
+        renderAutocompleteResults(matches);
+    });
+    
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+            autocompleteDropdown.classList.add('hidden');
+        }
+    });
+    
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const firstMatch = autocompleteDropdown.querySelector('li');
+            if (firstMatch) {
+                firstMatch.click();
+            }
+        }
+        
+        if (e.key === 'Escape') {
+            autocompleteDropdown.classList.add('hidden');
+            searchInput.blur();
+        }
+    });
+</script>
 {% endblock %}
