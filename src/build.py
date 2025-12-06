@@ -17,7 +17,7 @@ def main():
     # Define paths
     data_path = project_root / "data" / "esim_data.json"
     templates_path = project_root / "templates"
-    output_path = project_root / "public"
+    output_path = project_root / "docs"
     
     # Create output directory if it doesn't exist
     output_path.mkdir(exist_ok=True)
