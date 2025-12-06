@@ -29,10 +29,19 @@ def main():
     
     # Setup Jinja2 environment
     env = Environment(loader=FileSystemLoader(str(templates_path)))
-    template = env.get_template('base.html')
+    base_template = env.get_template('base.html')
+    index_template = env.get_template('index.html')
+    
+    # Generate index.html homepage
+    countries_list = [country_data['country'] for country_data in countries_data]
+    index_html = index_template.render(countries=countries_list)
+    index_file = output_path / "index.html"
+    with open(index_file, 'w', encoding='utf-8') as f:
+        f.write(index_html)
+    generated_count = 1
+    print(f"Generated: index.html")
     
     # Generate HTML for each country
-    generated_count = 0
     for country_data in countries_data:
         country = country_data['country']
         providers = country_data['providers']
@@ -42,7 +51,7 @@ def main():
         output_file = output_path / filename
         
         # Render template
-        html_content = template.render(
+        html_content = base_template.render(
             country=country,
             providers=providers
         )
