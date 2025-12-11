@@ -56,39 +56,38 @@
     <main class="flex-grow">
         
 <!-- Hero Section -->
-<section class="relative bg-cover bg-center bg-no-repeat py-24 md:py-32" 
-         style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');">
+<section class="relative bg-cover bg-center bg-no-repeat py-24 md:py-32"
+    style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');">
     <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    
+
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">Stay Connected Anywhere</h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">Stay Connected Anywhere
+        </h1>
         <p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto drop-shadow-md">
             Compare and find the best eSIM plans for your next adventure. Instant activation, no physical SIM needed.
         </p>
-        
+
         <!-- Seamless Search Bar with Autocomplete -->
         <div class="relative w-full max-w-2xl mx-auto">
-            <div class="flex items-center w-full bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-                <input 
-                    type="text" 
-                    id="country-search"
+            <div
+                class="flex items-center w-full bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                <input type="text" id="country-search"
                     class="flex-grow w-full bg-transparent border-none outline-none focus:ring-0 focus:border-none focus:outline-none px-6 py-4 text-gray-700 placeholder-gray-400 m-0 h-full appearance-none"
-                    placeholder="Where are you going?"
-                >
-                <button 
-                    id="searchButton" 
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 font-bold border-none outline-none focus:outline-none h-full m-0 rounded-none cursor-pointer flex-shrink-0 transition-colors duration-200 flex items-center"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    placeholder="Where are you going?">
+                <button id="searchButton"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 font-bold border-none outline-none focus:outline-none h-full m-0 rounded-none cursor-pointer flex-shrink-0 transition-colors duration-200 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
             </div>
-            
+
             <!-- Autocomplete Dropdown -->
-            <ul id="autocomplete-dropdown" 
+            <ul id="autocomplete-dropdown"
                 class="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 max-h-64 overflow-y-auto z-50 hidden">
                 <!-- Results will be populated here by JavaScript -->
             </ul>
@@ -106,416 +105,334 @@
     <!-- Airbnb-Style Country Cards Grid - Top 9 -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         
-        <a href="israel.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="israel.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Western_Wall-Jerusalem.jpg?width=800');">
+                style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Western_Wall-Jerusalem.jpg?width=800');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/il.png" 
-                         alt="Israel flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/il.png" alt="Israel flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">Israel</h3>
                 </div>
             </div>
         </a>
         
-        <a href="usa.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="usa.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/us.png" 
-                         alt="USA flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/us.png" alt="USA flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">USA</h3>
                 </div>
             </div>
         </a>
         
-        <a href="japan.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="japan.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Fuji_from_Lake_Kawaguchi.jpg?width=1200');">
+                style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Fuji_from_Lake_Kawaguchi.jpg?width=1200');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/jp.png" 
-                         alt="Japan flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">Japan</h3>
                 </div>
             </div>
         </a>
         
-        <a href="france.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="france.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/fr.png" 
-                         alt="France flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/fr.png" alt="France flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">France</h3>
                 </div>
             </div>
         </a>
         
-        <a href="thailand.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="thailand.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/th.png" 
-                         alt="Thailand flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/th.png" alt="Thailand flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">Thailand</h3>
                 </div>
             </div>
         </a>
         
-        <a href="united-kingdom.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="united-kingdom.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/gb.png" 
-                         alt="United Kingdom flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">United Kingdom</h3>
                 </div>
             </div>
         </a>
         
-        <a href="italy.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="italy.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/it.png" 
-                         alt="Italy flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/it.png" alt="Italy flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">Italy</h3>
                 </div>
             </div>
         </a>
         
-        <a href="spain.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
+        <a href="spain.html"
+            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
             <!-- Background Image -->
             <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80');">
+                style="background-image: url('https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80');">
             </div>
-            
+
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
+
             <!-- Content at Bottom-Left -->
             <div class="absolute bottom-0 left-0 right-0 p-6">
                 <div class="flex items-center gap-3">
                     <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/es.png" 
-                         alt="Spain flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
+                    <img src="https://flagcdn.com/w40/es.png" alt="Spain flag"
+                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
                     <!-- Country Name -->
                     <h3 class="text-xl font-bold text-white drop-shadow-lg">Spain</h3>
                 </div>
             </div>
         </a>
         
-        <a href="germany.html" 
-           class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
-            <!-- Background Image -->
-            <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Neuschwanstein_Castle_2024.jpg?width=800');">
-            </div>
-            
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            
-            <!-- Content at Bottom-Left -->
-            <div class="absolute bottom-0 left-0 right-0 p-6">
-                <div class="flex items-center gap-3">
-                    <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/de.png" 
-                         alt="Germany flag"
-                         class="w-8 h-6 object-cover rounded shadow-md"
-                         onerror="this.style.display='none'">
-                    <!-- Country Name -->
-                    <h3 class="text-xl font-bold text-white drop-shadow-lg">Germany</h3>
-                </div>
-            </div>
-        </a>
-        
     </div>
-    
+
     <!-- All Countries Section -->
     
     <div class="mt-16 text-center">
         <h3 class="text-2xl font-bold text-gray-900 mb-6">All 21 Destinations</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
             
-            <a href="israel.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/il.png" 
-                     alt="Israel flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="israel.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/il.png" alt="Israel flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Israel</h4>
             </a>
             
-            <a href="usa.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/us.png" 
-                     alt="USA flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="usa.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/us.png" alt="USA flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">USA</h4>
             </a>
             
-            <a href="japan.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/jp.png" 
-                     alt="Japan flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="japan.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Japan</h4>
             </a>
             
-            <a href="france.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/fr.png" 
-                     alt="France flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="france.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/fr.png" alt="France flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">France</h4>
             </a>
             
-            <a href="thailand.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/th.png" 
-                     alt="Thailand flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="thailand.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/th.png" alt="Thailand flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Thailand</h4>
             </a>
             
-            <a href="united-kingdom.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/gb.png" 
-                     alt="United Kingdom flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="united-kingdom.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">United Kingdom</h4>
             </a>
             
-            <a href="italy.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/it.png" 
-                     alt="Italy flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="italy.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/it.png" alt="Italy flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Italy</h4>
             </a>
             
-            <a href="spain.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/es.png" 
-                     alt="Spain flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="spain.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/es.png" alt="Spain flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Spain</h4>
             </a>
             
-            <a href="germany.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/de.png" 
-                     alt="Germany flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="germany.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/de.png" alt="Germany flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Germany</h4>
             </a>
             
-            <a href="turkey.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/tr.png" 
-                     alt="Turkey flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="turkey.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/tr.png" alt="Turkey flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Turkey</h4>
             </a>
             
-            <a href="australia.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/au.png" 
-                     alt="Australia flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="australia.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/au.png" alt="Australia flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Australia</h4>
             </a>
             
-            <a href="south-korea.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/kr.png" 
-                     alt="South Korea flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="south-korea.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/kr.png" alt="South Korea flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">South Korea</h4>
             </a>
             
-            <a href="singapore.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/sg.png" 
-                     alt="Singapore flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="singapore.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/sg.png" alt="Singapore flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Singapore</h4>
             </a>
             
-            <a href="indonesia.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/id.png" 
-                     alt="Indonesia flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="indonesia.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/id.png" alt="Indonesia flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Indonesia</h4>
             </a>
             
-            <a href="canada.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/ca.png" 
-                     alt="Canada flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="canada.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/ca.png" alt="Canada flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Canada</h4>
             </a>
             
-            <a href="mexico.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/mx.png" 
-                     alt="Mexico flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="mexico.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/mx.png" alt="Mexico flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Mexico</h4>
             </a>
             
-            <a href="greece.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/gr.png" 
-                     alt="Greece flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="greece.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/gr.png" alt="Greece flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Greece</h4>
             </a>
             
-            <a href="portugal.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/pt.png" 
-                     alt="Portugal flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="portugal.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/pt.png" alt="Portugal flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Portugal</h4>
             </a>
             
-            <a href="netherlands.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/nl.png" 
-                     alt="Netherlands flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="netherlands.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/nl.png" alt="Netherlands flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Netherlands</h4>
             </a>
             
-            <a href="switzerland.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/ch.png" 
-                     alt="Switzerland flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="switzerland.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/ch.png" alt="Switzerland flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">Switzerland</h4>
             </a>
             
-            <a href="united-arab-emirates.html" 
-               class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/ae.png" 
-                     alt="UAE flag"
-                     class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm"
-                     onerror="this.style.display='none'">
+            <a href="united-arab-emirates.html"
+                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
+                <img src="https://flagcdn.com/w40/ae.png" alt="UAE flag"
+                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
                 <h4 class="text-sm font-semibold text-gray-900">UAE</h4>
             </a>
             
@@ -529,146 +446,146 @@
     // All countries data for autocomplete
     const allCountries = [
         
-        {
-            name: "Israel",
+    {
+        name: "Israel",
             slug: "israel",
-            code: "il"
-        },
-        
-        {
-            name: "USA",
-            slug: "usa",
-            code: "us"
-        },
-        
-        {
-            name: "Japan",
-            slug: "japan",
-            code: "jp"
-        },
-        
-        {
-            name: "France",
-            slug: "france",
-            code: "fr"
-        },
-        
-        {
-            name: "Thailand",
-            slug: "thailand",
-            code: "th"
-        },
-        
-        {
-            name: "United Kingdom",
-            slug: "united-kingdom",
-            code: "gb"
-        },
-        
-        {
-            name: "Italy",
-            slug: "italy",
-            code: "it"
-        },
-        
-        {
-            name: "Spain",
-            slug: "spain",
-            code: "es"
-        },
-        
-        {
-            name: "Germany",
-            slug: "germany",
-            code: "de"
-        },
-        
-        {
-            name: "Turkey",
-            slug: "turkey",
-            code: "tr"
-        },
-        
-        {
-            name: "Australia",
-            slug: "australia",
-            code: "au"
-        },
-        
-        {
-            name: "South Korea",
-            slug: "south-korea",
-            code: "kr"
-        },
-        
-        {
-            name: "Singapore",
-            slug: "singapore",
-            code: "sg"
-        },
-        
-        {
-            name: "Indonesia",
-            slug: "indonesia",
-            code: "id"
-        },
-        
-        {
-            name: "Canada",
-            slug: "canada",
-            code: "ca"
-        },
-        
-        {
-            name: "Mexico",
-            slug: "mexico",
-            code: "mx"
-        },
-        
-        {
-            name: "Greece",
-            slug: "greece",
-            code: "gr"
-        },
-        
-        {
-            name: "Portugal",
-            slug: "portugal",
-            code: "pt"
-        },
-        
-        {
-            name: "Netherlands",
-            slug: "netherlands",
-            code: "nl"
-        },
-        
-        {
-            name: "Switzerland",
-            slug: "switzerland",
-            code: "ch"
-        },
-        
-        {
-            name: "UAE",
-            slug: "united-arab-emirates",
-            code: "ae"
-        }
-        
-    ];
+                code: "il"
+    } , 
     
+    {
+        name: "USA",
+            slug: "usa",
+                code: "us"
+    } , 
+    
+    {
+        name: "Japan",
+            slug: "japan",
+                code: "jp"
+    } , 
+    
+    {
+        name: "France",
+            slug: "france",
+                code: "fr"
+    } , 
+    
+    {
+        name: "Thailand",
+            slug: "thailand",
+                code: "th"
+    } , 
+    
+    {
+        name: "United Kingdom",
+            slug: "united-kingdom",
+                code: "gb"
+    } , 
+    
+    {
+        name: "Italy",
+            slug: "italy",
+                code: "it"
+    } , 
+    
+    {
+        name: "Spain",
+            slug: "spain",
+                code: "es"
+    } , 
+    
+    {
+        name: "Germany",
+            slug: "germany",
+                code: "de"
+    } , 
+    
+    {
+        name: "Turkey",
+            slug: "turkey",
+                code: "tr"
+    } , 
+    
+    {
+        name: "Australia",
+            slug: "australia",
+                code: "au"
+    } , 
+    
+    {
+        name: "South Korea",
+            slug: "south-korea",
+                code: "kr"
+    } , 
+    
+    {
+        name: "Singapore",
+            slug: "singapore",
+                code: "sg"
+    } , 
+    
+    {
+        name: "Indonesia",
+            slug: "indonesia",
+                code: "id"
+    } , 
+    
+    {
+        name: "Canada",
+            slug: "canada",
+                code: "ca"
+    } , 
+    
+    {
+        name: "Mexico",
+            slug: "mexico",
+                code: "mx"
+    } , 
+    
+    {
+        name: "Greece",
+            slug: "greece",
+                code: "gr"
+    } , 
+    
+    {
+        name: "Portugal",
+            slug: "portugal",
+                code: "pt"
+    } , 
+    
+    {
+        name: "Netherlands",
+            slug: "netherlands",
+                code: "nl"
+    } , 
+    
+    {
+        name: "Switzerland",
+            slug: "switzerland",
+                code: "ch"
+    } , 
+    
+    {
+        name: "UAE",
+            slug: "united-arab-emirates",
+                code: "ae"
+    } 
+    
+    ];
+
     const searchInput = document.getElementById('country-search');
     const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
-    
+
     function renderAutocompleteResults(matches) {
         if (matches.length === 0) {
             autocompleteDropdown.classList.add('hidden');
             return;
         }
-        
+
         autocompleteDropdown.innerHTML = '';
         autocompleteDropdown.classList.remove('hidden');
-        
+
         matches.forEach(country => {
             const li = document.createElement('li');
             li.className = 'flex items-center gap-3 px-6 py-3 hover:bg-gray-100 cursor-pointer transition-colors';
@@ -679,40 +596,40 @@
                      onerror="this.style.display='none'">
                 <span class="text-gray-900 font-medium">${country.name}</span>
             `;
-            
-            li.addEventListener('click', function() {
+
+            li.addEventListener('click', function () {
                 window.location.href = `${country.slug}.html`;
             });
-            
+
             autocompleteDropdown.appendChild(li);
         });
     }
-    
-    searchInput.addEventListener('input', function(e) {
+
+    searchInput.addEventListener('input', function (e) {
         const searchTerm = e.target.value.toLowerCase().trim();
-        
+
         if (searchTerm === '') {
             autocompleteDropdown.classList.add('hidden');
             return;
         }
-        
+
         // Filter countries that match search term
-        const matches = allCountries.filter(country => 
+        const matches = allCountries.filter(country =>
             country.name.toLowerCase().includes(searchTerm)
         ).slice(0, 8); // Limit to 8 results
-        
+
         renderAutocompleteResults(matches);
     });
-    
+
     // Hide dropdown when clicking outside
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
             autocompleteDropdown.classList.add('hidden');
         }
     });
-    
+
     // Handle keyboard navigation
-    searchInput.addEventListener('keydown', function(e) {
+    searchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
             const firstMatch = autocompleteDropdown.querySelector('li');
@@ -720,7 +637,7 @@
                 firstMatch.click();
             }
         }
-        
+
         if (e.key === 'Escape') {
             autocompleteDropdown.classList.add('hidden');
             searchInput.blur();

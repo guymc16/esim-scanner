@@ -106,6 +106,7 @@ def main():
         return
 
     top_countries = countries[:8]
+
     
     # Render Index
     print("Rendering index.html...")
