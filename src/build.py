@@ -1,182 +1,209 @@
-#!/usr/bin/env python3
-"""
-Static Site Generator for eSIM Comparison Website
-Generates HTML pages for each country from JSON data.
-"""
-
 import json
-import re
+import os
 import random
-from pathlib import Path
+import urllib.request
+import urllib.error
 from jinja2 import Environment, FileSystemLoader
 
+# Configuration
+DATA_DIR = 'data'
+DOCS_DIR = 'docs'
+TEMPLATES_DIR = 'templates'
+STATIC_LOGOS_DIR = os.path.join(DOCS_DIR, 'static', 'logos')
+
+# Ensure directories exist
+os.makedirs(STATIC_LOGOS_DIR, exist_ok=True)
+
+def download_logo(url, name):
+    if not url:
+        return ''
+    
+    # Sanitize filename
+    safe_name = "".join([c for c in name.lower() if c.isalnum() or c in (' ', '-', '_')]).strip().replace(' ', '_')
+    filename = f"{safe_name}.png"
+    filepath = os.path.join(STATIC_LOGOS_DIR, filename)
+    relative_path = f"static/logos/{filename}"
+    
+    if os.path.exists(filepath):
+        return relative_path
+        
+    print(f"Downloading logo for {name}: {url}")
+    try:
+        req = urllib.request.Request(
+            url, 
+            headers={
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Referer': 'https://www.google.com/'
+            }
+        )
+        with urllib.request.urlopen(req) as response:
+            with open(filepath, 'wb') as out_file:
+                out_file.write(response.read())
+        return relative_path
+    except Exception as e:
+        print(f"Failed to download logo for {name}: {e}")
+        return url # Fallback to remote URL
+
+def comma_filter(value):
+    try:
+        if isinstance(value, (int, float)):
+             return "{:,}".format(value)
+        return value
+    except:
+        return value
+
+def generate_dummy_price(provider_name, size_gb):
+    # Dummy logic with some consistency
+    random.seed(f"{provider_name}_{size_gb}") # Consistent per run/provider
+    base = 3.0
+    if size_gb >= 20:
+        base = 25.0
+    elif size_gb >= 10:
+        base = 15.0
+    elif size_gb >= 5:
+        base = 10.0
+    elif size_gb >= 3:
+        base = 6.0
+    
+    # Add randomness
+    price = base + random.uniform(0, 5)
+    return round(price, 2)
 
 def main():
-    # Get the project root directory (parent of src/)
-    project_root = Path(__file__).parent.parent
-    
-    # Define paths
-    providers_path = project_root / "data" / "providers.json"
-    countries_path = project_root / "data" / "countries.json"
-    templates_path = project_root / "templates"
-    output_path = project_root / "docs"
-    
-    # Create output directory if it doesn't exist
-    output_path.mkdir(exist_ok=True)
-    
-    # Load JSON data
-    print(f"Loading providers from {providers_path}...")
-    with open(providers_path, 'r', encoding='utf-8') as f:
-        providers_data = json.load(f)
-    
-    print(f"Loading countries from {countries_path}...")
-    with open(countries_path, 'r', encoding='utf-8') as f:
-        countries_data = json.load(f)
-    
-    # Setup Jinja2 environment
-    env = Environment(loader=FileSystemLoader(str(templates_path)))
-    index_template = env.get_template('index.html')
-    country_template = env.get_template('country.html')
-    
-    # Standard data amounts
-    standard_data_amounts = ["1GB", "3GB", "5GB", "10GB", "Unlimited"]
-    
-    # Country price multipliers (to vary prices by country)
-    # Base multiplier is 1.0, adjust for specific countries
-    country_multipliers = {
-        'USA': 1.0,
-        'Japan': 1.15,
-        'France': 1.05,
-        'Switzerland': 1.20,
-        'United Arab Emirates': 1.10
-    }
-    
-    # Generate index.html homepage
-    # Template will show top 9 from all_countries
-    all_countries = countries_data
-    index_html = index_template.render(
-        all_countries=all_countries
-    )
-    index_file = output_path / "index.html"
-    with open(index_file, 'w', encoding='utf-8') as f:
-        f.write(index_html)
-    generated_count = 1
-    print(f"Generated: index.html")
-    
-    # Generate HTML for each country
-    for country_info in countries_data:
-        country_name = country_info['name']
-        country_slug = country_info['slug']
-        country_code = country_info.get('code', '')
-        image_url = country_info.get('image_url', '')
-        intro_text = country_info.get('intro_text', '')
-        multiplier = country_multipliers.get(country_name, 1.0)
+    # Load Data
+    with open(os.path.join(DATA_DIR, 'providers.json'), 'r', encoding='utf-8') as f:
+        providers = json.load(f)
         
-        # Generate plans for ALL providers and ALL data amounts
-        all_plans = []
-        for provider_info in providers_data:
-            provider_name = provider_info['name']
-            base_prices = provider_info['base_prices']
-            base_rating = provider_info['base_rating']
-            
-            for data_amount in standard_data_amounts:
-                base_price = base_prices[data_amount]
-                final_price = round(base_price * multiplier, 2)
-                
-                # Generate random rating around base rating (between base_rating and 5.0)
-                rating = round(random.uniform(base_rating, 5.0), 1)
-                
-                # Generate random review count (formatted)
-                review_counts = [
-                    random.randint(200, 999),
-                    f"{random.randint(1, 9)}.{random.randint(0, 9)}k",
-                    f"{random.randint(10, 99)}k"
-                ]
-                review_count = random.choice(review_counts)
-                if isinstance(review_count, int):
-                    review_count_str = str(review_count)
-                else:
-                    review_count_str = review_count
-                
-                # Generate affiliate link
-                affiliate_link = provider_info['affiliate_link_template'].format(
-                    country_slug=country_slug
-                )
-                
-                plan = {
-                    'name': provider_name,
-                    'price': final_price,
-                    'data_amount': data_amount,
-                    'link': affiliate_link,
-                    'benefits': provider_info['benefits'],
-                    'logo_url': provider_info['logo_url'],
-                    'rating': rating,
-                    'review_count': review_count_str
-                }
-                all_plans.append(plan)
+    with open(os.path.join(DATA_DIR, 'countries.json'), 'r', encoding='utf-8') as f:
+        countries = json.load(f)
+
+    # Download Logos & Split Providers
+    fixed_providers = []
+    payg_providers = []
+    
+    print("Processing providers and downloading logos...")
+    for p in providers:
+        # Download Logo
+        p['local_logo'] = download_logo(p.get('logo_url'), p.get('name'))
         
-        # Group plans by data_amount
-        grouped_plans = {}
-        for plan in all_plans:
-            data_amount = plan['data_amount']
-            if data_amount not in grouped_plans:
-                grouped_plans[data_amount] = []
-            grouped_plans[data_amount].append(plan)
-        
-        # Sort data amounts logically (smallest to largest, "Unlimited" last)
-        def sort_key(data_amount):
-            if data_amount.lower() == 'unlimited':
-                return float('inf')
-            # Extract numeric value (handles "1GB", "3GB", "10GB", etc.)
-            match = re.search(r'(\d+\.?\d*)', data_amount)
-            if match:
-                return float(match.group(1))
-            return 0
-        
-        sorted_data_amounts = sorted(grouped_plans.keys(), key=sort_key)
-        
-        # Find cheapest plan in each group and mark it
-        grouped_plans_sorted = []
-        for data_amount in sorted_data_amounts:
-            plans = grouped_plans[data_amount]
-            # Find the cheapest plan
-            cheapest_plan = min(plans, key=lambda p: p['price'])
-            # Mark it as cheapest
-            cheapest_plan['is_cheapest'] = True
-            # Mark others as not cheapest
-            for plan in plans:
-                if plan != cheapest_plan:
-                    plan['is_cheapest'] = False
-            
-            grouped_plans_sorted.append({
-                'data_amount': data_amount,
-                'plans': plans
-            })
-        
-        # Generate filename using slug
-        filename = f"{country_slug}.html"
-        output_file = output_path / filename
-        
-        # Render template
-        html_content = country_template.render(
-            country=country_name,
-            country_code=country_code,
-            country_slug=country_slug,
-            image_url=image_url,
-            intro_text=intro_text,
-            grouped_plans=grouped_plans_sorted
+        # Split type
+        if p.get('service_type') == 'pay_as_you_go':
+            payg_providers.append(p)
+        else:
+            fixed_providers.append(p)
+
+    # Prepare Jinja2 Environment
+    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+    env.filters['comma'] = comma_filter
+    
+    try:
+        index_template = env.get_template('index.html')
+        country_template = env.get_template('country.html')
+    except Exception as e:
+        print(f"Error loading templates: {e}")
+        return
+
+    top_countries = countries[:8]
+    
+    # Render Index
+    print("Rendering index.html...")
+    try:
+        output_html = index_template.render(
+            all_countries=countries,
+            top_countries=top_countries,
+            plans_by_size={}, 
+            payg_plans=payg_providers
         )
         
-        # Write to file
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(html_content)
-        
-        generated_count += 1
-        print(f"Generated: {filename}")
+        with open(os.path.join(DOCS_DIR, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(output_html)
+        print("Built index.html")
+    except Exception as e:
+        print(f"Failed to render index.html: {e}")
+
+    # Render Country Pages
+    sizes = [1, 3, 5, 10, "Unlimited"] # GB or String
+    print(f"Rendering {len(countries)} country pages...")
     
-    # Print success message
-    print(f"\n✓ Generated {generated_count} pages in {output_path}")
+    for country in countries:
+        # Generate plans for this country
+        plans_by_size = {} # Dict for User Request
+        grouped_plans = [] # List for Existing Template
+        
+        for size in sizes:
+            if size == "Unlimited":
+                size_label = "Unlimited"
+                pricing_size = 100 # Arbitrary high number for pricing logic
+            else:
+                size_label = f"{size}GB"
+                pricing_size = size
+            
+            plans_for_size = []
+            
+            for p in fixed_providers:
+                # Price
+                price = generate_dummy_price(p['name'], pricing_size)
+                
+                # Affiliate Link
+                link = p['affiliate_link']
+                if '{country_slug}' in link:
+                    link = link.replace('{country_slug}', country['slug'])
+                
+                plan_obj = {
+                    'name': p['name'],
+                    'logo_url': p['local_logo'], # using local_logo as logo_url for template compatibility
+                    'price': price,
+                    'data_amount': size_label,
+                    'link': link,
+                    'features': p['benefits'], 
+                    'benefits': p['benefits'],
+                    'rating': p['base_rating'],
+                    'review_count': p['review_count'],
+                    'is_cheapest': False 
+                }
+                plans_for_size.append(plan_obj)
+            
+            # Sort Top 5 by Price
+            plans_for_size.sort(key=lambda x: x['price'])
+            top_5 = plans_for_size[:5]
+            
+            if top_5:
+                top_5[0]['is_cheapest'] = True
+            
+            plans_by_size[size_label] = top_5
+            grouped_plans.append({
+                'data_amount': size_label,
+                'plans': top_5
+            })
+            
+        # Render
+        try:
+            country_html = country_template.render(
+                country=country['name'], 
+                country_slug=country['slug'],
+                country_code=country.get('code'),
+                image_url=country.get('image_url'),
+                intro_text=country.get('intro_text'),
+                
+                # Requested vars
+                all_countries=countries,
+                top_countries=top_countries,
+                plans_by_size=plans_by_size,
+                payg_plans=payg_providers,
+                
+                # Template compat var
+                grouped_plans=grouped_plans 
+            )
+            
+            out_path = os.path.join(DOCS_DIR, f"{country['slug']}.html")
+            with open(out_path, 'w', encoding='utf-8') as f:
+                f.write(country_html)
+        except Exception as e:
+            print(f"Failed to render {country['name']}: {e}")
+            
+    print("Build complete.")
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

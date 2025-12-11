@@ -59,8 +59,8 @@
     "name": "Germany",
     "code": "DE",
     "slug": "germany",
-    "image_url": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
-    "intro_text": "Berlin, Munich, and fast 5G autobahn speeds."
+    "image_url": "",
+    "intro_text": ""
   },
   {
     "name": "Turkey",

@@ -2,72 +2,99 @@
   {
     "name": "Airalo",
     "logo_url": "https://logo.clearbit.com/airalo.com",
+    "affiliate_link": "https://airalo.tp.st/tnsgDzuh",
+    "service_type": "fixed",
     "base_rating": 4.8,
-    "affiliate_link_template": "https://airalo.com/{country_slug}",
-    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
-    "base_prices": {
-      "1GB": 4.50,
-      "3GB": 9.00,
-      "5GB": 12.00,
-      "10GB": 18.00,
-      "Unlimited": 35.00
+    "review_count": 15400,
+    "benefits": [
+      "⚡ 5G Speed",
+      "📅 30 Days",
+      "📱 Top Rated App"
+    ],
+    "coupons": {
+      "new_user": {
+        "code": "NEWTOAIRALO15",
+        "label": "15% OFF"
+      },
+      "existing_user": {
+        "code": "AIRALOESIM10",
+        "label": "10% OFF"
+      }
     }
   },
   {
     "name": "Maya Mobile",
     "logo_url": "https://logo.clearbit.com/maya.net",
+    "affiliate_link": "https://maya.net/esim/{country_slug}?pid=QTsarrERAv1y",
+    "service_type": "fixed",
     "base_rating": 4.7,
-    "affiliate_link_template": "https://mayamobile.com/{country_slug}",
-    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
-    "base_prices": {
-      "1GB": 5.00,
-      "3GB": 10.00,
-      "5GB": 13.50,
-      "10GB": 20.00,
-      "Unlimited": 38.00
-    }
+    "review_count": 8200,
+    "benefits": [
+      "⚡ 5G/4G",
+      "📅 30 Days",
+      "🔄 Auto-Setup"
+    ],
+    "coupons": null
   },
   {
-    "name": "Nomad",
-    "logo_url": "https://logo.clearbit.com/getnomad.app",
+    "name": "Saily",
+    "logo_url": "https://www.google.com/s2/favicons?domain=saily.com&sz=128",
+    "affiliate_link": "https://saily.tp.st/j4UsvFqA",
+    "service_type": "fixed",
     "base_rating": 4.9,
-    "affiliate_link_template": "https://getnomad.app/{country_slug}",
-    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
-    "base_prices": {
-      "1GB": 5.50,
-      "3GB": 11.00,
-      "5GB": 14.00,
-      "10GB": 22.00,
-      "Unlimited": 40.00
+    "review_count": 3100,
+    "benefits": [
+      "🔒 Secure (NordVPN)",
+      "🌍 Global Plan",
+      "⚡ Fast Data"
+    ],
+    "coupons": null
+  },
+  {
+    "name": "Yesim",
+    "logo_url": "https://logo.clearbit.com/yesim.app",
+    "affiliate_link": "https://yesim.tp.st/8v5Ll423",
+    "service_type": "pay_as_you_go",
+    "base_rating": 4.5,
+    "review_count": 5600,
+    "benefits": [
+      "💸 Pay As You Go",
+      "♾️ Non-expiring Data",
+      "🌍 120+ Countries"
+    ],
+    "coupons": {
+      "new_user": {
+        "code": "FALLY20",
+        "label": "20% OFF"
+      }
     }
   },
   {
-    "name": "Holafly",
-    "logo_url": "https://logo.clearbit.com/holafly.com",
-    "base_rating": 4.6,
-    "affiliate_link_template": "https://holafly.com/{country_slug}",
-    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
-    "base_prices": {
-      "1GB": 6.00,
-      "3GB": 12.00,
-      "5GB": 15.00,
-      "10GB": 24.00,
-      "Unlimited": 45.00
-    }
+    "name": "Drimsim",
+    "logo_url": "https://logo.clearbit.com/drimsim.com",
+    "affiliate_link": "https://drimsim.tp.st/TiEl29y8",
+    "service_type": "pay_as_you_go",
+    "base_rating": 4.2,
+    "review_count": 2100,
+    "benefits": [
+      "💶 One Sim/One Rate",
+      "✈️ Global Roaming",
+      "📉 Low Rates"
+    ],
+    "coupons": null
   },
   {
     "name": "Klook",
     "logo_url": "https://logo.clearbit.com/klook.com",
-    "base_rating": 4.8,
-    "affiliate_link_template": "https://klook.com/{country_slug}",
-    "benefits": ["⚡ 5G Speed", "📅 30 Days"],
-    "base_prices": {
-      "1GB": 4.75,
-      "3GB": 9.50,
-      "5GB": 12.50,
-      "10GB": 19.00,
-      "Unlimited": 36.00
-    }
+    "affiliate_link": "https://klook.tp.st/kwZSVzQQ",
+    "service_type": "fixed",
+    "base_rating": 4.6,
+    "review_count": 45000,
+    "benefits": [
+      "🎟️ Travel Bundles",
+      "⚡ Instant Booking",
+      "🌏 Asia Specialist"
+    ],
+    "coupons": null
   }
 ]
-
