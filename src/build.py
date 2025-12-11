@@ -91,6 +91,9 @@ def main():
         # Split type
         if p.get('service_type') == 'pay_as_you_go':
             payg_providers.append(p)
+        elif p.get('service_type') == 'hybrid':
+            payg_providers.append(p)
+            fixed_providers.append(p)
         else:
             fixed_providers.append(p)
 
