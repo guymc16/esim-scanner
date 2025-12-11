@@ -10,9 +10,11 @@ DATA_DIR = 'data'
 DOCS_DIR = 'docs'
 TEMPLATES_DIR = 'templates'
 STATIC_LOGOS_DIR = os.path.join(DOCS_DIR, 'static', 'logos')
+STATIC_COUNTRIES_DIR = os.path.join(DOCS_DIR, 'static', 'countries')
 
 # Ensure directories exist
 os.makedirs(STATIC_LOGOS_DIR, exist_ok=True)
+os.makedirs(STATIC_COUNTRIES_DIR, exist_ok=True)
 
 def download_logo(url, name):
     if not url:
@@ -34,7 +36,6 @@ def download_logo(url, name):
             headers={
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-                'Accept-Language': 'en-US,en;q=0.9',
                 'Referer': 'https://www.google.com/'
             }
         )
@@ -45,6 +46,37 @@ def download_logo(url, name):
     except Exception as e:
         print(f"Failed to download logo for {name}: {e}")
         return url # Fallback to remote URL
+
+def download_country_image(country):
+    # If explicitly defined image URL (e.g. Wikimedia), keep it (User said they are fast)
+    if country.get('image_url'):
+        return country.get('image_url')
+
+    # If missing, use LoremFlickr dynamic image but DOWNLOAD it to cache
+    slug = country['slug']
+    filename = f"{slug}.jpg"
+    filepath = os.path.join(STATIC_COUNTRIES_DIR, filename)
+    relative_path = f"static/countries/{filename}"
+
+    if os.path.exists(filepath):
+        return relative_path
+
+    # Construct LoremFlickr URL
+    url = f"https://loremflickr.com/1600/900/{slug},travel/all"
+    print(f"Downloading background for {country['name']}: {url}")
+    
+    try:
+        req = urllib.request.Request(
+            url, 
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        with urllib.request.urlopen(req, timeout=10) as response:
+            with open(filepath, 'wb') as out_file:
+                out_file.write(response.read())
+        return relative_path
+    except Exception as e:
+        print(f"Failed to download background for {country['name']}: {e}")
+        return url # Fallback to remote if download fails
 
 def comma_filter(value):
     try:
@@ -66,6 +98,8 @@ def generate_dummy_price(provider_name, size_gb):
         base = 10.0
     elif size_gb >= 3:
         base = 6.0
+    elif size_gb >= 1:
+        base = 3.0
     
     # Add randomness
     price = base + random.uniform(0, 5)
@@ -97,6 +131,11 @@ def main():
         else:
             fixed_providers.append(p)
 
+    # Process Country Images FIRST (so they are ready for template)
+    print("Processing country images...")
+    for c in countries:
+        c['image_url'] = download_country_image(c)
+
     # Prepare Jinja2 Environment
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
     env.filters['comma'] = comma_filter
@@ -109,7 +148,6 @@ def main():
         return
 
     top_countries = countries[:8]
-
     
     # Render Index
     print("Rendering index.html...")

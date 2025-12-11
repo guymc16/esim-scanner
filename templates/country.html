@@ -4,11 +4,11 @@
 
 {% block content %}
 <!-- Country Hero Section -->
-<section class="relative bg-cover bg-center bg-no-repeat py-20 md:py-28" 
-         style="background-image: url('{% if image_url %}{{ image_url }}{% else %}https://source.unsplash.com/1600x900/?{{ country_slug }},travel{% endif %}');">
+<section class="relative bg-cover bg-center bg-no-repeat py-20 md:py-28"
+    style="background-image: url('{% if image_url %}{{ image_url }}{% else %}https://loremflickr.com/1600/900/{{ country_slug }},travel/all{% endif %}');">
     <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-    
+
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 text-center">
         <div class="flex items-center justify-center mb-6">
@@ -26,10 +26,8 @@
         </h1>
         {% if country_code %}
         <div class="flex items-center justify-center gap-2 mb-4">
-            <img src="https://flagcdn.com/w40/{{ country_code|lower }}.png" 
-                 alt="{{ country }} flag"
-                 class="w-10 h-7 object-cover rounded shadow-md"
-                 onerror="this.style.display='none'">
+            <img src="https://flagcdn.com/w40/{{ country_code|lower }}.png" alt="{{ country }} flag"
+                class="w-10 h-7 object-cover rounded shadow-md" onerror="this.style.display='none'">
         </div>
         {% endif %}
         <p class="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md">
@@ -43,16 +41,16 @@
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-center gap-2 py-3 overflow-x-auto scrollbar-hide">
             <!-- All Plans Button -->
-            <button onclick="filterPlans('all')" 
-                    class="filter-btn active px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full transition-all duration-200 whitespace-nowrap">
+            <button onclick="filterPlans('all')"
+                class="filter-btn active px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full transition-all duration-200 whitespace-nowrap">
                 All Plans
             </button>
             <!-- Data Amount Filter Buttons -->
             {% for group in grouped_plans %}
             {% set filter_id = group.data_amount.lower().replace(' ', '-') %}
-            <button onclick="filterPlans('{{ filter_id }}')" 
-                    class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
-                    data-filter="{{ filter_id }}">
+            <button onclick="filterPlans('{{ filter_id }}')"
+                class="filter-btn px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-blue-100 rounded-full transition-all duration-200 whitespace-nowrap"
+                data-filter="{{ filter_id }}">
                 {{ group.data_amount }}
             </button>
             {% endfor %}
@@ -74,10 +72,12 @@
         <!-- Plans Grid - 5 columns on xl screens -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {% for plan in group.plans %}
-            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}">
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}">
                 <!-- Best Price Badge - Small, Top Right -->
                 {% if plan.is_cheapest %}
-                <div class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
+                <div
+                    class="absolute top-2 right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-20">
                     BEST PRICE
                 </div>
                 {% endif %}
@@ -85,24 +85,25 @@
                 <div class="p-3">
                     <!-- Provider Name with Logo - Large and Bold -->
                     <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="{{ plan.logo_url }}" 
-                             alt="{{ plan.name }} logo" 
-                             class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <img src="{{ plan.logo_url }}" alt="{{ plan.name }} logo"
+                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
                         <h3 class="text-lg font-bold text-gray-900">{{ plan.name }}</h3>
                     </div>
-                    
+
                     <!-- Star Rating Trust Signal -->
                     <div class="flex items-center gap-1 mb-3">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">{{ "%.1f"|format(plan.rating) }}</span>
                         <span class="text-xs text-gray-500">({{ plan.review_count }})</span>
                     </div>
-                    
+
                     <!-- Price - Prominent Element -->
                     <div class="my-2">
-                        <span class="text-3xl font-bold {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %}">${{ "%.2f"|format(plan.price) }}</span>
+                        <span
+                            class="text-3xl font-bold {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %}">${{
+                            "%.2f"|format(plan.price) }}</span>
                     </div>
-                    
+
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
@@ -111,12 +112,10 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="{{ plan.link }}" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                    <a href="{{ plan.link }}" target="_blank" rel="noopener noreferrer"
+                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
                         Buy Now
                     </a>
                 </div>
@@ -133,13 +132,13 @@
         // Get all plan sections
         const sections = document.querySelectorAll('.plan-section');
         const filterButtons = document.querySelectorAll('.filter-btn');
-        
+
         // Remove active class from all buttons
         filterButtons.forEach(btn => {
             btn.classList.remove('active', 'bg-blue-600', 'text-white');
             btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-blue-100');
         });
-        
+
         // Show/hide sections based on filter
         if (filterValue === 'all') {
             // Show all sections
@@ -157,13 +156,13 @@
             sections.forEach(section => {
                 section.style.display = 'none';
             });
-            
+
             // Show only matching section
             const targetSection = document.querySelector(`.plan-section[data-filter="${filterValue}"]`);
             if (targetSection) {
                 targetSection.style.display = 'block';
             }
-            
+
             // Activate the clicked button
             const clickedButton = document.querySelector(`button[data-filter="${filterValue}"]`);
             if (clickedButton) {
@@ -171,12 +170,12 @@
                 clickedButton.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-blue-100');
             }
         }
-        
+
         // No auto-scroll - keep user's current scroll position
     }
-    
+
     // Initialize: show all plans by default
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         filterPlans('all');
     });
 </script>
@@ -187,6 +186,7 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
     .scrollbar-hide::-webkit-scrollbar {
         display: none;
     }
