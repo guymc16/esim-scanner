@@ -576,6 +576,7 @@
 
     const searchInput = document.getElementById('country-search');
     const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+    const searchButton = document.getElementById('searchButton');
 
     function renderAutocompleteResults(matches) {
         if (matches.length === 0) {
@@ -641,6 +642,20 @@
         if (e.key === 'Escape') {
             autocompleteDropdown.classList.add('hidden');
             searchInput.blur();
+        }
+    });
+    // Handle search button click
+    searchButton.addEventListener('click', function () {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        if (!searchTerm) return;
+
+        // Find matches in the same way autocomplete does
+        const match = allCountries.find(country =>
+            country.name.toLowerCase().includes(searchTerm)
+        );
+
+        if (match) {
+            window.location.href = `${match.slug}.html`;
         }
     });
 </script>
