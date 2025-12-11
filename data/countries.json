@@ -3,7 +3,7 @@
     "name": "Israel",
     "code": "IL",
     "slug": "israel",
-    "image_url": "https://images.unsplash.com/photo-1516422791400-da76595a86a6?w=800&q=80",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Western_Wall-Jerusalem.jpg?width=800",
     "intro_text": "High-speed coverage in Tel Aviv, Jerusalem and the North."
   },
   {
@@ -17,7 +17,7 @@
     "name": "Japan",
     "code": "JP",
     "slug": "japan",
-    "image_url": "https://images.unsplash.com/photo-1528360983277-13d9b152c56b?w=800&q=80",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Fuji_from_Lake_Kawaguchi.jpg?width=1200",
     "intro_text": "Stay connected in Tokyo, Kyoto, and beyond."
   },
   {
@@ -59,7 +59,7 @@
     "name": "Germany",
     "code": "DE",
     "slug": "germany",
-    "image_url": "",
+    "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Neuschwanstein_Castle_2024.jpg?width=800",
     "intro_text": ""
   },
   {
