@@ -1,7 +1,7 @@
 [
   {
     "name": "Airalo",
-    "logo_url": "https://logo.clearbit.com/airalo.com",
+    "logo_url": "https://www.google.com/s2/favicons?domain=airalo.com&sz=128",
     "affiliate_link": "https://airalo.tp.st/tnsgDzuh",
     "service_type": "fixed",
     "base_rating": 4.8,
@@ -24,7 +24,7 @@
   },
   {
     "name": "Maya Mobile",
-    "logo_url": "https://logo.clearbit.com/maya.net",
+    "logo_url": "https://www.google.com/s2/favicons?domain=maya.net&sz=128",
     "affiliate_link": "https://maya.net/esim/{country_slug}?pid=QTsarrERAv1y",
     "service_type": "fixed",
     "base_rating": 4.7,
@@ -71,7 +71,7 @@
   },
   {
     "name": "Drimsim",
-    "logo_url": "https://logo.clearbit.com/drimsim.com",
+    "logo_url": "https://www.google.com/s2/favicons?domain=drimsim.com&sz=128",
     "affiliate_link": "https://drimsim.tp.st/TiEl29y8",
     "service_type": "pay_as_you_go",
     "base_rating": 4.2,
@@ -85,7 +85,7 @@
   },
   {
     "name": "Klook",
-    "logo_url": "https://logo.clearbit.com/klook.com",
+    "logo_url": "https://www.google.com/s2/favicons?domain=klook.com&sz=128",
     "affiliate_link": "https://klook.tp.st/kwZSVzQQ",
     "service_type": "fixed",
     "base_rating": 4.6,
