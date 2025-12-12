@@ -73,7 +73,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {% for plan in group.plans %}
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}">
                 <!-- Best Price Badge - Small, Top Right -->
                 {% if plan.is_cheapest %}
                 <div
@@ -82,42 +82,86 @@
                 </div>
                 {% endif %}
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="{{ plan.logo_url }}" alt="{{ plan.name }} logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">{{ plan.name }}</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">{{ plan.name }}</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">{{ "%.1f"|format(plan.rating) }}</span>
                         <span class="text-xs text-gray-500">({{ plan.review_count }})</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %}">${{
-                            "%.2f"|format(plan.price) }}</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            {% if plan.discounted_price %}
+                            <span
+                                class="text-3xl font-bold {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %} leading-none">
+                                ${{ "%.2f"|format(plan.discounted_price) }}
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                ${{ "%.2f"|format(plan.price) }}
+                            </span>
+                            {% else %}
+                            <span
+                                class="text-3xl font-bold {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %} leading-none">
+                                ${{ "%.2f"|format(plan.price) }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            {% if plan.coupons %}
+                            {% if plan.coupons.new_user %}
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">{{
+                                    plan.coupons.new_user.code }}</span>
+                            </div>
+                            {% endif %}
+                            {% if plan.coupons.existing_user %}
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">{{
+                                    plan.coupons.existing_user.code }}</span>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             {% for benefit in plan.benefits %}
-                            <li class="text-xs text-gray-600">{{ benefit }}</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> {{ benefit }}
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="{{ plan.link }}" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="{{ plan.link }}" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

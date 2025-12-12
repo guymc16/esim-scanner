@@ -159,7 +159,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-green-500 border-2">
                 <!-- Best Price Badge - Small, Top Right -->
                 
                 <div
@@ -168,233 +168,376 @@
                 </div>
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/klook.png" alt="Klook logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Klook</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.6</span>
                         <span class="text-xs text-gray-500">(45000)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-green-600">$3.41</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-green-600 leading-none">
+                                $3.41
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🎟️ Travel Bundles</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🎟️ Travel Bundles
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Instant Booking</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Instant Booking
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌏 Asia Specialist</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.7</span>
-                        <span class="text-xs text-gray-500">(8200)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$4.33</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">⚡ 5G/4G</li>
-                            
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
-                            
-                            <li class="text-xs text-gray-600">🔄 Auto-Setup</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌏 Asia Specialist
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/airalo.png" alt="Airalo logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Airalo</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.8</span>
                         <span class="text-xs text-gray-500">(15400)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$4.44</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $3.77
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $4.44
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">NEWTOAIRALO15</span>
+                            </div>
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">AIRALOESIM10</span>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G Speed
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📱 Top Rated App</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📱 Top Rated App
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/yesim.png" alt="Yesim logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Yesim</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Maya Mobile</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(8200)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $4.33
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G/4G
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔄 Auto-Setup
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/yesim.png" alt="Yesim logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Yesim</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.5</span>
                         <span class="text-xs text-gray-500">(5600)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$6.36</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $5.09
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $6.36
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">FALLY20</span>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">💸 Pay As You Go</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 💸 Pay As You Go
+                            </li>
                             
-                            <li class="text-xs text-gray-600">♾️ Non-expiring Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ♾️ Non-expiring Data
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 120+ Countries</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 120+ Countries
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/saily.png" alt="Saily logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Saily</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Saily</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.9</span>
                         <span class="text-xs text-gray-500">(3100)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$7.63</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $7.63
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🔒 Secure (NordVPN)</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔒 Secure (NordVPN)
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 Global Plan</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 Global Plan
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Fast Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Fast Data
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -413,7 +556,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-green-500 border-2">
                 <!-- Best Price Badge - Small, Top Right -->
                 
                 <div
@@ -422,233 +565,376 @@
                 </div>
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.7</span>
-                        <span class="text-xs text-gray-500">(8200)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-green-600">$8.67</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">⚡ 5G/4G</li>
-                            
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
-                            
-                            <li class="text-xs text-gray-600">🔄 Auto-Setup</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/saily.png" alt="Saily logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Saily</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.9</span>
-                        <span class="text-xs text-gray-500">(3100)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$9.21</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">🔒 Secure (NordVPN)</li>
-                            
-                            <li class="text-xs text-gray-600">🌍 Global Plan</li>
-                            
-                            <li class="text-xs text-gray-600">⚡ Fast Data</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/yesim.png" alt="Yesim logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Yesim</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Yesim</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.5</span>
                         <span class="text-xs text-gray-500">(5600)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$9.41</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-green-600 leading-none">
+                                $7.53
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $9.41
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">FALLY20</span>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">💸 Pay As You Go</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 💸 Pay As You Go
+                            </li>
                             
-                            <li class="text-xs text-gray-600">♾️ Non-expiring Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ♾️ Non-expiring Data
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 120+ Countries</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 120+ Countries
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/airalo.png" alt="Airalo logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Maya Mobile</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(8200)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $8.67
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G/4G
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔄 Auto-Setup
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/airalo.png" alt="Airalo logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Airalo</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.8</span>
                         <span class="text-xs text-gray-500">(15400)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$10.38</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $8.82
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $10.38
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">NEWTOAIRALO15</span>
+                            </div>
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">AIRALOESIM10</span>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G Speed
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📱 Top Rated App</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📱 Top Rated App
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/klook.png" alt="Klook logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/saily.png" alt="Saily logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Saily</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(3100)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $9.21
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔒 Secure (NordVPN)
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 Global Plan
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Fast Data
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/klook.png" alt="Klook logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Klook</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.6</span>
                         <span class="text-xs text-gray-500">(45000)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$10.89</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $10.89
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🎟️ Travel Bundles</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🎟️ Travel Bundles
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Instant Booking</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Instant Booking
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌏 Asia Specialist</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌏 Asia Specialist
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -667,7 +953,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-green-500 border-2">
                 <!-- Best Price Badge - Small, Top Right -->
                 
                 <div
@@ -676,233 +962,376 @@
                 </div>
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.7</span>
-                        <span class="text-xs text-gray-500">(8200)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-green-600">$11.46</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">⚡ 5G/4G</li>
-                            
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
-                            
-                            <li class="text-xs text-gray-600">🔄 Auto-Setup</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/saily.png" alt="Saily logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Saily</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.9</span>
-                        <span class="text-xs text-gray-500">(3100)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$11.60</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">🔒 Secure (NordVPN)</li>
-                            
-                            <li class="text-xs text-gray-600">🌍 Global Plan</li>
-                            
-                            <li class="text-xs text-gray-600">⚡ Fast Data</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/yesim.png" alt="Yesim logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Yesim</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Yesim</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.5</span>
                         <span class="text-xs text-gray-500">(5600)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$13.15</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-green-600 leading-none">
+                                $10.52
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $13.15
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">FALLY20</span>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">💸 Pay As You Go</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 💸 Pay As You Go
+                            </li>
                             
-                            <li class="text-xs text-gray-600">♾️ Non-expiring Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ♾️ Non-expiring Data
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 120+ Countries</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 120+ Countries
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/airalo.png" alt="Airalo logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Maya Mobile</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(8200)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $11.46
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G/4G
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔄 Auto-Setup
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/airalo.png" alt="Airalo logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Airalo</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.8</span>
                         <span class="text-xs text-gray-500">(15400)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$13.64</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $11.59
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $13.64
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">NEWTOAIRALO15</span>
+                            </div>
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">AIRALOESIM10</span>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G Speed
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📱 Top Rated App</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📱 Top Rated App
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/klook.png" alt="Klook logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/saily.png" alt="Saily logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Saily</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(3100)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $11.60
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔒 Secure (NordVPN)
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 Global Plan
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Fast Data
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/klook.png" alt="Klook logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Klook</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.6</span>
                         <span class="text-xs text-gray-500">(45000)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$14.70</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $14.70
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🎟️ Travel Bundles</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🎟️ Travel Bundles
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Instant Booking</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Instant Booking
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌏 Asia Specialist</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌏 Asia Specialist
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -921,7 +1350,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-green-500 border-2">
                 <!-- Best Price Badge - Small, Top Right -->
                 
                 <div
@@ -930,233 +1359,376 @@
                 </div>
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.7</span>
-                        <span class="text-xs text-gray-500">(8200)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-green-600">$15.72</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">⚡ 5G/4G</li>
-                            
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
-                            
-                            <li class="text-xs text-gray-600">🔄 Auto-Setup</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/klook.png" alt="Klook logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.6</span>
-                        <span class="text-xs text-gray-500">(45000)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$17.26</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">🎟️ Travel Bundles</li>
-                            
-                            <li class="text-xs text-gray-600">⚡ Instant Booking</li>
-                            
-                            <li class="text-xs text-gray-600">🌏 Asia Specialist</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/saily.png" alt="Saily logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Saily</h3>
-                    </div>
-
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-yellow-500 text-sm">★</span>
-                        <span class="text-sm font-bold text-gray-900">4.9</span>
-                        <span class="text-xs text-gray-500">(3100)</span>
-                    </div>
-
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$18.52</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="mb-4">
-                        <ul class="space-y-0.5">
-                            
-                            <li class="text-xs text-gray-600">🔒 Secure (NordVPN)</li>
-                            
-                            <li class="text-xs text-gray-600">🌍 Global Plan</li>
-                            
-                            <li class="text-xs text-gray-600">⚡ Fast Data</li>
-                            
-                        </ul>
-                    </div>
-
-                    <!-- Buy Now Button - High CTA -->
-                    <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
-                </div>
-            </div>
-            
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
-                <!-- Best Price Badge - Small, Top Right -->
-                
-
-                <div class="p-3">
-                    <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/yesim.png" alt="Yesim logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Yesim</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Yesim</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.5</span>
                         <span class="text-xs text-gray-500">(5600)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$19.56</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-green-600 leading-none">
+                                $15.65
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $19.56
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">FALLY20</span>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">💸 Pay As You Go</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 💸 Pay As You Go
+                            </li>
                             
-                            <li class="text-xs text-gray-600">♾️ Non-expiring Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ♾️ Non-expiring Data
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 120+ Countries</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 120+ Countries
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
-                        <img src="static/logos/airalo.png" alt="Airalo logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Maya Mobile</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.7</span>
+                        <span class="text-xs text-gray-500">(8200)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $15.72
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G/4G
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔄 Auto-Setup
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/airalo.png" alt="Airalo logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Airalo</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.8</span>
                         <span class="text-xs text-gray-500">(15400)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$19.86</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $16.88
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $19.86
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">NEWTOAIRALO15</span>
+                            </div>
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">AIRALOESIM10</span>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G Speed
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📱 Top Rated App</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📱 Top Rated App
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/klook.png" alt="Klook logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Klook</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.6</span>
+                        <span class="text-xs text-gray-500">(45000)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $17.26
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🎟️ Travel Bundles
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Instant Booking
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌏 Asia Specialist
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
+                <!-- Best Price Badge - Small, Top Right -->
+                
+
+                <div class="p-3 flex flex-col flex-grow">
+                    <!-- Provider Name with Logo - Large and Bold -->
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
+                        <img src="static/logos/saily.png" alt="Saily logo"
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Saily</h3>
+                    </div>
+
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
+                        <span class="text-yellow-500 text-sm">★</span>
+                        <span class="text-sm font-bold text-gray-900">4.9</span>
+                        <span class="text-xs text-gray-500">(3100)</span>
+                    </div>
+
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $18.52
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="mb-4">
+                        <ul class="space-y-0.5">
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔒 Secure (NordVPN)
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 Global Plan
+                            </li>
+                            
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Fast Data
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <!-- Buy Now Button - High CTA -->
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -1175,7 +1747,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-500 border-2">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-green-500 border-2">
                 <!-- Best Price Badge - Small, Top Right -->
                 
                 <div
@@ -1184,233 +1756,376 @@
                 </div>
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/airalo.png" alt="Airalo logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Airalo</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Airalo</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.8</span>
                         <span class="text-xs text-gray-500">(15400)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-green-600">$25.19</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-green-600 leading-none">
+                                $21.41
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $25.19
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">NEWTOAIRALO15</span>
+                            </div>
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-100 uppercase">EXIST</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">AIRALOESIM10</span>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G Speed</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G Speed
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📱 Top Rated App</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📱 Top Rated App
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://airalo.tp.st/tnsgDzuh" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/yesim.png" alt="Yesim logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Yesim</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Yesim</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.5</span>
                         <span class="text-xs text-gray-500">(5600)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$27.62</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $22.10
+                            </span>
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400 leading-none mt-0.5">
+                                $27.62
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                            
+                            <div class="flex items-center gap-1 text-[9px]">
+                                <span
+                                    class="font-bold text-green-700 bg-green-50 px-1 py-0.5 rounded border border-green-100 uppercase">NEW</span>
+                                <span
+                                    class="font-mono font-bold text-gray-700 bg-gray-50 px-1 py-0.5 rounded border border-gray-200">FALLY20</span>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">💸 Pay As You Go</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 💸 Pay As You Go
+                            </li>
                             
-                            <li class="text-xs text-gray-600">♾️ Non-expiring Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ♾️ Non-expiring Data
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 120+ Countries</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 120+ Countries
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://yesim.tp.st/8v5Ll423" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/maya_mobile.png" alt="Maya Mobile logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Maya Mobile</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Maya Mobile</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.7</span>
                         <span class="text-xs text-gray-500">(8200)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$28.47</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $28.47
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">⚡ 5G/4G</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ 5G/4G
+                            </li>
                             
-                            <li class="text-xs text-gray-600">📅 30 Days</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 📅 30 Days
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🔄 Auto-Setup</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔄 Auto-Setup
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://maya.net/esim/australia?pid=QTsarrERAv1y" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/saily.png" alt="Saily logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Saily</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Saily</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.9</span>
                         <span class="text-xs text-gray-500">(3100)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$29.98</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $29.98
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🔒 Secure (NordVPN)</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🔒 Secure (NordVPN)
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌍 Global Plan</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌍 Global Plan
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Fast Data</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Fast Data
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://saily.tp.st/j4UsvFqA" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full border-gray-200">
                 <!-- Best Price Badge - Small, Top Right -->
                 
 
-                <div class="p-3">
+                <div class="p-3 flex flex-col flex-grow">
                     <!-- Provider Name with Logo - Large and Bold -->
-                    <div class="flex items-center gap-2 mb-2 pr-10">
+                    <!-- Provider Name with Logo - ONE LINE FIXED HEIGHT -->
+                    <div class="flex items-center gap-2 mb-1 pr-10 h-[3.5rem]">
                         <img src="static/logos/klook.png" alt="Klook logo"
-                            class="w-12 h-12 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
-                        <h3 class="text-lg font-bold text-gray-900">Klook</h3>
+                            class="w-10 h-10 rounded-full bg-white p-1 border border-gray-200 object-contain flex-shrink-0">
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Klook</h3>
                     </div>
 
-                    <!-- Star Rating Trust Signal -->
-                    <div class="flex items-center gap-1 mb-3">
+                    <!-- Star Rating - FIXED HEIGHT -->
+                    <div class="flex items-center gap-1 mb-1 h-[1.5rem]">
                         <span class="text-yellow-500 text-sm">★</span>
                         <span class="text-sm font-bold text-gray-900">4.6</span>
                         <span class="text-xs text-gray-500">(45000)</span>
                     </div>
 
-                    <!-- Price - Prominent Element -->
-                    <div class="my-2">
-                        <span
-                            class="text-3xl font-bold text-blue-600">$29.98</span>
+                    <!-- Price & Coupons Combined Row - FIXED HEIGHT -->
+                    <div class="h-[3.5rem] flex items-start justify-between mb-2 pt-1">
+                        <!-- Left: Price (Top Aligned) -->
+                        <div class="flex flex-col justify-start">
+                            
+                            <span
+                                class="text-3xl font-bold text-blue-600 leading-none">
+                                $29.98
+                            </span>
+                            
+                        </div>
+
+                        <!-- Right: Coupons (Top Aligned) -->
+                        <div class="flex flex-col items-end justify-start gap-1">
+                            
+                        </div>
                     </div>
 
                     <!-- Features List -->
                     <div class="mb-4">
                         <ul class="space-y-0.5">
                             
-                            <li class="text-xs text-gray-600">🎟️ Travel Bundles</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🎟️ Travel Bundles
+                            </li>
                             
-                            <li class="text-xs text-gray-600">⚡ Instant Booking</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> ⚡ Instant Booking
+                            </li>
                             
-                            <li class="text-xs text-gray-600">🌏 Asia Specialist</li>
+                            <li class="text-xs text-gray-600 flex items-start gap-1">
+                                <span class="text-blue-500 mt-0.5">✓</span> 🌏 Asia Specialist
+                            </li>
                             
                         </ul>
                     </div>
 
+
                     <!-- Buy Now Button - High CTA -->
-                    <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
-                        class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
-                        Buy Now
-                    </a>
+                    <div class="mt-auto"> <!-- Spacer to push button down -->
+                        <a href="https://klook.tp.st/kwZSVzQQ" target="_blank" rel="noopener noreferrer"
+                            class="w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
             

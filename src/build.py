@@ -193,22 +193,44 @@ def main():
                 if '{country_slug}' in link:
                     link = link.replace('{country_slug}', country['slug'])
                 
+                # Calculate Discounted Price
+                discounted_price = None
+                discount_label = None
+                best_coupon_code = None
+                
+                coupons = p.get('coupons')
+                if coupons and coupons.get('new_user'):
+                    try:
+                        label = coupons['new_user']['label']
+                        if "%" in label:
+                            percent = float(label.replace('%', '').replace(' OFF', ''))
+                            discounted_price = price * (1 - (percent / 100))
+                            discounted_price = round(discounted_price, 2)
+                            discount_label = label
+                            best_coupon_code = coupons['new_user']['code']
+                    except:
+                        pass
+                
                 plan_obj = {
                     'name': p['name'],
-                    'logo_url': p['local_logo'], # using local_logo as logo_url for template compatibility
-                    'price': price,
+                    'logo_url': p['local_logo'], 
+                    'price': price, # Original Price
+                    'discounted_price': discounted_price,
+                    'discount_label': discount_label,
+                    'best_coupon_code': best_coupon_code,
                     'data_amount': size_label,
                     'link': link,
                     'features': p['benefits'], 
                     'benefits': p['benefits'],
                     'rating': p['base_rating'],
                     'review_count': p['review_count'],
+                    'coupons': coupons,
                     'is_cheapest': False 
                 }
                 plans_for_size.append(plan_obj)
             
-            # Sort Top 5 by Price
-            plans_for_size.sort(key=lambda x: x['price'])
+            # Sort Top 5 by Price (Effective Price)
+            plans_for_size.sort(key=lambda x: x['discounted_price'] if x['discounted_price'] else x['price'])
             top_5 = plans_for_size[:5]
             
             if top_5:
