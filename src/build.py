@@ -3,6 +3,7 @@ import os
 import random
 import urllib.request
 import urllib.error
+# urllib.parse is imported locally where needed as per user request
 from jinja2 import Environment, FileSystemLoader
 
 # Configuration
@@ -187,11 +188,70 @@ def main():
             for p in fixed_providers:
                 # Price
                 price = generate_dummy_price(p['name'], pricing_size)
+                provider_name = p['name']
                 
-                # Affiliate Link
-                link = p['affiliate_link']
-                if '{country_slug}' in link:
-                    link = link.replace('{country_slug}', country['slug'])
+                # --- FINAL ROBUST MAPPING LOGIC START ---
+        
+                # 1. Get Country Code and Base Slug
+                c_code = country.get('code', '').upper()
+                base_slug = country.get('slug', '').lower()
+                
+                # 2. Define Default Slugs
+                airalo_slug = base_slug
+                maya_slug = base_slug
+                saily_slug = base_slug
+                yesim_slug = base_slug
+
+                # 3. MANUAL OVERRIDES (The Fix)
+                
+                if c_code == 'US':
+                    # USA Specifics
+                    airalo_slug = 'united-states'
+                    maya_slug = 'usa'            # <--- FIX: Maya uses 'usa', not 'united-states'
+                    saily_slug = 'united-states'
+                    yesim_slug = 'united-states'
+                    
+                elif c_code == 'GB':
+                    # UK Specifics
+                    airalo_slug = 'united-kingdom'
+                    maya_slug = 'uk'             # <--- FIX: Maya uses 'uk', not 'united-kingdom'
+                    saily_slug = 'united-kingdom'
+                    yesim_slug = 'united-kingdom'
+
+                # (South Korea and others use the base_slug 'south-korea', so they work automatically)
+                
+                # 4. GENERATE LINKS
+                
+                if "Airalo" in provider_name:
+                    target = f"https://airalo.com/{airalo_slug}-esim"
+                    final_link = f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u={target}"
+
+                elif "Maya" in provider_name:
+                    # DIRECT LINK (No Travelpayouts Wrapper)
+                    # Format: https://maya.net/esim/usa?pid=QTsarrERAv1y
+                    target = f"https://maya.net/esim/{maya_slug}?pid=QTsarrERAv1y"
+                    final_link = target
+
+                elif "Saily" in provider_name:
+                    target = f"https://saily.com/esim-{saily_slug}" 
+                    final_link = f"https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u={target}"
+
+                elif "Yesim" in provider_name:
+                    target = f"https://yesim.tech/country/{yesim_slug}"
+                    final_link = f"https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u={target}"
+
+                elif "Klook" in provider_name:
+                    import urllib.parse
+                    encoded_query = urllib.parse.quote(f"esim {country.get('name', '')}")
+                    target = f"https://www.klook.com/en-US/search/?keyword={encoded_query}"
+                    final_link = f"https://tp.media/r?campaign_id=137&marker=689615&p=4110&trs=479661&u={target}"
+
+                elif "Drimsim" in provider_name:
+                     final_link = "https://tp.media/r?campaign_id=102&marker=689615&p=2762&trs=479661&u=https://drimsim.com"
+
+                else:
+                    final_link = "#"
+                # --- FINAL ROBUST MAPPING LOGIC END ---
                 
                 # Calculate Discounted Price
                 discounted_price = None
@@ -219,7 +279,7 @@ def main():
                     'discount_label': discount_label,
                     'best_coupon_code': best_coupon_code,
                     'data_amount': size_label,
-                    'link': link,
+                    'link': final_link, # Use the computed link variable
                     'features': p['benefits'], 
                     'benefits': p['benefits'],
                     'rating': p['base_rating'],
