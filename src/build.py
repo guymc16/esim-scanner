@@ -114,6 +114,21 @@ def main():
     with open(os.path.join(DATA_DIR, 'countries.json'), 'r', encoding='utf-8') as f:
         countries = json.load(f)
 
+    # Load Real Plans
+    real_plans_path = os.path.join(DATA_DIR, 'data_plans.json')
+    real_plans_data = []
+    if os.path.exists(real_plans_path):
+        with open(real_plans_path, 'r', encoding='utf-8') as f:
+            real_plans_data = json.load(f)
+    
+    # Index Real Plans for O(1) Lookup: (provider_name, country_iso) -> [plans]
+    real_plans_map = {}
+    for p in real_plans_data:
+        key = (p['provider'], p['country_iso'])
+        if key not in real_plans_map:
+            real_plans_map[key] = []
+        real_plans_map[key].append(p)
+
     # Download Logos & Split Providers
     fixed_providers = []
     payg_providers = []
@@ -179,21 +194,57 @@ def main():
             if size == "Unlimited":
                 size_label = "Unlimited"
                 pricing_size = 100 # Arbitrary high number for pricing logic
+                target_gb = -1.0
             else:
                 size_label = f"{size}GB"
                 pricing_size = size
+                target_gb = float(size)
             
             plans_for_size = []
             
             for p in fixed_providers:
-                # Price
+                # Default Logic (Dummy)
                 price = generate_dummy_price(p['name'], pricing_size)
                 provider_name = p['name']
+                final_link = "#" # Default fallback
                 
+                # --- REAL DATA INJECTION START ---
+                c_code = country.get('code', '').upper()
+                
+                # Check for Real Plans
+                found_real_plan = None
+                available_plans = []
+                
+                # Lookup key: (Provider Name, Country ISO)
+                # Note: build.py uses "Airalo", data_plans uses "Airalo"
+                lookup_key = (provider_name, c_code)
+                
+                if lookup_key in real_plans_map:
+                    raw_plans = real_plans_map[lookup_key]
+                    
+                    # Create clean available_plans list for JSON injection
+                    for rp in raw_plans:
+                        clean_obj = {
+                            'data': rp['data_gb'],
+                            'day': rp['days'],
+                            'price': rp['price'],
+                            'link': rp['link']
+                        }
+                        available_plans.append(clean_obj)
+                        
+                        # Check if this matches our current size filter
+                        # Allow slight tolerance? No, strict for now based on user specs.
+                        # Handle Unlimited (-1.0)
+                        if rp['data_gb'] == target_gb:
+                             # If multiple matches, find cheapest?
+                             if found_real_plan is None or rp['price'] < found_real_plan['price']:
+                                 found_real_plan = rp
+
+                json_plans_str = json.dumps(available_plans) if available_plans else "{}"
+
                 # --- FINAL ROBUST MAPPING LOGIC START ---
         
                 # 1. Get Country Code and Base Slug
-                c_code = country.get('code', '').upper()
                 base_slug = country.get('slug', '').lower()
                 
                 # 2. Define Default Slugs
@@ -220,11 +271,16 @@ def main():
 
                 # (South Korea and others use the base_slug 'south-korea', so they work automatically)
                 
-                # 4. GENERATE LINKS
+                # 4. GENERATE LINKS (Fallback if real link not found)
                 
                 if "Airalo" in provider_name:
-                    target = f"https://airalo.com/{airalo_slug}-esim"
-                    final_link = f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u={target}"
+                    if found_real_plan:
+                         final_link = found_real_plan['link']
+                         price = found_real_plan['price']
+                    else:
+                        # Fallback Link Logic
+                        target = f"https://airalo.com/{airalo_slug}-esim"
+                        final_link = f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u={target}"
 
                 elif "Maya" in provider_name:
                     # DIRECT LINK (No Travelpayouts Wrapper)
@@ -285,7 +341,8 @@ def main():
                     'rating': p['base_rating'],
                     'review_count': p['review_count'],
                     'coupons': coupons,
-                    'is_cheapest': False 
+                    'is_cheapest': False,
+                    'json_data': json_plans_str # Added for data-plans attribute
                 }
                 plans_for_size.append(plan_obj)
             

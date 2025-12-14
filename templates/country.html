@@ -72,8 +72,8 @@
         <!-- Plans Grid - 5 columns on xl screens -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {% for plan in group.plans %}
-            <div
-                class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}">
+            <div class="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border flex flex-col h-full {% if plan.is_cheapest %}border-green-500 border-2{% else %}border-gray-200{% endif %}"
+                data-plans='{{ plan.json_data }}'>
                 <!-- Best Price Badge - Small, Top Right -->
                 {% if plan.is_cheapest %}
                 <div
