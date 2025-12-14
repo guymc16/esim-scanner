@@ -119,6 +119,26 @@ def generate_dummy_price(provider_name, size_gb):
     price = base * multiplier
     return round(price, 2)
 
+def get_affiliate_link(provider_name, iso_code, slug):
+    p = provider_name
+    c = iso_code.upper()
+    s = slug.lower()
+    
+    # Overrides
+    if c == 'US': s = 'usa' if "Maya" in p else 'united-states'
+    elif c == 'GB': s = 'uk' if "Maya" in p else 'united-kingdom'
+    
+    # Logic
+    if "Airalo" in p: return f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u=https://airalo.com/{s}-esim"
+    if "Maya" in p: return f"https://maya.net/esim/{s}?pid=QTsarrERAv1y"
+    if "Saily" in p: return f"https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https://saily.com/esim-{s}"
+    if "Yesim" in p: return f"https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https://yesim.tech/country/{s}"
+    if "Klook" in p:
+         q = urllib.parse.quote(f"esim {s.replace('-', ' ')}")
+         return f"https://www.klook.com/en-US/search/?keyword={q}"
+    
+    return "#"
+
 def main():
     # Load Data
     with open(os.path.join(DATA_DIR, 'providers.json'), 'r', encoding='utf-8') as f:
@@ -133,6 +153,12 @@ def main():
     if os.path.exists(real_plans_path):
         with open(real_plans_path, 'r', encoding='utf-8') as f:
             real_plans_data = json.load(f)
+
+    # Force correct links in the loaded JSON data
+    for plan in real_plans_data:
+        country_match = next((c for c in countries if c['code'] == plan['country_iso']), None)
+        c_slug = country_match['slug'] if country_match else plan['country_iso']
+        plan['link'] = get_affiliate_link(plan['provider'], plan['country_iso'], c_slug)
     
     # Index Real Plans for O(1) Lookup: (provider_name, country_iso) -> [plans]
     real_plans_map = {}
@@ -258,26 +284,25 @@ def main():
                     # Only generate if it makes sense (e.g. usually providers have 1/3/5/10/20)
                     if size == -1: continue # Skip unlimited for dummy for now unless specific
                     
-                    price = generate_dummy_price(p_name, size)
-                    duration = 30 # Default standard
-                    final_link = "#" # Will be filled below
+                    if size == -1: continue # Skip unlimited for dummy for now unless specific
                     
-                    # Create generic JSON data for filtering validity
-                    # We assume they have standard array of plans for filtering to feel real
-                    dummy_plans = [
-                        {'data': 1, 'day': 7, 'price': generate_dummy_price(p_name, 1), 'link': '#'},
-                        {'data': 2, 'day': 15, 'price': generate_dummy_price(p_name, 2), 'link': '#'},
-                        {'data': 3, 'day': 30, 'price': generate_dummy_price(p_name, 3), 'link': '#'},
-                        {'data': 5, 'day': 30, 'price': generate_dummy_price(p_name, 5), 'link': '#'},
-                        {'data': 10, 'day': 30, 'price': generate_dummy_price(p_name, 10), 'link': '#'},
-                        {'data': 20, 'day': 30, 'price': generate_dummy_price(p_name, 20), 'link': '#'},
-                        {'data': 50, 'day': 30, 'price': generate_dummy_price(p_name, 50), 'link': '#'}
-                    ]
-                    # Ensure current size is in there (should be)
+                    smart_link = get_affiliate_link(p_name, c_code, base_slug)
+                    
+                    # Update dummy plans generation
+                    dummy_plans = []
+                    dummy_sizes = [1, 2, 3, 5, 10, 20, 50]
+                    for d_size in dummy_sizes:
+                         dummy_plans.append({
+                            'data': d_size, 
+                            'day': 30, 
+                            'price': generate_dummy_price(p_name, d_size), 
+                            'link': smart_link 
+                         })
+                    
+                    # Create JSON with correct links
                     json_data = json.dumps(dummy_plans)
-                    
-                    # Dummy Link will be handled by existing fallback logic below
-                    best_plan = {'coupon': None} # No specific coupons for dummy
+                    final_link = smart_link
+                    best_plan = {'coupon': None}
 
                 # Link Logic (Dynamic or Fallback)
                 if not final_link or final_link == "#":
@@ -307,17 +332,6 @@ def main():
                             discounted_price = price * (1 - pct/100)
                         except: pass
 
-                # JSON Data for Client-Side Filtering
-                # We attach ALL plans for this provider/country so JS can switch durations
-                available_plans_list = []
-                for rp in plans:
-                    available_plans_list.append({
-                        'data': rp['data_gb'],
-                        'day': rp['days'],
-                        'price': rp['price'],
-                        'link': rp['link']
-                    })
-                json_data = json.dumps(available_plans_list)
 
                 plan_display = {
                     'name': p_name,
