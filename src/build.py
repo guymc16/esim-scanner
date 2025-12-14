@@ -134,8 +134,17 @@ def get_affiliate_link(provider_name, iso_code, slug):
     if "Saily" in p: return f"https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https://saily.com/esim-{s}"
     if "Yesim" in p: return f"https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https://yesim.tech/country/{s}"
     if "Klook" in p:
-         q = urllib.parse.quote(f"esim {s.replace('-', ' ')}")
-         return f"https://www.klook.com/en-US/search/?keyword={q}"
+         import urllib.parse
+         # 1. Create a clean search term
+         search_term = f"esim {s.replace('-', ' ')}"
+         
+         # 2. Build the Klook Target URL (Deep Link)
+         klook_deep_link = f"https://www.klook.com/en-US/search/?keyword={urllib.parse.quote(search_term)}"
+         
+         # 3. Wrap it in Travelpayouts (Campaign 137)
+         encoded_deep_link = urllib.parse.quote(klook_deep_link)
+         
+         return f"https://tp.media/r?campaign_id=137&marker=689615&p=4110&trs=479661&u={encoded_deep_link}"
     
     return "#"
 
