@@ -454,6 +454,22 @@
                 grid.appendChild(msg);
             }
 
+            // --- RE-SORT LOGIC START ---
+            // Sort the DOM elements based on the updated prices
+            if (visibleCount > 0) {
+                const activeCards = Array.from(cards).filter(c => c.style.display !== 'none');
+                activeCards.sort((a, b) => {
+                    const pA = parseFloat(a.querySelector('.main-price').innerText.replace(/[^0-9.]/g, ''));
+                    const pB = parseFloat(b.querySelector('.main-price').innerText.replace(/[^0-9.]/g, ''));
+                    return pA - pB;
+                });
+
+                // Re-append to grid in new order (moves them to the end)
+                // Hidden cards stay at the top but are invisible, so it doesn't matter
+                activeCards.forEach(c => grid.appendChild(c));
+            }
+            // --- RE-SORT LOGIC END ---
+
             // --- Cheapeast Logic (Robust) ---
             if (visibleCount > 0) {
                 let minPrice = Infinity;
