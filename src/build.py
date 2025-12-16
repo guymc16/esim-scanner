@@ -165,6 +165,35 @@ def main():
         with open(real_plans_path, 'r', encoding='utf-8') as f:
             real_plans_data = json.load(f)
 
+    # Enrich Countries with Region & Popularity from Plan Data
+    # 1. Build Lookup
+    country_meta_map = {}
+    for p in real_plans_data:
+        iso = p.get('country_iso')
+        if iso:
+            # If we haven't seen this country yet, or if this plan marks it as popular, update.
+            # We want to capture the region (assumed constant per country) and is_popular flag.
+            if iso not in country_meta_map:
+                country_meta_map[iso] = {
+                    'region': p.get('region', 'Other'),
+                    'is_popular': p.get('is_popular', False)
+                }
+            else:
+                # If any plan says it's popular, the country is popular
+                if p.get('is_popular'):
+                    country_meta_map[iso]['is_popular'] = True
+                # Region should be consistent, no need to overwrite unless missing
+
+    # 2. Inject into Country Objects
+    for c in countries:
+        code = c.get('code')
+        if code in country_meta_map:
+            c['region'] = country_meta_map[code]['region']
+            c['is_popular'] = country_meta_map[code]['is_popular']
+        else:
+            c['region'] = 'Other'
+            c['is_popular'] = False
+
     # Force correct links in the loaded JSON data
     for plan in real_plans_data:
         country_match = next((c for c in countries if c['code'] == plan['country_iso']), None)
@@ -293,15 +322,15 @@ def main():
                 else:
                     # FALLBACK / DUMMY DATA PATH (For Maya, Saily, etc.)
                     # Only generate if it makes sense (e.g. usually providers have 1/3/5/10/20)
-                    if size == -1: continue # Skip unlimited for dummy for now unless specific
-                    
-                    if size == -1: continue # Skip unlimited for dummy for now unless specific
+                    if size == -1: # Unlimited logic
+                        pass
+
                     
                     smart_link = get_affiliate_link(p_name, c_code, base_slug)
                     
                     # Update dummy plans generation
                     dummy_plans = []
-                    dummy_sizes = [1, 2, 3, 5, 10, 20, 50]
+                    dummy_sizes = [1, 2, 3, 5, 10, 20, 50, -1]
                     for d_size in dummy_sizes:
                          dummy_plans.append({
                             'data': d_size, 
@@ -314,6 +343,8 @@ def main():
                     json_data = json.dumps(dummy_plans)
                     final_link = smart_link
                     best_plan = {'coupon': None}
+                    price = generate_dummy_price(p_name, size)
+                    duration = 30
 
                 # Link Logic (Dynamic or Fallback)
                 if not final_link or final_link == "#":
@@ -352,6 +383,7 @@ def main():
                     'json_data': json_data, # Essential for JS
                     
                     # Display values
+                    'data': size,
                     'price': price,
                     'discounted_price': discounted_price,
                     'duration': duration,
@@ -382,7 +414,7 @@ def main():
             if section_plans:
                 grouped_plans.append({
                     'title': f"{size}GB Plans" if size != -1 else "Unlimited Data Plans",
-                    'filter_value': size,
+                    'filter_value': 999 if size == -1 else size,
                     'plans': section_plans
                 })
 

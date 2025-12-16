@@ -1,196 +1,758 @@
 {% extends "base.html" %}
 
-{% block title %}eSim Scanner AI - Stay Connected Anywhere{% endblock %}
+{% block title %}eSim Scanner AI - Global Connectivity, Student Prices{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="relative bg-cover bg-center bg-no-repeat py-24 md:py-32"
-    style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');">
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<!-- Premium Hero Section with Aurora Mesh Gradient -->
+<section class="relative bg-slate-900 py-32 md:py-48 z-50">
+    <!-- Aurora Background Effects -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div
+            class="absolute -top-[50%] -left-[20%] w-[100%] h-[100%] rounded-full bg-blue-600/20 blur-[120px] mix-blend-screen animate-blob">
+        </div>
+        <div
+            class="absolute top-[20%] -right-[20%] w-[80%] h-[80%] rounded-full bg-purple-600/20 blur-[120px] mix-blend-screen animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-[50%] left-[20%] w-[100%] h-[100%] rounded-full bg-indigo-600/20 blur-[120px] mix-blend-screen animate-blob animation-delay-4000">
+        </div>
+    </div>
 
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">Stay Connected Anywhere
+        <!-- Badge -->
+        <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-blue-300 text-xs font-semibold tracking-wide backdrop-blur-md mb-8 animate-fade-in-up">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+            Data for 180+ Countries
+        </div>
+
+        <h1
+            class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-8 tracking-tighter leading-tight drop-shadow-2xl animate-fade-in-up delay-100">
+            Stay Connected Anywhere. <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">The World is
+                Yours.</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto drop-shadow-md">
-            Compare and find the best eSIM plans for your next adventure. Instant activation, no physical SIM needed.
+
+        <p
+            class="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed tracking-wide animate-fade-in-up delay-200">
+            Instant connectivity for your next adventure. <br class="hidden md:block" /> No physical SIM needed. Just
+            scan and start exploring.
         </p>
 
-        <!-- Seamless Search Bar with Autocomplete -->
-        <div class="relative w-full max-w-2xl mx-auto">
+        <!-- Search Bar (Hero) - Premium Glass -->
+        <div class="relative w-full max-w-2xl mx-auto group animate-fade-in-up delay-300">
             <div
-                class="flex items-center w-full bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-                <input type="text" id="country-search"
-                    class="flex-grow w-full bg-transparent border-none outline-none focus:ring-0 focus:border-none focus:outline-none px-6 py-4 text-gray-700 placeholder-gray-400 m-0 h-full appearance-none"
-                    placeholder="Where are you going?">
-                <button id="searchButton"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 font-bold border-none outline-none focus:outline-none h-full m-0 rounded-none cursor-pointer flex-shrink-0 transition-colors duration-200 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </button>
+                class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500">
             </div>
-
-            <!-- Autocomplete Dropdown -->
-            <ul id="autocomplete-dropdown"
-                class="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 max-h-64 overflow-y-auto z-50 hidden">
-                <!-- Results will be populated here by JavaScript -->
+            <div
+                class="relative flex items-center w-full bg-white/10 backdrop-blur-xl rounded-full shadow-2xl border border-white/20 p-2 transition-all duration-300 focus-within:bg-white/20 focus-within:border-white/30 focus-within:scale-[1.02] focus-within:ring-4 focus-within:ring-blue-500/20">
+                <div class="pl-6 text-blue-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" id="hero-search"
+                    class="flex-grow bg-transparent border-none outline-none focus:ring-0 px-6 py-4 text-white placeholder-slate-300 text-lg font-medium"
+                    placeholder="Where are you going?">
+            </div>
+            <!-- Autocomplete Dropdown (Hero) -->
+            <ul id="hero-dropdown"
+                class="absolute top-full left-4 right-4 mt-4 bg-slate-900/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/10 max-h-80 overflow-y-auto z-50 hidden divide-y divide-white/5 py-2">
             </ul>
         </div>
     </div>
 </section>
 
-<!-- Popular Destinations Section -->
-<section id="destinations" class="container mx-auto px-4 py-16">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
-        <p class="text-gray-600 text-lg">Choose your destination to compare eSIM plans</p>
-    </div>
+<!-- Trending Flow Section -->
+<section class="bg-slate-900 border-t border-white/5 pb-16">
+    <!-- Curve Divider -->
+    <div class="w-full h-24 bg-gradient-to-b from-slate-900 to-slate-800 rounded-b-[50%] mb-12 scale-110"></div>
 
-    <!-- Airbnb-Style Country Cards Grid - Top 9 -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        {% for country in top_countries %}
-        <a href="{{ country.slug }}.html"
-            class="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]">
-            <!-- Background Image -->
-            <div class="absolute inset-0 bg-cover bg-center"
-                style="background-image: url('{% if country.image_url %}{{ country.image_url }}{% else %}https://loremflickr.com/600/400/{{ country.slug }},travel/all{% endif %}');">
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex items-center justify-between mb-8 reveal">
+            <h2 class="text-3xl font-bold text-white tracking-tight">Trending Now</h2>
+            <div class="flex gap-2">
+                <button id="scroll-left"
+                    class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors cursor-pointer">←</button>
+                <button id="scroll-right"
+                    class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors cursor-pointer">→</button>
             </div>
+        </div>
 
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-
-            <!-- Content at Bottom-Left -->
-            <div class="absolute bottom-0 left-0 right-0 p-6">
-                <div class="flex items-center gap-3">
-                    <!-- Flag Image -->
-                    <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" alt="{{ country.name }} flag"
-                        class="w-8 h-6 object-cover rounded shadow-md" onerror="this.style.display='none'">
-                    <!-- Country Name -->
-                    <h3 class="text-xl font-bold text-white drop-shadow-lg">{{ country.name }}</h3>
-                </div>
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-
-    <!-- All Countries Section -->
-    {% if all_countries|length > 9 %}
-    <div class="mt-16 text-center">
-        <h3 class="text-2xl font-bold text-gray-900 mb-6">All {{ all_countries|length }} Destinations</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
-            {% for country in all_countries %}
+        <!-- Horizontal Scroll Container -->
+        <div id="trending-scroll"
+            class="flex gap-6 overflow-x-auto scrollbar-hide pb-8 snap-x snap-mandatory perspective-1000">
+            {% for country in all_countries if country.is_popular %}
             <a href="{{ country.slug }}.html"
-                class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-blue-500 p-4 text-center">
-                <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" alt="{{ country.name }} flag"
-                    class="w-12 h-9 object-cover mx-auto mb-2 rounded shadow-sm" onerror="this.style.display='none'">
-                <h4 class="text-sm font-semibold text-gray-900">{{ country.name }}</h4>
+                class="snap-center shrink-0 w-72 md:w-80 h-[28rem] relative rounded-[2rem] overflow-hidden group cursor-pointer border border-white/10 hover:border-blue-400/50 transition-all duration-500 reveal-card">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style="background-image: url('{% if country.image %}{{ country.image }}{% else %}{{ country.image_url }}{% endif %}');">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                <div
+                    class="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/20">
+                    Trending
+                </div>
+
+                <div
+                    class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-white mb-1">{{ country.name }}</h3>
+                    <p class="text-slate-300 text-sm mb-4">{{ country.region }}</p>
+                    <div class="flex items-center text-blue-300 font-bold text-sm">
+                        View Plans <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
             </a>
             {% endfor %}
         </div>
     </div>
-    {% endif %}
 </section>
 
-<!-- Autocomplete Search Functionality -->
+<!-- Stats / Trust Ticker -->
+<div class="bg-slate-900 border-b border-white/5">
+    <div class="container mx-auto px-4 py-6 border-t border-white/5">
+        <div
+            class="flex justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <!-- Placeholder logos or trust indicators could go here -->
+            <span class="text-slate-400 font-bold text-sm tracking-widest uppercase">Trusted by Travelers</span>
+            <span class="text-slate-400 font-bold text-sm tracking-widest uppercase">Verified Speeds</span>
+            <span class="text-slate-400 font-bold text-sm tracking-widest uppercase">Secure Payment</span>
+        </div>
+    </div>
+</div>
+
+<!-- Core Value Proposition -->
+<section class="bg-white py-24 relative overflow-hidden">
+    <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Why use eSim Scanner AI?</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">The smartest way to stay connected globally. We rank
+                plans by speed, price, and reliability.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Feature 1 -->
+            <div
+                class="bg-slate-50 rounded-[2rem] p-10 hover:bg-white border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 group reveal delay-100">
+                <div
+                    class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform text-3xl">
+                    🤖
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">AI Price Comparison</h3>
+                <p class="text-slate-500 leading-relaxed">We analyze thousands of plans instantly so you never overpay.
+                    Save up to 70% on roaming.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+                class="bg-slate-50 rounded-[2rem] p-10 hover:bg-white border border-slate-100 hover:border-purple-100 hover:shadow-xl transition-all duration-300 group reveal delay-200">
+                <div
+                    class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform text-3xl">
+                    ⚡
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Top-Tier Networks</h3>
+                <p class="text-slate-500 leading-relaxed">We filter out slow providers. Connect to only the fastest
+                    4G/5G networks locally.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-slate-50 rounded-[2rem] p-10 hover:bg-white border border-slate-100 hover:border-green-100 hover:shadow-xl transition-all duration-300 group reveal delay-300 cursor-pointer"
+                onclick="openCompatibilityModal()">
+                <div
+                    class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform text-3xl">
+                    📱
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Instant Digital Delivery</h3>
+                <p class="text-slate-500 leading-relaxed">Get your plan in seconds. No shipping, no stores. Just scan
+                    and go.</p>
+                <div
+                    class="mt-6 text-green-600 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Check Compatibility <span>→</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Interface -->
+<section id="destinations" class="min-h-screen bg-slate-50 pb-32 pt-16">
+
+
+
+    <!-- Sticky Header & Tabs -->
+    <div class="sticky top-0 z-40 bg-slate-50/80 backdrop-blur-xl border-b border-slate-200/50 pt-4 pb-4 mb-12 transition-all shadow-sm"
+        id="sticky-tabs-container">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-7xl mx-auto">
+
+                <!-- Glass Pill Tabs -->
+                <div
+                    class="bg-gray-100/50 p-1.5 rounded-full flex items-center gap-1 overflow-x-auto scrollbar-hide w-full md:w-auto shadow-inner border border-white/50">
+                    <button onclick="filterRegion('Popular')"
+                        class="tab-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group w-full md:w-auto text-slate-600 hover:text-slate-900 active"
+                        data-tab="Popular">
+                        <span class="relative z-10">🔥 Popular</span>
+                        <div
+                            class="absolute inset-0 bg-white shadow-sm rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                        </div>
+                        <div
+                            class="active-bg absolute inset-0 bg-white shadow-md rounded-full transform scale-100 opacity-0 transition-all duration-300">
+                        </div>
+                    </button>
+                    <button onclick="filterRegion('Europe')"
+                        class="tab-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group w-full md:w-auto text-slate-600 hover:text-slate-900"
+                        data-tab="Europe">
+                        <span class="relative z-10">Europe</span>
+                        <div
+                            class="absolute inset-0 bg-white shadow-sm rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                        </div>
+                        <div
+                            class="active-bg absolute inset-0 bg-white shadow-md rounded-full transform scale-100 opacity-0 transition-all duration-300">
+                        </div>
+                    </button>
+                    <button onclick="filterRegion('Asia')"
+                        class="tab-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group w-full md:w-auto text-slate-600 hover:text-slate-900"
+                        data-tab="Asia">
+                        <span class="relative z-10">Asia</span>
+                        <div
+                            class="absolute inset-0 bg-white shadow-sm rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                        </div>
+                        <div
+                            class="active-bg absolute inset-0 bg-white shadow-md rounded-full transform scale-100 opacity-0 transition-all duration-300">
+                        </div>
+                    </button>
+                    <button onclick="filterRegion('Americas')"
+                        class="tab-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group w-full md:w-auto text-slate-600 hover:text-slate-900"
+                        data-tab="Americas">
+                        <span class="relative z-10">Americas</span>
+                        <div
+                            class="absolute inset-0 bg-white shadow-sm rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                        </div>
+                        <div
+                            class="active-bg absolute inset-0 bg-white shadow-md rounded-full transform scale-100 opacity-0 transition-all duration-300">
+                        </div>
+                    </button>
+                    <button onclick="filterRegion('All')"
+                        class="tab-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group w-full md:w-auto text-slate-600 hover:text-slate-900"
+                        data-tab="All">
+                        <span class="relative z-10">🌍 All</span>
+                        <div
+                            class="absolute inset-0 bg-white shadow-sm rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                        </div>
+                        <div
+                            class="active-bg absolute inset-0 bg-white shadow-md rounded-full transform scale-100 opacity-0 transition-all duration-300">
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Sticky Search Box -->
+                <div class="relative w-full md:w-64 group" id="sticky-search">
+                    <div
+                        class="absolute inset-0 bg-blue-200/50 blur-lg rounded-full opacity-0 group-hover:opacity-50 transition-opacity">
+                    </div>
+                    <input type="text" id="filter-search"
+                        class="w-full bg-white border border-slate-200 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm relative z-10"
+                        placeholder="Find country...">
+                    <div class="absolute left-3 top-2.5 text-slate-400 z-10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Country Grid (Premium Cards) -->
+    <div class="container mx-auto px-4">
+        <div id="country-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {% for country in all_countries %}
+            <a href="{{ country.slug }}.html"
+                class="country-card group relative bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col reveal-card"
+                data-name="{{ country.name|lower }}" data-region="{{ country.region }}"
+                data-popular="{{ 'true' if country.is_popular else 'false' }}">
+
+                <!-- Flag & Image Header -->
+                <div class="h-40 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                        style="background-image: url('{% if country.image %}{{ country.image }}{% else %}{{ country.image_url }}{% endif %}');">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 flex items-center gap-3">
+                        <div class="w-8 h-6 rounded-md overflow-hidden border border-white/30 shadow-md">
+                            <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" alt="{{ country.name }}"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-white font-bold text-lg shadow-black/50 drop-shadow-md">{{ country.name }}</h3>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="p-4 flex justify-between items-center bg-white relative z-10">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">{{ country.region }}</span>
+                    <span
+                        class="text-blue-600 text-sm font-semibold group-hover:translate-x-1 transition-transform">Compare
+                        →</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="text-6xl mb-4">🌍</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">No countries found</h3>
+            <p class="text-slate-500">Try adjusting your search or filter.</p>
+        </div>
+    </div>
+
+</section>
+
+<!-- FAQ Section (New) -->
+<section class="py-24 bg-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white pointer-events-none"></div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-bold text-slate-900 tracking-tight mb-4">Frequently Asked Questions</h2>
+            <p class="text-slate-500 text-lg">Everything you need to know about eSIM technology.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+            <!-- FAQ Item 1 -->
+            <div
+                class="group border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all hover:shadow-lg">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span class="text-lg font-bold text-slate-800">What is an eSIM and how does it work?</span>
+                    <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                    An eSIM (embedded SIM) is a digital SIM card embedded directly into your phone. It allows you to
+                    activate a mobile data plan from a carrier without having to use a physical SIM card. You simply
+                    scan a QR code or enter details manually to get connected instantly!
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div
+                class="group border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all hover:shadow-lg">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span class="text-lg font-bold text-slate-800">Will my WhatsApp number change?</span>
+                    <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                    No! You can keep your primary number active for WhatsApp, calls, and texts while using the eSIM for
+                    data. Your contacts will still be able to reach you on your regular number.
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div
+                class="group border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all hover:shadow-lg">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span class="text-lg font-bold text-slate-800">When does my plan start?</span>
+                    <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                    Most plans start only when you activate them upon arrival in your destination and connect to the
+                    local network. However, some providers may start the validity period immediately upon installation.
+                    Check the specific plan details before purchasing.
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div
+                class="group border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all hover:shadow-lg">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span class="text-lg font-bold text-slate-800">Is my phone compatible?</span>
+                    <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                    Most modern smartphones from Apple (iPhone XR and newer), Samsung (S20 and newer), and Google (Pixel
+                    3 and newer) support eSIMs. You can use our "Check Compatibility" tool above to verify your device!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Compatibility Modal (Clean Glass) -->
+<div id="compat-modal" class="fixed inset-0 z-[100] hidden items-center justify-center" aria-labelledby="modal-title"
+    role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity"
+        onclick="closeCompatibilityModal()"></div>
+    <div
+        class="relative z-10 bg-white rounded-3xl shadow-2xl max-w-sm w-full mx-4 p-8 transform transition-all scale-100 ring-1 ring-white/20">
+        <button class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+            onclick="closeCompatibilityModal()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div class="text-center">
+            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">📲</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">Check Compatibility</h3>
+
+            <div class="bg-slate-50 rounded-xl p-4 mb-6 text-left border border-slate-100">
+                <p class="text-sm font-bold text-slate-700 mb-1">⚡ Quick Trick:</p>
+                <p class="text-sm text-slate-600">Dial <span
+                        class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200 font-bold">*#06#</span> on
+                    your phone.</p>
+                <p class="text-xs text-slate-500 mt-2">If you see an <strong class="text-slate-700">EID</strong> number,
+                    your phone is likely eSIM ready!</p>
+            </div>
+
+            <a href="https://www.airalo.com/help/about-airalo/what-devices-support-esim" target="_blank"
+                rel="noopener noreferrer"
+                class="block w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl mb-3">
+                View Device List
+            </a>
+            <button onclick="closeCompatibilityModal()"
+                class="block w-full bg-slate-100 text-slate-600 font-bold py-4 rounded-xl hover:bg-slate-200 transition-colors">
+                I'll check later
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom Animations */
+    @keyframes blob {
+        0% {
+            transform: translate(0px, 0px) scale(1);
+        }
+
+        33% {
+            transform: translate(30px, -50px) scale(1.1);
+        }
+
+        66% {
+            transform: translate(-20px, 20px) scale(0.9);
+        }
+
+        100% {
+            transform: translate(0px, 0px) scale(1);
+        }
+    }
+
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    /* Active Tab Styles */
+    .tab-btn.active span {
+        color: #000;
+    }
+
+    .tab-btn.active .active-bg {
+        opacity: 1;
+    }
+
+    .reveal {
+        opacity: 1;
+        /* Default visible */
+        transform: translateY(0);
+        transition: all 0.8s ease-out;
+    }
+
+    .reveal-pending {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reveal-card {
+        opacity: 1;
+        /* Default visible */
+        transform: translateY(0);
+        transition: all 0.6s ease-out;
+    }
+
+    .reveal-card-pending {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .reveal-card.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .delay-100 {
+        animation-delay: 0.1s;
+        transition-delay: 0.1s;
+    }
+
+    .delay-200 {
+        animation-delay: 0.2s;
+        transition-delay: 0.2s;
+    }
+
+    .delay-300 {
+        animation-delay: 0.3s;
+        transition-delay: 0.3s;
+    }
+</style>
+
 <script>
-    // All countries data for autocomplete
+    console.log('Script Init: eSim Scanner');
+    // --- Data ---
     const allCountries = [
         {% for country in all_countries %}
     {
         name: "{{ country.name }}",
             slug: "{{ country.slug }}",
-                code: "{{ country.code|lower }}"
+                code: "{{ country.code|lower }}",
+                    region: "{{ country.region }}",
+                        isPopular: { { country.is_popular | tojson } }
     } {% if not loop.last %}, {% endif %}
     {% endfor %}
     ];
 
-    const searchInput = document.getElementById('country-search');
-    const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
-    const searchButton = document.getElementById('searchButton');
+    // --- State & DOM ---
+    let currentFilter = 'Popular';
+    let searchQuery = '';
 
-    function renderAutocompleteResults(matches) {
-        if (matches.length === 0) {
-            autocompleteDropdown.classList.add('hidden');
-            return;
-        }
+    // Global Observer Variable (Will be init in DOMContentLoaded)
+    let globalObserver = null;
 
-        autocompleteDropdown.innerHTML = '';
-        autocompleteDropdown.classList.remove('hidden');
+    const grid = document.getElementById('country-grid');
+    const cards = document.querySelectorAll('.country-card');
+    const tabs = document.querySelectorAll('.tab-btn');
+    const stickySearch = document.getElementById('sticky-search');
+    const stickyInput = document.getElementById('filter-search');
+    const heroInput = document.getElementById('hero-search');
+    const heroDropdown = document.getElementById('hero-dropdown');
+    const emptyState = document.getElementById('empty-state');
 
-        matches.forEach(country => {
-            const li = document.createElement('li');
-            li.className = 'flex items-center gap-3 px-6 py-3 hover:bg-gray-100 cursor-pointer transition-colors';
-            li.innerHTML = `
-                <img src="https://flagcdn.com/w40/${country.code}.png" 
-                     alt="${country.name} flag"
-                     class="w-8 h-6 object-cover rounded shadow-sm"
-                     onerror="this.style.display='none'">
-                <span class="text-gray-900 font-medium">${country.name}</span>
-            `;
+    // --- Tab Logic ---
+    function filterRegion(region) {
+        currentFilter = region;
 
-            li.addEventListener('click', function () {
-                window.location.href = `${country.slug}.html`;
-            });
-
-            autocompleteDropdown.appendChild(li);
+        tabs.forEach(btn => {
+            if (btn.getAttribute('data-tab') === region) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
         });
+
+        applyFilters();
     }
 
-    searchInput.addEventListener('input', function (e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
+    // --- Filtering ---
+    function applyFilters() {
+        let visibleCount = 0;
+        const q = searchQuery.toLowerCase().trim();
 
-        if (searchTerm === '') {
-            autocompleteDropdown.classList.add('hidden');
+        cards.forEach(card => {
+            const region = card.getAttribute('data-region');
+            const isPopular = card.getAttribute('data-popular') === 'true';
+            const name = card.getAttribute('data-name');
+
+            let regionMatch = true;
+            if (currentFilter === 'Popular') {
+                regionMatch = isPopular;
+            } else if (currentFilter !== 'All') {
+                regionMatch = (region === currentFilter);
+            }
+
+            let searchMatch = !q || name.includes(q);
+
+            if (regionMatch && searchMatch) {
+                card.style.display = 'flex';
+                // Trigger reveal if in viewport, check if observer exists
+                if (globalObserver) globalObserver.observe(card);
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (visibleCount === 0) emptyState.classList.remove('hidden');
+        else emptyState.classList.add('hidden');
+    }
+
+    // --- Inputs ---
+    stickyInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        if (searchQuery.length > 0 && currentFilter === 'Popular') filterRegion('All');
+        applyFilters();
+    });
+
+    // --- Hero Search ---
+    heroInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        console.log('Search Debug: Input', val);
+        console.log('Search Debug: All Countries', allCountries.length);
+
+        heroDropdown.innerHTML = '';
+
+        if (val.length === 0) {
+            heroDropdown.classList.add('hidden');
             return;
         }
 
-        // Filter countries that match search term
-        const matches = allCountries.filter(country =>
-            country.name.toLowerCase().includes(searchTerm)
-        ).slice(0, 8); // Limit to 8 results
+        const matches = allCountries.filter(c => c.name.toLowerCase().includes(val) || c.code === val || (val === 'usa' && c.code === 'us') || (val === 'uk' && c.code === 'gb') || (val === 'uae' && c.code === 'ae'));
+        console.log('Search Debug: Matches', matches.length);
 
-        renderAutocompleteResults(matches);
-    });
-
-    // Hide dropdown when clicking outside
-    document.addEventListener('click', function (e) {
-        if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
-            autocompleteDropdown.classList.add('hidden');
+        if (matches.length > 0) {
+            heroDropdown.classList.remove('hidden');
+            console.log('Search Debug: Removing hidden class');
+            matches.slice(0, 8).forEach(c => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="${c.slug}.html" class="flex items-center gap-3 px-6 py-3 hover:bg-white/10 transition-colors text-white">
+                        <img src="https://flagcdn.com/w20/${c.code}.png" alt="${c.name}" class="w-5 h-auto rounded-sm">
+                        <span class="font-medium">${c.name}</span>
+                    </a>
+                `;
+                heroDropdown.appendChild(li);
+            });
+        } else {
+            heroDropdown.classList.add('hidden');
         }
     });
 
-    // Handle keyboard navigation
-    searchInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const firstMatch = autocompleteDropdown.querySelector('li');
-            if (firstMatch) {
-                firstMatch.click();
-            }
-        }
-
-        if (e.key === 'Escape') {
-            autocompleteDropdown.classList.add('hidden');
-            searchInput.blur();
+    // Hide dropdown on click outside
+    document.addEventListener('click', (e) => {
+        if (!heroInput.contains(e.target) && !heroDropdown.contains(e.target)) {
+            heroDropdown.classList.add('hidden');
         }
     });
-    // Handle search button click
-    searchButton.addEventListener('click', function () {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        if (!searchTerm) return;
 
-        // Find matches in the same way autocomplete does
-        const match = allCountries.find(country =>
-            country.name.toLowerCase().includes(searchTerm)
-        );
+    // --- Trending Scroll ---
+    function scrollTrending(direction) {
+        const container = document.getElementById('trending-scroll');
+        const scrollAmount = 300;
+        container.scrollLeft += direction * scrollAmount;
+    }
 
-        if (match) {
-            window.location.href = `${match.slug}.html`;
-        }
+    // Scroll Reveal Logic (Robust & Progressive Enhancement)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Progressive Enhancement: Hide elements only if JS runs
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal-pending'));
+        document.querySelectorAll('.reveal-card').forEach(el => el.classList.add('reveal-card-pending'));
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.01
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('reveal-pending');
+                    entry.target.classList.remove('reveal-card-pending');
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Assign to global variable
+        globalObserver = observer;
+
+        // Observe elements
+        const observeElements = () => {
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-card').forEach(el => observer.observe(el));
+        };
+
+        observeElements();
+        window.dynamicObserver = observer;
     });
+
+    // --- Modal ---
+    function openCompatibilityModal() {
+        const modal = document.getElementById('compat-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCompatibilityModal() {
+        const modal = document.getElementById('compat-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Init
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => filterRegion('Popular'));
+    } else {
+        filterRegion('Popular');
+    }
+
+    // Trending Button Listeners
+    const btnLeft = document.getElementById('scroll-left');
+    const btnRight = document.getElementById('scroll-right');
+    if (btnLeft && btnRight) {
+        btnLeft.addEventListener('click', (e) => { e.preventDefault(); scrollTrending(-1); });
+        btnRight.addEventListener('click', (e) => { e.preventDefault(); scrollTrending(1); });
+    }
 </script>
 {% endblock %}

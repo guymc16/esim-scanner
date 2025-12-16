@@ -1,201 +1,264 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
+
+{% block title %}Best eSIM Plans for {{ country.name }} - Student Prices{% endblock %}
 
 {% block content %}
-<!-- Country Hero Section -->
-<section class="relative bg-cover bg-center bg-no-repeat py-20 md:py-28"
-    style="background-image: url('{{ country.image }}');">
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+<!-- Country Hero (Immersive & Premium) -->
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
+        style="background-image: url('{{ country.image }}');">
+    </div>
+    <!-- Overlay Gradients -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-slate-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
 
     <!-- Content -->
-    <div class="relative z-10 container mx-auto px-4 text-center">
-        <div class="flex items-center justify-center mb-6">
-            <a href="index.html" class="text-white hover:text-blue-300 mr-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </a>
-            <span class="text-gray-200">Home</span>
-            <span class="mx-2 text-gray-400">/</span>
-            <span class="text-white font-medium">{{ country.name }}</span>
-        </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            Best eSIM Plans for {{ country.name }}
-        </h1>
+    <div class="relative z-10 container mx-auto px-4 text-center pt-20">
+        <!-- Breadcrumb / Back -->
+        <a href="index.html"
+            class="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors group backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full border border-white/10 hover:bg-white/20">
+            <span class="group-hover:-translate-x-1 transition-transform">←</span>
+            <span class="text-sm font-medium">Back to Map</span>
+        </a>
 
-        <div class="flex items-center justify-center gap-2 mb-4">
-            <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png" alt="{{ country.name }} flag"
-                class="w-10 h-7 object-cover rounded shadow-md" onerror="this.style.display='none'">
+        <div class="flex items-center justify-center gap-4 mb-6 animate-fade-in-up">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-2xl">
+                {{ country.name }}
+            </h1>
+            <div
+                class="w-16 h-11 rounded-lg overflow-hidden border-2 border-white/20 shadow-2xl skew-y-3 transform hover:skew-y-0 transition-all duration-500">
+                <img src="https://flagcdn.com/w80/{{ country.code|lower }}.png" alt="{{ country.name }}"
+                    class="w-full h-full object-cover">
+            </div>
         </div>
 
-        <p class="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md">
-            Travel across {{ country.name }} with high-speed data.
+        <p
+            class="text-xl md:text-2xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed mb-12 animate-fade-in-up delay-100">
+            {{ country.intro_text }}
         </p>
+
     </div>
 </section>
 
-<!-- Sticky Filter Bar -->
-<nav class="sticky top-0 z-40 bg-white shadow-lg border-b-2 border-gray-300">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4 py-3">
-            <!-- Data Amount Filter (Buttons) -->
-            <div id="data-filters" class="flex gap-2 overflow-x-auto scrollbar-hide w-full md:w-auto">
-                <!-- Buttons will be injected here by JS -->
-            </div>
+<!-- Filter Navigation (Sticky Glass Capsule) -->
+<div class="sticky top-6 z-50 container mx-auto px-4 mb-16 pointer-events-none">
+    <div
+        class="pointer-events-auto mx-auto max-w-fit bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl flex items-center gap-2 overflow-x-auto scrollbar-hide max-w-[95vw]">
 
-            <!-- Duration Filter (Dropdown) -->
-            <div class="relative w-auto min-w-[160px]" id="duration-container" style="display:none;">
-                <label for="duration-filter" class="sr-only">Select Duration</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span class="text-gray-500">📅</span>
-                    </div>
-                    <select id="duration-filter"
-                        class="appearance-none block w-full pl-10 pr-8 py-2 text-sm border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-lg shadow-sm bg-gray-50 text-gray-800 font-semibold cursor-pointer border hover:bg-white transition-colors duration-200">
-                        <option value="all">Standard Duration</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                        <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
+        <div id="data-filters" class="flex items-center gap-1">
+            <!-- Buttons injected by JS -->
+        </div>
+
+        <div class="w-px h-6 bg-white/10 mx-2"></div>
+
+        <div class="w-px h-6 bg-white/10 mx-2"></div>
+
+        <!-- Duration Dropdown (Restored & Refined) -->
+        <div class="relative group" id="duration-container" style="display:none;">
+            <select id="duration-filter"
+                class="appearance-none bg-transparent text-white font-medium text-sm pl-3 pr-8 py-2 focus:outline-none cursor-pointer">
+                <option value="all" class="text-slate-900">Filter Plans</option>
+            </select>
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
             </div>
         </div>
     </div>
-</nav>
+</div>
 
-<!-- Main Plans Grid -->
-<section class="container mx-auto px-4 py-8">
+<!-- Plans Grid Area -->
+<section class="container mx-auto px-4 pb-32 -mt-8 relative z-20">
 
-    <!-- Render Grouped Plans -->
     {% for group in grouped_plans %}
-    <div class="plan-section mb-10" data-section-size="{{ group.filter_value }}">
-        <div class="mb-4 text-center md:text-left">
-            <h2 class="text-2xl font-bold text-gray-900">{{ group.title }}</h2>
-            <p class="text-sm text-gray-500">Compare all providers for {{ group.title }}</p>
+    <div class="plan-section mb-16" data-section-size="{{ group.filter_value }}">
+        <!-- Section Header -->
+        <div class="flex items-center justify-between mb-8 px-2 max-w-[1400px] mx-auto">
+            <div class="flex items-center gap-4">
+                <div
+                    class="w-1.5 h-10 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full shadow-lg shadow-blue-500/30">
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
+                        {{ group.title }}
+                    </h2>
+                    <span class="text-sm font-medium text-slate-400">{{ group.plans|length }} options available</span>
+                </div>
+            </div>
+
+            <!-- Mobile Scroll Hint (Hidden on Desktop) -->
+            <div class="lg:hidden flex gap-2 text-slate-300">
+                <div class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            {% for plan in group.plans %}
-            <!-- Compact Blue Style Card -->
-            <div class="provider-card group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden"
-                data-plans='{{ plan.json_data }}' data-provider="{{ plan.name }}"
-                data-initial-days="{{ plan.duration }}" data-initial-price="{{ plan.price }}"
-                data-initial-discount="{{ plan.discounted_price }}">
+        <!-- Grid Container (Replaces Scroll) -->
+        <!-- Responsive Grid: 1 col mobile, 2 col tablet, 3 col matches, 5 col XL -->
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
 
-                <!-- OLD STYLE BADGE (Green Capsule Inside - Compact) -->
-                <div
-                    class="best-price-badge absolute top-3 right-3 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-20 uppercase tracking-wide {% if not plan.is_cheapest %}hidden{% endif %}">
-                    BEST PRICE
-                </div>
+                {% for plan in group.plans %}
+                <!-- Compact Grid Card -->
+                <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
+                    data-plans='{{ plan.json_data }}' data-provider="{{ plan.name }}"
+                    data-initial-days="{{ plan.duration }}" data-initial-price="{{ plan.price }}"
+                    data-initial-discount="{{ plan.discounted_price }}">
 
-                <div class="p-4 flex flex-col flex-grow relative"> <!-- Reduced Padding p-6 -> p-4 -->
-                    <!-- Header -->
-                    <div class="flex items-center gap-3 mb-2"> <!-- Reduced Margin mb-4 -> mb-2 -->
+                    <!-- Hover Gradient -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+
+                    <!-- Best Price Badge (Dynamic & Premium) -->
+                    <div class="best-price-badge absolute top-3 right-3 z-20 hidden">
                         <div
-                            class="w-10 h-10 rounded-lg bg-white p-1 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                            <!-- Smaller Logo w-12 -> w-10 -->
-                            <img src="{{ plan.logo_url }}" alt="{{ plan.name }}" class="w-full h-full object-contain">
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-tight">{{ plan.name }}</h3>
-                            <!-- Smaller text-lg -> text-base -->
-                            <div class="flex items-center gap-1">
-                                <span class="text-yellow-400 text-xs">★</span>
-                                <span class="text-xs font-semibold text-gray-600">{{ "%.1f"|format(plan.rating)
-                                    }}</span>
-                                <span class="text-[10px] text-gray-400">({{ plan.review_count }})</span>
-                            </div>
+                            class="bg-green-600 backdrop-blur-md text-white text-[9px] font-bold px-2.5 py-1 rounded-full shadow-lg border border-white/20 tracking-wide uppercase">
+                            BEST PRICE
                         </div>
                     </div>
 
-                    <!-- Price & Coupons Section (Side-by-Side) -->
-                    <div class="flex items-center justify-between mb-3 min-h-[3.5rem] relative">
-                        <!-- Flex Side-by-Side, fixed height -->
-                        <!-- Price Node (Left) -->
-                        <div class="flex flex-col justify-center flex-shrink-0 mr-1"> <!-- Reduced mr-2 -> mr-1 -->
-                            {% if plan.discounted_price %}
-                            <div class="flex items-baseline gap-1">
-                                <span class="main-price text-3xl font-bold text-blue-600 leading-none">
-                                    ${{ "%.2f"|format(plan.discounted_price) }}
-                                </span>
-                                <span class="old-price text-xs text-gray-400 line-through">
-                                    ${{ "%.2f"|format(plan.price) }}
-                                </span>
+                    <!-- Reduced Padding: p-5 instead of p-8 -->
+                    <div class="p-5 flex flex-col h-full relative z-10">
+                        <!-- Header: Smaller Logo & Price -->
+                        <div class="flex justify-between items-start mb-4">
+                            <!-- Smaller Logo: w-12 h-12 -->
+                            <div
+                                class="w-12 h-12 rounded-xl bg-white p-1 shadow-sm border border-slate-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                                <img src="{{ plan.logo_url }}" alt="{{ plan.name }}"
+                                    class="w-full h-full object-contain rounded-lg"
+                                    onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name={{ plan.name }}&background=random';">
                             </div>
+                            <div class="text-right">
+                                <div class="flex flex-col items-end">
+                                    <div class="flex items-baseline gap-1">
+                                        <!-- Smaller Price: text-2xl -->
+                                        <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">${{
+                                            "%.2f"|format(plan.discounted_price if plan.discounted_price else
+                                            plan.price) }}</span>
+                                    </div>
+                                    <span
+                                        class="text-[10px] text-slate-400 line-through decoration-slate-300 old-price font-medium"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Provider Info -->
+                        <div class="mb-4">
+                            <h3 class="font-bold text-slate-900 text-lg tracking-tight mb-0.5">{{ plan.name }}</h3>
+                            <div class="flex items-center gap-1">
+                                <span class="text-amber-400 text-xs">★★★★★</span>
+                                <span class="text-[10px] font-semibold text-slate-400">{{ plan.rating }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Validity Block (Compact) -->
+                        <div
+                            class="mb-4 bg-slate-50/50 rounded-xl p-2.5 border border-slate-100 flex items-center justify-center">
+                            <div class="flex flex-col items-center leading-none">
+                                <span
+                                    class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Validity</span>
+                                <span class="text-lg font-bold text-slate-900 dynamic-duration-label">{{ plan.duration
+                                    }} Days</span>
+                            </div>
+                        </div>
+
+                        <!-- Features (Compacted) -->
+                        <div class="space-y-2 mb-4 flex-grow">
+                            {% if plan.benefits %}
+                            <!-- Limit to top 2-3 benefits via CSS or JS? Or just show them compact -->
+                            {% for benefit in plan.benefits[:3] %}
+                            <div
+                                class="flex items-start gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                                <div
+                                    class="w-4 h-4 rounded-full bg-blue-100/50 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-medium text-slate-600 leading-tight">{{ benefit }}</span>
+                            </div>
+                            {% endfor %}
                             {% else %}
-                            <span
-                                class="main-price text-3xl font-bold leading-none {% if plan.is_cheapest %}text-green-600{% else %}text-blue-600{% endif %}">
-                                ${{ "%.2f"|format(plan.price) }}
-                            </span>
+                            <div class="flex items-start gap-2">
+                                <div
+                                    class="w-4 h-4 rounded-full bg-blue-100/50 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-medium text-slate-600 leading-tight">High Speed 5G</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div
+                                    class="w-4 h-4 rounded-full bg-blue-100/50 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-medium text-slate-600 leading-tight">Instant Activation</span>
+                            </div>
                             {% endif %}
                         </div>
 
-                        <!-- Coupons Node (Right - Stacked) -->
+                        <!-- Coupons (Compact) -->
                         {% if plan.coupons %}
-                        <div class="flex flex-col items-end gap-1 flex-grow min-w-0 max-w-[70%] pr-0.5">
-                            <!-- Increased max-w 55% -> 70% and added tiny pr -->
+                        <div class="mb-4 flex flex-wrap gap-1.5 min-h-[24px]">
                             {% if plan.coupons.new_user %}
-                            <div class="flex items-center justify-end gap-1 w-full">
-                                <span
-                                    class="text-[9px] font-bold text-green-700 bg-green-50 border border-green-200 px-1.5 py-0.5 rounded uppercase whitespace-nowrap flex-shrink-0">NEW</span>
-                                <span class="text-[9px] font-mono text-gray-500 truncate block text-right"
-                                    title="{{ plan.coupons.new_user.code }}">{{ plan.coupons.new_user.code }}</span>
-                                <!-- Truncate + Title -->
+                            <div
+                                class="inline-flex items-center gap-1 px-2 py-1 bg-green-50 rounded-md border border-green-100">
+                                <span class="text-[9px] font-bold text-green-700 uppercase">New:
+                                    {{ plan.coupons.new_user.code }}</span>
                             </div>
                             {% endif %}
                             {% if plan.coupons.existing_user %}
-                            <div class="flex items-center justify-end gap-1 w-full">
-                                <span
-                                    class="text-[9px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded uppercase whitespace-nowrap flex-shrink-0">EXIST</span>
-                                <span class="text-[9px] font-mono text-gray-500 truncate block text-right"
-                                    title="{{ plan.coupons.existing_user.code }}">{{ plan.coupons.existing_user.code
-                                    }}</span> <!-- Truncate + Title -->
+                            <div
+                                class="inline-flex items-center gap-1 px-2 py-1 bg-blue-50 rounded-md border border-blue-100">
+                                <span class="text-[9px] font-bold text-blue-700 uppercase">Exist:
+                                    {{ plan.coupons.existing_user.code }}</span>
                             </div>
                             {% endif %}
                         </div>
                         {% endif %}
-                    </div>
 
-                    <!-- Features -->
-                    <div class="space-y-1.5 mb-4 flex-grow border-t border-gray-100 pt-3">
-                        <!-- Duration Removed -->
-                        {% for benefit in plan.benefits[:4] %}
-                        <div class="flex items-start gap-2 text-xs text-gray-500">
-                            <span class="text-green-500 font-bold">✓</span>
-                            <span class="line-clamp-1">{{ benefit }}</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <!-- CTA Button -->
-                    <div class="mt-auto">
+                        <!-- Action Button (Compact) -->
                         <a href="{{ plan.link }}" target="_blank" rel="noopener noreferrer"
-                            class="buy-btn group/btn relative w-full block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md text-sm">
-                            <!-- Compact Button -->
-                            Buy Now
+                            class="group/btn relative w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-md shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-300 overflow-hidden text-center flex items-center justify-center gap-2 mt-auto">
+                            <span class="relative z-10 text-xs tracking-wide">Buy Now</span>
+                            <svg class="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
                         </a>
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
-            {% endfor %}
         </div>
     </div>
     {% endfor %}
 
     <!-- Empty State -->
-    <div id="no-plans-msg" class="hidden text-center py-20 bg-gray-50 rounded-lg">
-        <h3 class="text-xl font-bold text-gray-700">No plans found for this filter.</h3>
-        <p class="text-gray-500 mt-2">Try selecting a different option.</p>
+    <div id="no-plans-msg" class="hidden text-center py-32">
+        <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">🤔
+        </div>
+        <h3 class="text-2xl font-bold text-slate-800">No plans found</h3>
+        <p class="text-slate-500 mt-2">Try adjusting your filters.</p>
     </div>
 
 </section>
 
-<!-- Combined Logic -->
+<!-- Include Filter Scripts -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const sections = document.querySelectorAll('.plan-section');
@@ -204,17 +267,18 @@
         const durationSelect = document.getElementById('duration-filter');
         const noPlansMsg = document.getElementById('no-plans-msg');
 
-        // 1. Build Filter Buttons based on available Sections
+        // 1. Build Filter Buttons
         let availableSizes = [];
         sections.forEach(sec => {
-            const size = parseFloat(sec.getAttribute('data-section-size'));
+            let size = parseFloat(sec.getAttribute('data-section-size'));
+            if (size === -1) size = 999;
             if (!availableSizes.includes(size)) availableSizes.push(size);
         });
         availableSizes.sort((a, b) => a - b);
 
         // Create 'All' Button
         const allBtn = document.createElement('button');
-        allBtn.className = 'filter-btn active px-6 py-2 text-sm font-bold text-white bg-blue-600 rounded-full transition-all duration-200 whitespace-nowrap shadow-md transform scale-105';
+        allBtn.className = 'filter-btn active px-4 py-1.5 text-sm font-semibold text-white bg-white/20 border border-white/10 rounded-full transition-all duration-200 whitespace-nowrap backdrop-blur-md';
         allBtn.innerText = 'All';
         allBtn.onclick = () => showAll();
         filterContainer.appendChild(allBtn);
@@ -225,7 +289,7 @@
             const isUnlimited = size === 999;
             const label = isUnlimited ? 'Unlimited' : size + 'GB';
 
-            btn.className = 'filter-btn px-5 py-2 text-sm font-semibold text-gray-600 bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 rounded-full transition-all duration-200 whitespace-nowrap';
+            btn.className = 'filter-btn px-4 py-1.5 text-sm font-semibold text-slate-400 hover:text-white transition-all duration-200 whitespace-nowrap';
             btn.innerText = label;
             btn.onclick = () => filterBySize(size, btn);
             filterContainer.appendChild(btn);
@@ -235,7 +299,6 @@
         showAll();
 
         // --- Functions ---
-
         function showAll() {
             updateButtons(allBtn);
             durationContainer.style.display = 'block';
@@ -250,7 +313,9 @@
 
             let activeSection = null;
             sections.forEach(sec => {
-                const secSize = parseFloat(sec.getAttribute('data-section-size'));
+                let secSize = parseFloat(sec.getAttribute('data-section-size'));
+                if (secSize === -1) secSize = 999;
+
                 if (secSize === size) {
                     sec.style.display = 'block';
                     activeSection = sec;
@@ -276,7 +341,9 @@
                 : document.querySelectorAll(`.plan-section[data-section-size="${scopeSize}"]`);
 
             targetSections.forEach(sec => {
-                const secSize = parseFloat(sec.getAttribute('data-section-size'));
+                let secSize = parseFloat(sec.getAttribute('data-section-size'));
+                if (secSize === -1) secSize = 999;
+
                 const cards = sec.querySelectorAll('.provider-card');
 
                 cards.forEach(card => {
@@ -294,31 +361,38 @@
 
             const sortedDays = Array.from(validDays).sort((a, b) => a - b);
             const previousVal = durationSelect.value;
-            durationSelect.innerHTML = '';
+            durationSelect.innerHTML = ''; // Start with empty
 
-            if (sortedDays.length === 0) {
-                durationContainer.style.display = 'none';
-                return;
-            }
+            // Add "Filter Plans" (acts as All/Any)
+            const anyOpt = document.createElement('option');
+            anyOpt.value = 'all';
+            anyOpt.innerText = 'All Durations';
+            anyOpt.className = 'text-slate-900 font-bold';
+            durationSelect.appendChild(anyOpt);
 
             sortedDays.forEach(day => {
                 const opt = document.createElement('option');
                 opt.value = day;
                 opt.innerText = day + ' Days';
+                opt.className = 'text-slate-900';
                 durationSelect.appendChild(opt);
             });
 
-            let nextVal = sortedDays[0];
+            // Try to preserve selection
+            let nextVal = 'all';
             if (previousVal !== 'all' && sortedDays.includes(parseInt(previousVal))) {
                 nextVal = parseInt(previousVal);
             }
-
             durationSelect.value = nextVal;
-            applyDurationFilter(scopeSize, nextVal);
+
+            // Initial apply
+            if (nextVal !== 'all') applyDurationFilter(scopeSize, nextVal);
+            else applyDurationFilter(scopeSize, 'all');
+
 
             durationSelect.onchange = () => {
                 const v = durationSelect.value;
-                applyDurationFilter(scopeSize, parseInt(v));
+                applyDurationFilter(scopeSize, v === 'all' ? 'all' : parseInt(v));
             };
         }
 
@@ -330,39 +404,25 @@
             let globalVisibleCards = 0;
 
             targetSections.forEach(sec => {
-                const secSize = parseFloat(sec.getAttribute('data-section-size'));
+                let secSize = parseFloat(sec.getAttribute('data-section-size'));
+                if (secSize === -1) secSize = 999;
+
                 const visibleCount = updateCardsInSection(sec, secSize, selectedDay);
                 globalVisibleCards += visibleCount;
 
                 if (scopeSize === 'all') {
-                    // In "All" view: Hide empty sections completely
-                    if (visibleCount === 0) {
-                        sec.style.display = 'none';
-                    } else {
-                        sec.style.display = 'block';
-                    }
-                } else {
-                    // In specific Size view: Always show section, but card logic handles empty message
-                    sec.style.display = 'block';
+                    if (visibleCount === 0) sec.style.display = 'none';
+                    else sec.style.display = 'block';
                 }
             });
 
-            // If absolutely no cards found across everything
-            if (globalVisibleCards === 0 && scopeSize === 'all') {
-                noPlansMsg.classList.remove('hidden');
-            } else if (scopeSize === 'all') {
-                noPlansMsg.classList.add('hidden');
-            }
+            if (globalVisibleCards === 0) noPlansMsg.classList.remove('hidden');
+            else noPlansMsg.classList.add('hidden');
         }
 
         function updateCardsInSection(section, size, days) {
             const cards = section.querySelectorAll('.provider-card');
             let visibleCount = 0;
-            const grid = section.querySelector('.grid');
-
-            // Remove any existing inline error msg
-            const existingMsg = section.querySelector('.inline-no-plan-msg');
-            if (existingMsg) existingMsg.remove();
 
             cards.forEach(card => {
                 const plans = JSON.parse(card.getAttribute('data-plans') || '[]');
@@ -372,16 +432,27 @@
                 const durationLabel = card.querySelector('.dynamic-duration-label');
                 const bestBadge = card.querySelector('.best-price-badge');
 
+                // RESET HIGHLIGHT STYLES FOR ALL CARDS FIRST
+                if (bestBadge) bestBadge.classList.add('hidden');
+
+                // Clear Apple glow styles
+                card.classList.remove('shadow-[0_0_30px_rgba(22,163,74,0.3)]', 'ring-1', 'border-green-500/50');
+                card.style.boxShadow = '';
+
+                priceEl.classList.remove('text-green-600');
+                priceEl.classList.add('text-slate-900');
+
+
                 let match = null;
 
                 if (days === 'all') {
                     const initialDays = parseInt(card.getAttribute('data-initial-days'));
-                    // Priority 1: Match initial
+                    // 1. Initial Match
                     match = plans.find(p => {
                         let pSize = p.data === -1 ? 999 : p.data;
                         return Math.abs(pSize - size) < 0.1 && p.day === initialDays;
                     });
-                    // Priority 2: Cheapest
+                    // 2. Cheapest Fallback
                     if (!match) {
                         const candidates = plans.filter(p => {
                             let pSize = p.data === -1 ? 999 : p.data;
@@ -399,24 +470,17 @@
                     });
                 }
 
-                // Reset
-                if (bestBadge) bestBadge.classList.add('hidden');
-                card.classList.remove('border-green-500', 'ring-2', 'ring-green-500');
-                card.classList.add('border-gray-100');
-                priceEl.classList.remove('text-green-600');
-                priceEl.classList.add('text-blue-600');
-
                 if (match) {
+                    // Start of Card Display
+                    // Card is in a Grid, so we just toggle display: flex or none? 
+                    // Grid items with display:flex works.
                     card.style.display = 'flex';
                     visibleCount++;
-                    // Re-enable button
-                    buyBtn.style.pointerEvents = 'auto';
 
                     let displayPrice = match.price;
                     let displayOldPrice = null;
-
-                    // Discount Logic
                     const providerName = card.getAttribute('data-provider');
+
                     if (providerName.includes('Airalo')) {
                         displayOldPrice = displayPrice;
                         displayPrice = displayPrice * 0.85;
@@ -425,12 +489,10 @@
                         displayPrice = displayPrice * 0.80;
                     }
 
-                    // Update Price Text
                     priceEl.innerText = '$' + displayPrice.toFixed(2);
 
-                    // Update Old Price
                     if (oldPriceEl) {
-                        if (displayOldPrice && displayOldPrice > displayPrice) {
+                        if (displayOldPrice) {
                             oldPriceEl.innerText = '$' + displayOldPrice.toFixed(2);
                             oldPriceEl.classList.remove('hidden');
                         } else {
@@ -439,23 +501,14 @@
                     }
 
                     buyBtn.href = match.link;
-                    if (durationLabel) durationLabel.innerText = `${match.day} Days Coverage`;
+                    if (durationLabel) durationLabel.innerText = `${match.day} Days`;
 
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            // Specific "Does not exist" message logic
-            if (visibleCount === 0 && days !== 'all') {
-                const msg = document.createElement('div');
-                msg.className = 'inline-no-plan-msg col-span-full text-center py-8 text-gray-500 italic';
-                msg.innerText = 'This plan does not exist';
-                grid.appendChild(msg);
-            }
-
-            // --- RE-SORT LOGIC START ---
-            // Sort the DOM elements based on the updated prices
+            // Best Value Logic for this section (cheapest visible)
             if (visibleCount > 0) {
                 const activeCards = Array.from(cards).filter(c => c.style.display !== 'none');
                 activeCards.sort((a, b) => {
@@ -464,40 +517,23 @@
                     return pA - pB;
                 });
 
-                // Re-append to grid in new order (moves them to the end)
-                // Hidden cards stay at the top but are invisible, so it doesn't matter
-                activeCards.forEach(c => grid.appendChild(c));
-            }
-            // --- RE-SORT LOGIC END ---
+                const cheapestCard = activeCards[0];
+                if (cheapestCard) {
+                    // 1. Show Badge
+                    const b = cheapestCard.querySelector('.best-price-badge');
+                    if (b) b.classList.remove('hidden');
 
-            // --- Cheapeast Logic (Robust) ---
-            if (visibleCount > 0) {
-                let minPrice = Infinity;
-                cards.forEach(card => {
-                    if (card.style.display !== 'none') {
-                        const pText = card.querySelector('.main-price').innerText;
-                        const price = parseFloat(pText.replace(/[^0-9.]/g, ''));
-                        if (!isNaN(price) && price > 0) {
-                            if (price < minPrice) minPrice = price;
-                        }
-                    }
-                });
+                    // 2. Premium Apple-style Glow
+                    cheapestCard.classList.add('shadow-[0_0_30px_rgba(22,163,74,0.3)]', 'ring-1', 'border-green-500/50');
+                    cheapestCard.classList.remove('border-transparent');
 
-                cards.forEach(card => {
-                    if (card.style.display !== 'none') {
-                        const pText = card.querySelector('.main-price').innerText;
-                        const price = parseFloat(pText.replace(/[^0-9.]/g, ''));
-                        if (Math.abs(price - minPrice) < 0.01) {
-                            const b = card.querySelector('.best-price-badge');
-                            if (b) b.classList.remove('hidden');
-                            card.classList.remove('border-gray-100');
-                            card.classList.add('border-green-500', 'ring-1', 'ring-green-500');
-                            const pEl = card.querySelector('.main-price');
-                            pEl.classList.remove('text-blue-600', 'text-gray-900');
-                            pEl.classList.add('text-green-600');
-                        }
+                    // 3. Green Price Text
+                    const priceEl = cheapestCard.querySelector('.main-price');
+                    if (priceEl) {
+                        priceEl.classList.remove('text-slate-900');
+                        priceEl.classList.add('text-green-600');
                     }
-                });
+                }
             }
 
             return visibleCount;
@@ -505,23 +541,44 @@
 
         function updateButtons(activeBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow-md', 'transform', 'scale-105');
-                b.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+                b.classList.remove('active', 'bg-white/20', 'text-white', 'border-white/10');
+                b.classList.add('text-slate-400');
             });
-            activeBtn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
-            activeBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow-md', 'transform', 'scale-105');
+            activeBtn.classList.remove('text-slate-400');
+            activeBtn.classList.add('active', 'bg-white/20', 'text-white', 'border-white/10');
         }
     });
 </script>
 
 <style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
     .scrollbar-hide {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+    }
+
+    .delay-100 {
+        animation-delay: 0.1s;
     }
 </style>
 {% endblock %}

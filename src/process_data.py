@@ -9,11 +9,35 @@ DATA_DIR = BASE_DIR / "data"
 XML_FILE = DATA_DIR / "airalo_feed.xml"
 COUNTRIES_FILE = DATA_DIR / "countries.json"
 
+# Phase 1: Region Mapping & Popularity Configuration
+POPULAR_CODES = ['US', 'JP', 'FR', 'GB', 'IT', 'TH', 'ES', 'DE', 'TR', 'CN', 'CH', 'PT', 'GR']
+
 def load_country_map():
     with open(COUNTRIES_FILE, "r", encoding="utf-8") as f:
         countries = json.load(f)
     # Map lowercase country name to ISO code
     return {c["name"].lower(): c["code"] for c in countries}
+
+def get_region(country_code):
+    """
+    Returns the region for a given country ISO code.
+    Fallback: 'Other'
+    """
+    code = country_code.upper()
+    
+    europe = ['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'CH', 'TR', 'AT', 'GR', 'PT', 'BE', 'SE', 'NO', 'DK', 'FI', 'IE', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'RS', 'SI', 'SK', 'EE', 'LV', 'LT', 'IS', 'MT', 'CY', 'AL', 'ME', 'MK', 'BA', 'MD', 'UA', 'BY', 'RU', 'MC', 'LI', 'LU', 'AD', 'SM', 'VA', 'XK']
+    asia = ['JP', 'TH', 'CN', 'IN', 'ID', 'KR', 'VN', 'MY', 'SG', 'AE', 'IL', 'SA', 'QA', 'OM', 'KW', 'BH', 'LB', 'JO', 'TW', 'HK', 'MO', 'PH', 'KH', 'LA', 'MM', 'BD', 'NP', 'LK', 'PK', 'MV', 'MN', 'UZ', 'KZ', 'KG', 'TJ', 'TM', 'AF', 'IQ', 'SY', 'YE', 'PS']
+    americas = ['US', 'CA', 'MX', 'BR', 'AR', 'CO', 'PE', 'CL', 'VE', 'EC', 'GT', 'CU', 'HT', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY', 'BO', 'JM', 'TT', 'BS', 'BB', 'LC', 'VC', 'GD', 'AG', 'KN', 'DM', 'BZ', 'GY', 'SR']
+    oceania = ['AU', 'NZ', 'FJ', 'PG', 'SB', 'VU', 'NC', 'PF', 'WS', 'TO', 'KI', 'FM', 'MH', 'PW', 'NR', 'TV']
+    africa = ['ZA', 'EG', 'MA', 'NG', 'KE', 'ET', 'TZ', 'GH', 'UG', 'DZ', 'SD', 'CD', 'AO', 'MZ', 'CM', 'CI', 'MG', 'ZW', 'SN', 'TN', 'RW', 'SO', 'ZM', 'SS', 'GN', 'BJ', 'BI', 'TG', 'SL', 'LY', 'CG', 'LR', 'CF', 'MR', 'ER', 'NA', 'GM', 'BW', 'GA', 'LS', 'GW', 'GQ', 'DJ', 'KM', 'CV', 'ST', 'SZ', 'SC', 'MU']
+
+    if code in europe: return 'Europe'
+    if code in asia: return 'Asia'
+    if code in americas: return 'Americas'
+    if code in oceania: return 'Oceania'
+    if code in africa: return 'Africa'
+    
+    return 'Other'
 
 def parse_price(price_str):
     if not price_str:
@@ -125,13 +149,19 @@ def analyze_feed():
         data_gb = parse_data_amount(data_part)
         days = parse_days(duration_part)
         
+        # New Logic: Region & Popularity
+        region = get_region(country_iso)
+        is_popular = country_iso in POPULAR_CODES
+        
         plan = {
             "provider": "Airalo",
             "country_iso": country_iso,
             "data_gb": data_gb,
             "days": days,
             "price": price_val,
-            "link": link_val
+            "link": link_val,
+            "region": region,
+            "is_popular": is_popular
         }
         
         parsed_plans.append(plan)
