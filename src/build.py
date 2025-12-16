@@ -433,6 +433,20 @@ def main():
         except Exception as e:
             print(f"Failed to render {country['name']}: {e}")
             
+
+    # Render About Page
+    try:
+        about_template = env.get_template('about.html')
+        about_html = about_template.render(
+            all_countries=countries,
+            page_title="About Us"
+        )
+        with open(os.path.join(DOCS_DIR, 'about.html'), 'w', encoding='utf-8') as f:
+            f.write(about_html)
+        print("Built about.html")
+    except Exception as e:
+        print(f"Failed to render about.html: {e}")
+
     print("Build complete.")
 
 if __name__ == '__main__':

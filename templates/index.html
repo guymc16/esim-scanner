@@ -566,7 +566,7 @@
             slug: "{{ country.slug }}",
                 code: "{{ country.code|lower }}",
                     region: "{{ country.region }}",
-                        isPopular: { { country.is_popular | tojson } }
+                        isPopular: {{ country.is_popular|tojson }}
     } {% if not loop.last %}, {% endif %}
     {% endfor %}
     ];
