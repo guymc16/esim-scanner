@@ -150,7 +150,54 @@ def get_affiliate_link(provider_name, iso_code, slug):
     
     return "#"
 
+def fix_template_safeguard():
+    """
+    User requested 'Just fix build'. 
+    This auto-repairs the recurrent Jinja syntax error in templates/index.html 
+    BEFORE the build process tries to interpret it.
+    """
+    target_file = os.path.join(TEMPLATES_DIR, 'index.html')
+    if not os.path.exists(target_file):
+        return
+
+    try:
+        with open(target_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # The specific regression pattern
+        bad_pattern = '{ { country.is_popular | tojson } }'
+        good_pattern = '{{ country.is_popular|tojson }}'
+        
+        if bad_pattern in content:
+            print("SAFEGUARD: Fixing broken Jinja syntax in index.html...")
+            content = content.replace(bad_pattern, good_pattern)
+            with open(target_file, 'w', encoding='utf-8') as f:
+                f.write(content)
+    except Exception as e:
+        print(f"SAFEGUARD WARNING: Could not check template: {e}")
+
+def ensure_about_hero():
+    """Downloads a clean hero image without text overlays."""
+    url = "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop"
+    filepath = os.path.join(DOCS_DIR, 'static', 'brand', 'hero_bg_clean.jpg')
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    
+    if not os.path.exists(filepath):
+        print("Downloading clean About Us hero...")
+        try:
+             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+             with urllib.request.urlopen(req) as response:
+                 with open(filepath, 'wb') as f:
+                     f.write(response.read())
+        except Exception as e:
+            print(f"Failed to download hero: {e}")
+    return "static/brand/hero_bg_clean.jpg"
+
 def main():
+    # 0. Safeguard: Fix Templates
+    fix_template_safeguard()
+    ensure_about_hero()
+    
     # Load Data
     with open(os.path.join(DATA_DIR, 'providers.json'), 'r', encoding='utf-8') as f:
         providers = json.load(f)
