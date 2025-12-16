@@ -63,7 +63,7 @@
     </style>
 </head>
 
-<body class="bg-slate-50 min-h-screen flex flex-col overflow-y-scroll">
+<body class="bg-slate-50 min-h-screen flex flex-col overflow-y-scroll overflow-x-hidden">
     <!-- Navbar -->
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
@@ -141,9 +141,9 @@
 </section>
 
 <!-- Filter Navigation (Sticky Glass Capsule) -->
-<div class="sticky top-6 z-50 container mx-auto px-4 mb-16 pointer-events-none">
+<div class="sticky top-20 z-40 container mx-auto px-4 mb-16 pointer-events-none transition-all duration-300">
     <div
-        class="pointer-events-auto mx-auto max-w-fit bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl flex items-center gap-2 overflow-x-auto scrollbar-hide max-w-[95vw]">
+        class="pointer-events-auto mx-auto max-w-fit bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-full p-1.5 shadow-2xl flex items-center gap-2 overflow-x-auto snap-x snap-mandatory scrollbar-hide max-w-[95vw]">
 
         <div id="data-filters" class="flex items-center gap-1">
             <!-- Buttons injected by JS -->
@@ -4886,7 +4886,7 @@
 
         // Create 'All' Button
         const allBtn = document.createElement('button');
-        allBtn.className = 'filter-btn active px-4 py-1.5 text-sm font-semibold text-white bg-white/20 border border-white/10 rounded-full transition-all duration-200 whitespace-nowrap backdrop-blur-md';
+        allBtn.className = 'filter-btn active px-5 py-2 text-sm font-bold text-white bg-white/20 border border-white/10 rounded-full transition-all duration-200 whitespace-nowrap backdrop-blur-md snap-center flex-shrink-0';
         allBtn.innerText = 'All';
         allBtn.onclick = () => showAll();
         filterContainer.appendChild(allBtn);
@@ -4897,7 +4897,7 @@
             const isUnlimited = size === 999;
             const label = isUnlimited ? 'Unlimited' : size + 'GB';
 
-            btn.className = 'filter-btn px-4 py-1.5 text-sm font-semibold text-slate-400 hover:text-white transition-all duration-200 whitespace-nowrap';
+            btn.className = 'filter-btn px-5 py-2 text-sm font-bold text-slate-400 hover:text-white transition-all duration-200 whitespace-nowrap snap-center flex-shrink-0';
             btn.innerText = label;
             btn.onclick = () => filterBySize(size, btn);
             filterContainer.appendChild(btn);
