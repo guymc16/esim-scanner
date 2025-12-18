@@ -614,6 +614,97 @@ def main():
     except Exception as e:
         print(f"Failed to render toolkit.html: {e}")
 
+    # Render Partners Page
+    print("Processing partners data...")
+    partners_data = [
+        {
+            'name': 'Airalo',
+            'link': 'https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u=https%3A%2F%2Fairalo.com',
+            'badge': 'Global Leader',
+            'badge_color': 'blue',
+            'description': 'The world’s first and largest eSIM store. We partner with them because their coverage spans 200+ countries, offering the most reliable connection for global travelers.'
+        },
+        {
+            'name': 'Maya Mobile',
+            'link': 'https://maya.net/?pid=QTsarrERAv1y',
+            'badge': 'Unlimited Data',
+            'badge_color': 'indigo',
+            'description': 'Known for their premium 5G networks and unlimited data plans. Maya is our top choice for power users who need fast, unthrottled internet for work and streaming.'
+        },
+        {
+            'name': 'Saily',
+            'link': 'https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com',
+            'badge': 'Security First',
+            'badge_color': 'emerald',
+            'description': 'Created by the team behind Nord Security. We recommend Saily for travelers who prioritize privacy and secure connections without compromising on speed.'
+        },
+        {
+            'name': 'Yesim',
+            'link': 'https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.tech',
+            'badge': 'Flexible Plans',
+            'badge_color': 'purple',
+            'description': 'The pay-as-you-go flexibility of Yesim makes it unique. Their "Ycoins" reward system and virtual number features are excellent for long-term nomads.'
+        },
+        {
+            'name': 'Drimsim',
+            'link': 'https://tp.media/r?campaign_id=102&marker=689615&p=2762&trs=479661&u=https%3A%2F%2Fw1.drimsim.com',
+            'badge': 'Universal Sim',
+            'badge_color': 'orange',
+            'description': 'A true universal SIM card that works almost everywhere. Great for cross-border trips where you do not want to switch profiles constantly.'
+        }
+    ]
+    
+    # Process Partner Logos (Using downloaded files)
+    for p in partners_data:
+        p['local_logo'] = f"static/tools/{p['name'].lower().replace(' ', '_')}.png"
+
+    ecosystem_data = [
+        {
+            'name': 'Booking.com', 
+            'logo': 'static/tools/booking_com.png',
+            'link': 'https://www.booking.com'
+        },
+        {
+            'name': 'Hostelworld', 
+            'logo': 'static/tools/hostelworld.png',
+            'link': 'https://www.hostelworld.com'
+        },
+        {
+            'name': 'NordVPN', 
+            'logo': 'static/tools/nordvpn.png',
+            'link': 'https://tp.media/click?shmarker=689615&promo_id=8986&source_type=link&type=click&campaign_id=631&trs=479661'
+        },
+        {
+            'name': 'AirHelp', 
+            'logo': 'static/tools/airhelp.png',
+            'link': 'https://tp.media/r?campaign_id=120&marker=689615&p=3670&trs=479661&u=https%3A%2F%2Fairhelp.com'
+        },
+        {
+            'name': 'GetYourGuide', 
+            'logo': 'static/tools/getyourguide.png',
+            'link': 'https://www.getyourguide.com'
+        },
+        {
+            'name': 'Discover Cars', 
+            'logo': 'static/tools/discover_cars.png',
+            'link': 'https://www.discovercars.com'
+        },
+    ]
+
+    try:
+        partners_template = env.get_template('partners.html')
+        partners_html = partners_template.render(
+            all_countries=countries,
+            page_title="Our Partners",
+            partners=partners_data,
+            ecosystem=ecosystem_data
+        )
+        with open(os.path.join(DOCS_DIR, 'partners.html'), 'w', encoding='utf-8') as f:
+            f.write(partners_html)
+        print("Built partners.html")
+    except Exception as e:
+        print(f"Failed to render partners.html: {e}")
+
     print("Build complete.")
 
 if __name__ == '__main__':
