@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Global Traveler Background -->
+<div class="fixed inset-0 -z-10 bg-slate-50">
+    <!-- View from Plane Window (Wing + Clouds) - High Visibility with Fade -->
+    <div class="absolute inset-0 w-full h-[80vh] bg-cover bg-top" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80'); 
+                opacity: 0.5;
+                mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+    </div>
+
+    <!-- Sky Blue Gradient Overlay (Cruising Altitude Vibe) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-sky-200/40 via-sky-100/20 to-transparent pointer-events-none">
+    </div>
+</div>
+
+<div class="container mx-auto px-4 py-16 sm:py-24 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16 max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-slate-800 mb-6 tracking-tight">
+            The Global Traveler's Toolkit
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+            As we fly around the world testing eSIMs, we need tools that keep up.
+            <span class="font-medium text-slate-800 block mt-2">No fluff, just essentials.</span>
+        </p>
+    </div>
+
+    <!-- Process Cards Loop (All are now Feature Cards) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+
+        {% for tool in tools %}
+        <div
+            class="group relative bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 shadow-sm flex flex-col h-full">
+            <!-- Badge -->
+            <div class="absolute top-4 right-4 z-20">
+                <span
+                    class="px-3 py-1 rounded-full bg-{{ tool.badge_color }}-100 text-{{ tool.badge_color }}-700 text-xs font-bold border border-{{ tool.badge_color }}-200 uppercase tracking-wide">{{
+                    tool.category }}</span>
+            </div>
+
+            <!-- Cover Image (Height fixed) -->
+            <div class="w-full h-48 sm:h-56 relative overflow-hidden">
+                <img src="{{ tool.image_url }}" alt="{{ tool.name }}"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <!-- Gradient to blend image into card -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                <!-- Logo overlaid on image (Option A layout) -->
+                <div class="absolute bottom-4 left-4 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/90 backdrop-blur-sm p-1.5 flex items-center justify-center shadow-lg">
+                        <img src="{{ tool.local_logo }}" class="w-full h-full object-contain" alt="{{ tool.name }}">
+                    </div>
+                    <h3 class="text-xl font-bold text-white shadow-sm">{{ tool.name }}</h3>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <p class="text-slate-600 mb-6 leading-relaxed flex-grow">
+                    {{ tool.description }}
+                </p>
+                <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-semibold transition-all shadow-lg w-full group-hover:shadow-blue-500/20">
+                    <span>{{ tool.cta }}</span>
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-20 text-center border-t border-slate-200 pt-8 max-w-2xl mx-auto">
+        <p class="text-xs text-slate-400">
+            Transparency: Some links in this kit are affiliate links. If you buy through them, we may earn a small
+            commission at no extra cost to you. This keeps the site running. We only recommend what we actually use.
+        </p>
+    </div>
+</div>
+{% endblock %}

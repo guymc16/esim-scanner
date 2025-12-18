@@ -494,6 +494,126 @@ def main():
     except Exception as e:
         print(f"Failed to render about.html: {e}")
 
+    # Render Toolkit Page with Local Logos
+    print("Processing toolkit logos...")
+    
+    # 1. Define Tools Data
+    tools_data = [
+        # Must Haves
+        {
+            'name': 'NordVPN',
+            'category': 'ESSENTIAL',
+            'badge_color': 'blue', # Tailwind class suffix
+            'logo_url': 'https://logo.clearbit.com/nordvpn.com',
+            'image_url': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80',
+            'description': '"Public WiFi at airports is dangerous. We use this to protect our credit card info and watch Netflix from back home."',
+            'link': 'https://tp.media/click?shmarker=689615&promo_id=8986&source_type=link&type=click&campaign_id=631&trs=479661',
+            'cta': 'Get 63% Off Plan',
+            'is_featured': True
+        },
+        {
+            'name': 'EKTA Insurance',
+            'category': 'BEST VALUE',
+            'badge_color': 'emerald',
+            'logo_url': 'https://logo.clearbit.com/ektatraveling.com',
+            'image_url': 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80',
+            'description': '"Most insurance doesn\'t cover tech gear or Covid. This one is built for nomads and starts at just $3."',
+            'link': 'https://tp.media/r?campaign_id=225&marker=689615&p=5869&trs=479661&u=https%3A%2F%2Fektatraveling.com',
+            'cta': 'Check Prices',
+            'is_featured': True
+        },
+        {
+            'name': 'AirHelp',
+            'category': 'FREE CHECK',
+            'badge_color': 'purple',
+            'logo_url': 'https://logo.clearbit.com/airhelp.com',
+            'image_url': 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80',
+            'description': '"Flight delayed? Don\'t stress. Check if you are owed €600 compensation. It\'s totally free to check."',
+            'link': 'https://tp.media/r?campaign_id=120&marker=689615&p=3670&trs=479661&u=https%3A%2F%2Fairhelp.com',
+            'cta': 'Check Eligibility',
+            'is_featured': True
+        },
+        # Standard Cards (Now upgraded with Images)
+        {
+            'name': 'Hostelworld',
+            'category': 'SOCIAL VIBES',
+            'logo_url': 'https://logo.clearbit.com/hostelworld.com',
+            'image_url': 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80',
+            'description': '"The backpacker\'s bible. Great for finding social vibes, not just a bed."',
+            'link': 'https://www.hostelworld.com',
+            'badge_color': 'orange',
+            'cta': 'Find Hostels',
+            'is_featured': True
+        },
+        {
+            'name': 'Booking.com',
+            'category': 'HOTELS',
+            'logo_url': 'https://logo.clearbit.com/booking.com',
+            'image_url': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80',
+            'description': '"For when you need a private room or a break from the dorm life."',
+            'link': 'https://www.booking.com',
+            'badge_color': 'blue',
+            'cta': 'Book Stays',
+            'is_featured': True
+        },
+        {
+             'name': 'GetYourGuide',
+             'category': 'EXPERIENCES',
+             'logo_url': 'https://logo.clearbit.com/getyourguide.com',
+             'image_url': 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80',
+             'description': '"Skip the line at the Colosseum. Book experiences instantly."',
+             'link': 'https://www.getyourguide.com',
+             'badge_color': 'red',
+             'cta': 'View Tours',
+             'is_featured': True
+        },
+        {
+            'name': 'Discover Cars',
+            'category': 'GETTING AROUND',
+            'badge_color': 'orange', 
+            'logo_url': 'https://logo.clearbit.com/discovercars.com', 
+            'image_url': 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80',
+            'description': '"Don\'t get ripped off at the rental counter. We use this to compare prices across all major brands globally. Their full coverage insurance is often 50% cheaper than what you pay at the desk."',
+            'link': 'https://www.discovercars.com',
+            'cta': 'Compare Rental Prices',
+            'is_featured': True
+        }
+    ]
+
+    # 2. Use Local Logos (Downloaded via curl)
+    STATIC_TOOLS_DIR = os.path.join(DOCS_DIR, 'static', 'tools')
+    
+    for tool in tools_data:
+        # Expected filename from our curl commands
+        safe_name = "".join([c for c in tool['name'].lower() if c.isalnum() or c in (' ', '-', '_')]).strip().replace(' ', '_')
+        
+        # Handle specific naming from curl commands if needed
+        filename = f"{safe_name}.png"
+        
+        # Fix for Booking.com (Booking.com -> bookingcom, but file is booking_com.png)
+        if tool['name'] == 'Booking.com':
+            filename = 'booking_com.png'
+        
+        # Verify if file exists, if not use fallback (though we should have them now)
+        if os.path.exists(os.path.join(STATIC_TOOLS_DIR, filename)):
+            tool['local_logo'] = f"static/tools/{filename}"
+        else:
+            print(f"Warning: Logo not found for {tool['name']}, using remote URL")
+            tool['local_logo'] = tool['logo_url']
+
+    try:
+        toolkit_template = env.get_template('toolkit.html')
+        toolkit_html = toolkit_template.render(
+            all_countries=countries,
+            page_title="Travel Kit",
+            tools=tools_data
+        )
+        with open(os.path.join(DOCS_DIR, 'toolkit.html'), 'w', encoding='utf-8') as f:
+            f.write(toolkit_html)
+        print("Built toolkit.html")
+    except Exception as e:
+        print(f"Failed to render toolkit.html: {e}")
+
     print("Build complete.")
 
 if __name__ == '__main__':
