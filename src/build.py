@@ -1,711 +1,353 @@
-import json
 import os
-import random
-import urllib.request
-import urllib.error
-import urllib.parse
-from jinja2 import Environment, FileSystemLoader
+import re
+import datetime
 
 # Configuration
-DATA_DIR = 'data'
-DOCS_DIR = 'docs'
-TEMPLATES_DIR = 'templates'
-STATIC_LOGOS_DIR = os.path.join(DOCS_DIR, 'static', 'logos')
-STATIC_COUNTRIES_DIR = os.path.join(DOCS_DIR, 'static', 'countries')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
+DOCS_DIR = os.path.join(PROJECT_ROOT, 'docs')
 
-# Ensure directories exist
-os.makedirs(STATIC_LOGOS_DIR, exist_ok=True)
-os.makedirs(STATIC_COUNTRIES_DIR, exist_ok=True)
+# Core files to exclude from SEO updates
+IGNORED_FILES = {
+    'index.html',
+    'about.html',
+    'partners.html',
+    'toolkit.html',
+    'sitemap.xml',
+    '404.html',
+    'google',  # any google verification files
+    'robots.txt'
+}
 
-def download_logo(url, name):
-    if not url:
-        return ''
-    
-    # Sanitize filename
-    safe_name = "".join([c for c in name.lower() if c.isalnum() or c in (' ', '-', '_')]).strip().replace(' ', '_')
-    filename = f"{safe_name}.png"
-    filepath = os.path.join(STATIC_LOGOS_DIR, filename)
-    relative_path = f"static/logos/{filename}"
-    
-    if os.path.exists(filepath):
-        return relative_path
-        
-    print(f"Downloading logo for {name}: {url}")
-    try:
-        req = urllib.request.Request(
-            url, 
-            headers={
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-                'Referer': 'https://www.google.com/'
-            }
-        )
-        with urllib.request.urlopen(req) as response:
-            with open(filepath, 'wb') as out_file:
-                out_file.write(response.read())
-        return relative_path
-    except Exception as e:
-        print(f"Failed to download logo for {name}: {e}")
-        return url # Fallback to remote URL
+# 1. The Data Dictionary (VIP Data)
+COUNTRIES_DATA = {
+    "Israel": {
+        "slug": "israel",
+        "capital": "Jerusalem",
+        "landmark": "the Western Wall",
+        "network": "Pelephone",
+        "plug": "Type H"
+    },
+    "Japan": {
+        "slug": "japan",
+        "capital": "Tokyo",
+        "landmark": "Shibuya Crossing",
+        "network": "Docomo",
+        "plug": "Type A"
+    },
+    "USA": {
+        "slug": "usa",
+        "capital": "Washington D.C.",
+        "landmark": "Times Square",
+        "network": "T-Mobile",
+        "plug": "Type A/B"
+    },
+    "France": {
+        "slug": "france",
+        "capital": "Paris",
+        "landmark": "the Eiffel Tower",
+        "network": "Orange",
+        "plug": "Type E"
+    },
+    "United Kingdom": {
+        "slug": "united-kingdom",
+        "capital": "London",
+        "landmark": "Big Ben",
+        "network": "EE",
+        "plug": "Type G"
+    },
+    "Italy": {
+        "slug": "italy",
+        "capital": "Rome",
+        "landmark": "the Colosseum",
+        "network": "TIM",
+        "plug": "Type L"
+    },
+    "Spain": {
+        "slug": "spain",
+        "capital": "Madrid",
+        "landmark": "Sagrada Família",
+        "network": "Movistar",
+        "plug": "Type F"
+    },
+    "Germany": {
+        "slug": "germany",
+        "capital": "Berlin",
+        "landmark": "Brandenburg Gate",
+        "network": "Telekom",
+        "plug": "Type F"
+    },
+    "Portugal": {
+        "slug": "portugal",
+        "capital": "Lisbon",
+        "landmark": "Belem Tower",
+        "network": "MEO",
+        "plug": "Type F"
+    },
+    "Greece": {
+        "slug": "greece",
+        "capital": "Athens",
+        "landmark": "the Acropolis",
+        "network": "Cosmote",
+        "plug": "Type F"
+    },
+    "Switzerland": {
+        "slug": "switzerland",
+        "capital": "Bern",
+        "landmark": "The Matterhorn",
+        "network": "Swisscom",
+        "plug": "Type J"
+    },
+    "Turkey": {
+        "slug": "turkey",
+        "capital": "Ankara",
+        "landmark": "Hagia Sophia",
+        "network": "Turkcell",
+        "plug": "Type F"
+    },
+    "Thailand": {
+        "slug": "thailand",
+        "capital": "Bangkok",
+        "landmark": "the Grand Palace",
+        "network": "AIS",
+        "plug": "Type A/B"
+    },
+    "South Korea": {
+        "slug": "south-korea",
+        "capital": "Seoul",
+        "landmark": "Gyeongbokgung Palace",
+        "network": "SK Telecom",
+        "plug": "Type F"
+    },
+    "Indonesia": {
+        "slug": "indonesia",
+        "capital": "Jakarta",
+        "landmark": "Bali Beaches",
+        "network": "Telkomsel",
+        "plug": "Type C"
+    },
+    "Singapore": {
+        "slug": "singapore",
+        "capital": "Singapore",
+        "landmark": "Marina Bay Sands",
+        "network": "Singtel",
+        "plug": "Type G"
+    },
+    "Australia": {
+        "slug": "australia",
+        "capital": "Canberra",
+        "landmark": "Sydney Opera House",
+        "network": "Telstra",
+        "plug": "Type I"
+    },
+    "Canada": {
+        "slug": "canada",
+        "capital": "Ottawa",
+        "landmark": "Niagara Falls",
+        "network": "Rogers",
+        "plug": "Type A"
+    },
+    "Mexico": {
+        "slug": "mexico",
+        "capital": "Mexico City",
+        "landmark": "Chichen Itza",
+        "network": "Telcel",
+        "plug": "Type A"
+    },
+    "United Arab Emirates": {
+        "slug": "united-arab-emirates",
+        "capital": "Abu Dhabi",
+        "landmark": "Burj Khalifa",
+        "network": "Etisalat",
+        "plug": "Type G"
+    },
+    "Netherlands": {
+        "slug": "netherlands",
+        "capital": "Amsterdam",
+        "landmark": "the Canals",
+        "network": "KPN/Vodafone",
+        "plug": "Type C/F"
+    }
+}
 
-def download_country_image(country):
-    # If explicitly defined image URL (e.g. Wikimedia), keep it (User said they are fast)
-    if country.get('image_url'):
-        return country.get('image_url')
-
-    # If missing, use LoremFlickr dynamic image but DOWNLOAD it to cache
-    slug = country['slug']
-    filename = f"{slug}.jpg"
-    filepath = os.path.join(STATIC_COUNTRIES_DIR, filename)
-    relative_path = f"static/countries/{filename}"
-
-    if os.path.exists(filepath):
-        return relative_path
-
-    # Construct LoremFlickr URL
-    url = f"https://loremflickr.com/1600/900/{slug},travel/all"
-    print(f"Downloading background for {country['name']}: {url}")
-    
-    try:
-        req = urllib.request.Request(
-            url, 
-            headers={'User-Agent': 'Mozilla/5.0'}
-        )
-        with urllib.request.urlopen(req, timeout=10) as response:
-            with open(filepath, 'wb') as out_file:
-                out_file.write(response.read())
-        return relative_path
-    except Exception as e:
-        print(f"Failed to download background for {country['name']}: {e}")
-        return url # Fallback to remote if download fails
-
-def comma_filter(value):
-    try:
-        if isinstance(value, (int, float)):
-             return "{:,}".format(value)
-        return value
-    except:
-        return value
-
-def generate_dummy_price(provider_name, size_gb):
-    random.seed(f"{provider_name}_{size_gb}") 
-    base = 4.5 # Standard market rate for 1GB
-    
-    if size_gb >= 50:
-        base = 100.0
-    elif size_gb >= 20:
-        base = 35.0
-    elif size_gb >= 10:
-        base = 18.0
-    elif size_gb >= 5:
-        base = 12.0
-    elif size_gb >= 3:
-        base = 8.0
-    elif size_gb >= 2:
-        base = 6.0
-    elif size_gb >= 1:
-        base = 4.5
-    else: # Unlimited
-        base = 35.0
-
-    # Multiplier-based randomness (stable)
-    multiplier = random.uniform(0.95, 1.05)
-    
-    # Specific adjustments to match user perception if needed
-    if "Yesim" in provider_name:
-        multiplier = 1.0 # Force stable for Yesim
-        if size_gb == 1: base = 4.5 # Result ~4.50 -> 3.60w/20%
-
-    price = base * multiplier
-    return round(price, 2)
-
-def get_affiliate_link(provider_name, iso_code, slug):
-    p = provider_name
-    c = iso_code.upper()
-    s = slug.lower()
-    
-    # Overrides
-    if c == 'US': s = 'usa' if "Maya" in p else 'united-states'
-    elif c == 'GB': s = 'uk' if "Maya" in p else 'united-kingdom'
-    
-    # Logic
-    if "Airalo" in p: return f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u=https://airalo.com/{s}-esim"
-    if "Maya" in p: return f"https://maya.net/esim/{s}?pid=QTsarrERAv1y"
-    if "Saily" in p: return f"https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https://saily.com/esim-{s}"
-    if "Yesim" in p: return f"https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https://yesim.tech/country/{s}"
-    elif "Klook" in p:
-         import urllib.parse
-         # 1. Clean Search Term
-         search_term = f"esim {s.replace('-', ' ')}"
-         
-         # 2. Build Target URL (Matching the actual Klook search structure)
-         # Note: usage of '/search/result/' and '?query='
-         # We use quote() to get '%20' instead of '+' which Klook prefers in this structure
-         target_url = f"https://www.klook.com/en-US/search/result/?query={urllib.parse.quote(search_term)}"
-         
-         # 3. Encode for Travelpayouts (Safe wrapping)
-         encoded_target = urllib.parse.quote(target_url, safe='')
-         
-         return f"https://tp.media/r?campaign_id=137&marker=689615&p=4110&trs=479661&u={encoded_target}"
-    
-    return "#"
-
-def fix_template_safeguard():
+def get_country_data(filename):
     """
-    User requested 'Just fix build'. 
-    This auto-repairs the recurrent Jinja syntax error in templates/index.html 
-    BEFORE the build process tries to interpret it.
+    Determines country data based on filename.
+    Returns (country_name, data_dict)
     """
-    target_file = os.path.join(TEMPLATES_DIR, 'index.html')
-    if not os.path.exists(target_file):
-        return
+    slug = filename.replace('.html', '')
+    
+    # Capitalize Slug for Name (e.g. costa-rica -> Costa Rica)
+    country_name = slug.replace('-', ' ').title()
+    
+    # Special Case Fixes (e.g. Uae -> UAE, Usa -> USA if not handled)
+    if country_name.lower() == 'usa': country_name = "USA"
+    if country_name.lower() == 'uae': country_name = "UAE"
+    if country_name.lower() == 'uk': country_name = "UK"
+    if country_name.lower() == 'united kingdom': country_name = "United Kingdom"
 
-    try:
-        with open(target_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # The specific regression pattern
-        bad_pattern = '{ { country.is_popular | tojson } }'
-        good_pattern = '{{ country.is_popular|tojson }}'
-        
-        if bad_pattern in content:
-            print("SAFEGUARD: Fixing broken Jinja syntax in index.html...")
-            content = content.replace(bad_pattern, good_pattern)
-            with open(target_file, 'w', encoding='utf-8') as f:
-                f.write(content)
-    except Exception as e:
-        print(f"SAFEGUARD WARNING: Could not check template: {e}")
+    # LOOKUP IN VIP DATA
+    # Try to find by name match
+    # 1. Exact Name Match
+    if country_name in COUNTRIES_DATA:
+        return country_name, COUNTRIES_DATA[country_name]
+    
+    # 2. Slug Match
+    for name, data in COUNTRIES_DATA.items():
+        if data['slug'] == slug:
+            return name, data
 
-def ensure_about_hero():
-    """Downloads a clean hero image without text overlays."""
-    url = "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop"
-    filepath = os.path.join(DOCS_DIR, 'static', 'brand', 'hero_bg_clean.jpg')
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    # FALLBACK LOGIC
+    # print(f"   (Using fallback data for {country_name})")
+    fallback_data = {
+        "slug": slug,
+        "capital": "the capital city",
+        "landmark": "popular tourist attractions",
+        "network": "top-tier local networks",
+        "plug": "local"  # Will result in "local power outlets"
+    }
+    return country_name, fallback_data
+
+
+def generate_premium_accordion(country_name, data):
+    """
+    Generates the Premium Tailwind Accordion HTML.
+    """
+    current_year = datetime.datetime.now().year
+    
+    # formatting "plug" correctly for fallback
+    plug_text = f"<strong>{data['plug']}</strong>" if data['plug'] != "local" else "the local"
+    
+    html = f"""<!-- Premium FAQ Accordion -->
+<div id="faq-section" class="max-w-4xl mx-auto my-16 px-4">
+    <details class="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <summary class="flex items-center justify-between p-5 cursor-pointer bg-white hover:bg-gray-50 transition-colors list-none select-none">
+            <span class="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                <span>🌍</span> Traveler's Guide: Connectivity in {country_name} ({current_year})
+            </span>
+            <svg class="w-5 h-5 text-gray-400 transform group-open:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </summary>
+        <div class="p-6 text-gray-600 bg-gray-50/50 border-t border-gray-100 space-y-4 text-sm leading-relaxed">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Why buy an eSIM?</h4>
+                    <p>Traveling to <strong>{country_name}</strong>? Whether you're visiting <strong>{data['landmark']}</strong> or staying in <strong>{data['capital']}</strong>, public WiFi is unreliable. An eSIM gives you instant, secure data the moment you land.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Best Local Network</h4>
+                    <p>Connecting to networks like <strong>{data['network']}</strong> ensures you have fast 4G/5G coverage, even in remote areas.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Installation</h4>
+                    <p>You will receive a QR code via email instantly. Scan it to activate data in under 2 minutes.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Local Tech Specs</h4>
+                    <p>{country_name} uses {plug_text} power outlets. Don't forget your travel adapter!</p>
+                </div>
+            </div>
+        </div>
+    </details>
+</div>
+<!-- End Accordion -->"""
+    return html
+
+def update_country_page(filename, country_name, data):
+    """
+    Surgically updates the HTML file for a country.
+    """
+    filepath = os.path.join(DOCS_DIR, filename)
     
     if not os.path.exists(filepath):
-        print("Downloading clean About Us hero...")
-        try:
-             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-             with urllib.request.urlopen(req) as response:
-                 with open(filepath, 'wb') as f:
-                     f.write(response.read())
-        except Exception as e:
-            print(f"Failed to download hero: {e}")
-    return "static/brand/hero_bg_clean.jpg"
+        print(f"File not found: {filename} (Skipping)")
+        return
+        
+    # print(f"   - Updating {filename}...")
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+        
+    current_year = datetime.datetime.now().year
+    
+    # --- Step A: SEO Updates (Regex) ---
+    
+    # 1. Title
+    # New Format: "Best eSIM for {Country} (2025) | Cheapest & Student Plans"
+    new_title = f"Best eSIM for {country_name} ({current_year}) | Cheapest & Student Plans"
+    
+    # Check if Title actually needs update to avoid regex work if possible? 
+    # Valid regex replace is fast enough.
+    content = re.sub(r'<title>.*?</title>', f'<title>{new_title}</title>', content, count=1, flags=re.IGNORECASE)
+    
+    # 2. Meta Description
+    # New Format: "Looking for the cheapest eSIM for {Country}? Compare top-tier data plans for travelers and students. Instant activation, no roaming fees. Plans start from $4.50."
+    new_desc = f"Looking for the cheapest eSIM for {country_name}? Compare top-tier data plans for travelers and students. Instant activation, no roaming fees. Plans start from $4.50."
+    
+    desc_pattern = r'<meta\s+name=["\']description["\']\s+content=["\'].*?["\']\s*/?>'
+    if re.search(desc_pattern, content, re.IGNORECASE):
+        content = re.sub(desc_pattern, f'<meta name="description" content="{new_desc}">', content, count=1, flags=re.IGNORECASE)
+    else:
+        # Insert after title if missing
+        # print("     (Injecting missing Meta Description)")
+        content = re.sub(r'(</title>)', f'\\1\n    <meta name="description" content="{new_desc}">', content, count=1, flags=re.IGNORECASE)
+                     
+    # --- Step B: Accordion Injection ---
+    
+    accordion_html = generate_premium_accordion(country_name, data)
+    
+    # Check if we already have an FAQ section (to update it instead of duplicate)
+    if 'id="faq-section"' in content:
+        # print("     (Updating existing Accordion)")
+        # Regex to remove existing block using our comments
+        if '<!-- Premium FAQ Accordion -->' in content:
+             content = re.sub(r'<!-- Premium FAQ Accordion -->.*?<!-- End Accordion -->', accordion_html, content, flags=re.DOTALL)
+        else:
+            # Fallback for the very first overwrite if structure exists but not comments? 
+            # We assume "Surgical Update" Phase 1 put them there, OR they don't exist in fallback files yet.
+            print(f"   WARNING: {filename} has id='faq-section' but no comment markers. Skipping accordion to avoid duplication/damage.")
+            pass 
+    else:
+        # print("     (Injecting new Accordion)")
+        # Insert before <footer>
+        match = re.search(r'(<footer)', content, re.IGNORECASE)
+        if match:
+            idx = match.start()
+            content = content[:idx] + accordion_html + "\n\n" + content[idx:]
+        else:
+             content = content.replace('</body>', f'{accordion_html}\n</body>')
+
+    # --- Step C: Save ---
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
 
 def main():
-    # 0. Safeguard: Fix Templates
-    fix_template_safeguard()
-    ensure_about_hero()
+    print("--- STARTING UNIVERSAL SURGICAL UPDATE (PHASE 4) ---")
+    print(f"Target Directory: {DOCS_DIR}")
     
-    # Load Data
-    with open(os.path.join(DATA_DIR, 'providers.json'), 'r', encoding='utf-8') as f:
-        providers = json.load(f)
+    # 1. Discover all HTML files
+    all_files = os.listdir(DOCS_DIR)
+    html_files = [f for f in all_files if f.endswith('.html')]
+    
+    valid_files = [f for f in html_files if f not in IGNORED_FILES]
+    print(f"Found {len(valid_files)} country pages to update.")
+    
+    count = 0
+    for filename in valid_files:
+        # 2. Determine Data
+        name, data = get_country_data(filename)
         
-    with open(os.path.join(DATA_DIR, 'countries.json'), 'r', encoding='utf-8') as f:
-        countries = json.load(f)
-
-    # Load Real Plans
-    real_plans_path = os.path.join(DATA_DIR, 'data_plans.json')
-    real_plans_data = []
-    if os.path.exists(real_plans_path):
-        with open(real_plans_path, 'r', encoding='utf-8') as f:
-            real_plans_data = json.load(f)
-
-    # Enrich Countries with Region & Popularity from Plan Data
-    # 1. Build Lookup
-    country_meta_map = {}
-    for p in real_plans_data:
-        iso = p.get('country_iso')
-        if iso:
-            # If we haven't seen this country yet, or if this plan marks it as popular, update.
-            # We want to capture the region (assumed constant per country) and is_popular flag.
-            if iso not in country_meta_map:
-                country_meta_map[iso] = {
-                    'region': p.get('region', 'Other'),
-                    'is_popular': p.get('is_popular', False)
-                }
-            else:
-                # If any plan says it's popular, the country is popular
-                if p.get('is_popular'):
-                    country_meta_map[iso]['is_popular'] = True
-                # Region should be consistent, no need to overwrite unless missing
-
-    # 2. Inject into Country Objects
-    for c in countries:
-        code = c.get('code')
-        if code in country_meta_map:
-            c['region'] = country_meta_map[code]['region']
-            c['is_popular'] = country_meta_map[code]['is_popular']
-        else:
-            c['region'] = 'Other'
-            c['is_popular'] = False
-
-    # Force correct links in the loaded JSON data
-    for plan in real_plans_data:
-        country_match = next((c for c in countries if c['code'] == plan['country_iso']), None)
-        c_slug = country_match['slug'] if country_match else plan['country_iso']
-        plan['link'] = get_affiliate_link(plan['provider'], plan['country_iso'], c_slug)
-    
-    # Index Real Plans for O(1) Lookup: (provider_name, country_iso) -> [plans]
-    real_plans_map = {}
-    for p in real_plans_data:
-        key = (p['provider'], p['country_iso'])
-        if key not in real_plans_map:
-            real_plans_map[key] = []
-        real_plans_map[key].append(p)
-
-    # Download Logos & Split Providers
-    fixed_providers = []
-    payg_providers = []
-    
-    print("Processing providers and downloading logos...")
-    for p in providers:
-        # Download Logo
-        p['local_logo'] = download_logo(p.get('logo_url'), p.get('name'))
-        
-        # Split type
-        if p.get('service_type') == 'pay_as_you_go':
-            payg_providers.append(p)
-        elif p.get('service_type') == 'hybrid':
-            payg_providers.append(p)
-            fixed_providers.append(p)
-        else:
-            fixed_providers.append(p)
-
-    # Process Country Images FIRST (so they are ready for template)
-    print("Processing country images...")
-    for c in countries:
-        c['image'] = download_country_image(c) # Check key 'image' vs 'image_url' in template
-
-    # Prepare Jinja2 Environment
-    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
-    env.filters['comma'] = comma_filter
-    
-    try:
-        index_template = env.get_template('index.html')
-        country_template = env.get_template('country.html')
-    except Exception as e:
-        print(f"Error loading templates: {e}")
-        return
-
-    top_countries = countries[:8]
-    
-    # Render Index
-    print("Rendering index.html...")
-    try:
-        output_html = index_template.render(
-            all_countries=countries,
-            top_countries=top_countries,
-            plans_by_size={}, 
-            payg_plans=payg_providers
-        )
-        
-        with open(os.path.join(DOCS_DIR, 'index.html'), 'w', encoding='utf-8') as f:
-            f.write(output_html)
-        print("Built index.html")
-    except Exception as e:
-        print(f"Failed to render index.html: {e}")
-
-    # Render Country Pages
-    print(f"Rendering {len(countries)} country pages...")
-    
-    for country in countries:
-        # Generate plans for this country
-        grouped_plans = [] # List of dicts with title, filter_value, plans
-        
-        # Valid sizes to group by
-        sizes = [1, 2, 3, 5, 10, 20, -1]
-                
-        # Get plans map for this country
-        c_code = country.get('code', '').upper()
-        base_slug = country.get('slug', '').lower()
-
-        # Pre-calc overrides for link generation (Affiliate)
-        slugs = {
-            'Airalo': base_slug,
-            'Maya Mobile': base_slug,
-            'Saily': base_slug,
-            'Yesim': base_slug
-        }
-        if c_code == 'US':
-             slugs = {'Airalo': 'united-states', 'Maya Mobile': 'usa', 'Saily': 'united-states', 'Yesim': 'united-states'}
-        elif c_code == 'GB':
-             slugs = {'Airalo': 'united-kingdom', 'Maya Mobile': 'uk', 'Saily': 'united-kingdom', 'Yesim': 'united-kingdom'}
-
-        for size in sizes:
-            section_plans = []
-            
-            for provider_meta in fixed_providers:
-                p_name = provider_meta['name']
-                
-                # Check for Real Plans Data
-                key = (p_name, c_code)
-                
-                if key in real_plans_map and real_plans_map[key]:
-                    # REAL DATA PATH
-                    plans = real_plans_map[key]
-                    matching_plans = [p for p in plans if p['data_gb'] == size]
-                    
-                    if not matching_plans:
-                        continue
-                        
-                    best_plan = min(matching_plans, key=lambda x: x['price'])
-                    price = best_plan['price']
-                    duration = best_plan['days']
-                    final_link = best_plan['link']
-                    
-                    # JSON for Filter
-                    available_plans_list = []
-                    for rp in plans:
-                        available_plans_list.append({
-                            'data': rp['data_gb'],
-                            'day': rp['days'],
-                            'price': rp['price'],
-                            'link': rp['link']
-                        })
-                    json_data = json.dumps(available_plans_list)
-                    
-                else:
-                    # FALLBACK / DUMMY DATA PATH (For Maya, Saily, etc.)
-                    # Only generate if it makes sense (e.g. usually providers have 1/3/5/10/20)
-                    if size == -1: # Unlimited logic
-                        pass
-
-                    
-                    smart_link = get_affiliate_link(p_name, c_code, base_slug)
-                    
-                    # Update dummy plans generation
-                    dummy_plans = []
-                    dummy_sizes = [1, 2, 3, 5, 10, 20, 50, -1]
-                    for d_size in dummy_sizes:
-                         dummy_plans.append({
-                            'data': d_size, 
-                            'day': 30, 
-                            'price': generate_dummy_price(p_name, d_size), 
-                            'link': smart_link 
-                         })
-                    
-                    # Create JSON with correct links
-                    json_data = json.dumps(dummy_plans)
-                    final_link = smart_link
-                    best_plan = {'coupon': None}
-                    price = generate_dummy_price(p_name, size)
-                    duration = 30
-
-                # Link Logic (Dynamic or Fallback)
-                if not final_link or final_link == "#":
-                     # Fallback Affiliate Links
-                     s = slugs.get(p_name, base_slug)
-                     if "Airalo" in p_name: final_link = f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u=https://airalo.com/{s}-esim"
-                     elif "Maya" in p_name: final_link = f"https://maya.net/esim/{s}?pid=QTsarrERAv1y"
-                     elif "Saily" in p_name: final_link = f"https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https://saily.com/esim-{s}"
-                     elif "Yesim" in p_name: final_link = f"https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https://yesim.tech/country/{s}"
-                     elif "Klook" in p_name:
-                         # Klook needs encoded search
-                         q = urllib.parse.quote(f"esim {country.get('name', '')}")
-                         final_link = f"https://www.klook.com/en-US/search/?keyword={q}"
-                
-                # Dynamic Discount Calculation (Front-loaded)
-                discounted_price = None
-                coupons = best_plan.get('coupon')
-                if not coupons:
-                    coupons = provider_meta.get('coupons')
-                
-                if coupons and coupons.get('new_user'):
-                    l = coupons['new_user']['label'] # e.g. "15% OFF"
-
-                    if "%" in l:
-                        try:
-                            pct = float(l.replace('%','').replace(' OFF',''))
-                            discounted_price = price * (1 - pct/100)
-                        except: pass
-
-
-                plan_display = {
-                    'name': p_name,
-                    'logo_url': provider_meta['local_logo'],
-                    'rating': provider_meta['base_rating'],
-                    'review_count': provider_meta['review_count'],
-                    'json_data': json_data, # Essential for JS
-                    
-                    # Display values
-                    'data': size,
-                    'price': price,
-                    'discounted_price': discounted_price,
-                    'duration': duration,
-                    'link': final_link,
-                    
-                    'benefits': provider_meta['benefits'],
-                    'coupons': coupons,
-                    'is_cheapest': False
-                }
-                section_plans.append(plan_display)
-            
-            # Sort Section by Price
-            # Sort plans by price (low to high)
-            # Ensure discounted_price is used if present
-            def get_sort_price(p):
-                val = p['discounted_price'] if p['discounted_price'] else p['price']
-                return val
-
-            section_plans.sort(key=get_sort_price)
-            
-            # Recalculate cheapest flag based on sorted list
-            if section_plans:
-                # Reset all first
-                for p in section_plans: p['is_cheapest'] = False
-                # Set first as cheapest
-                section_plans[0]['is_cheapest'] = True
-
-            if section_plans:
-                grouped_plans.append({
-                    'title': f"{size}GB Plans" if size != -1 else "Unlimited Data Plans",
-                    'filter_value': 999 if size == -1 else size,
-                    'plans': section_plans
-                })
-
-        # Render Template
+        # 3. Update
         try:
-            output_html = country_template.render(
-                country=country, # Pass FULL Object so {{ country.name }} works
-                all_countries=countries,
-                top_countries=top_countries,
-                grouped_plans=grouped_plans, 
-                payg_plans=payg_providers
-            )
-            
-            with open(os.path.join(DOCS_DIR, f"{country['slug']}.html"), 'w', encoding='utf-8') as f:
-                f.write(output_html)
+            update_country_page(filename, name, data)
+            count += 1
+            if count % 10 == 0:
+                print(f"   Processed {count} files...")
         except Exception as e:
-            print(f"Failed to render {country['name']}: {e}")
-            
-
-    # Render About Page
-    try:
-        about_template = env.get_template('about.html')
-        about_html = about_template.render(
-            all_countries=countries,
-            page_title="About Us"
-        )
-        with open(os.path.join(DOCS_DIR, 'about.html'), 'w', encoding='utf-8') as f:
-            f.write(about_html)
-        print("Built about.html")
-    except Exception as e:
-        print(f"Failed to render about.html: {e}")
-
-    # Render Toolkit Page with Local Logos
-    print("Processing toolkit logos...")
-    
-    # 1. Define Tools Data
-    tools_data = [
-        # Must Haves
-        {
-            'name': 'NordVPN',
-            'category': 'ESSENTIAL',
-            'badge_color': 'blue', # Tailwind class suffix
-            'logo_url': 'https://logo.clearbit.com/nordvpn.com',
-            'image_url': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80',
-            'description': '"Public WiFi at airports is dangerous. We use this to protect our credit card info and watch Netflix from back home."',
-            'link': 'https://tp.media/click?shmarker=689615&promo_id=8986&source_type=link&type=click&campaign_id=631&trs=479661',
-            'cta': 'Get 63% Off Plan',
-            'is_featured': True
-        },
-        {
-            'name': 'EKTA Insurance',
-            'category': 'BEST VALUE',
-            'badge_color': 'emerald',
-            'logo_url': 'https://logo.clearbit.com/ektatraveling.com',
-            'image_url': 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80',
-            'description': '"Most insurance doesn\'t cover tech gear or Covid. This one is built for nomads and starts at just $3."',
-            'link': 'https://tp.media/r?campaign_id=225&marker=689615&p=5869&trs=479661&u=https%3A%2F%2Fektatraveling.com',
-            'cta': 'Check Prices',
-            'is_featured': True
-        },
-        {
-            'name': 'AirHelp',
-            'category': 'FREE CHECK',
-            'badge_color': 'purple',
-            'logo_url': 'https://logo.clearbit.com/airhelp.com',
-            'image_url': 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80',
-            'description': '"Flight delayed? Don\'t stress. Check if you are owed €600 compensation. It\'s totally free to check."',
-            'link': 'https://tp.media/r?campaign_id=120&marker=689615&p=3670&trs=479661&u=https%3A%2F%2Fairhelp.com',
-            'cta': 'Check Eligibility',
-            'is_featured': True
-        },
-        # Standard Cards (Now upgraded with Images)
-        {
-            'name': 'Hostelworld',
-            'category': 'SOCIAL VIBES',
-            'logo_url': 'https://logo.clearbit.com/hostelworld.com',
-            'image_url': 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80',
-            'description': '"The backpacker\'s bible. Great for finding social vibes, not just a bed."',
-            'link': 'https://www.hostelworld.com',
-            'badge_color': 'orange',
-            'cta': 'Find Hostels',
-            'is_featured': True
-        },
-        {
-            'name': 'Booking.com',
-            'category': 'HOTELS',
-            'logo_url': 'https://logo.clearbit.com/booking.com',
-            'image_url': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80',
-            'description': '"For when you need a private room or a break from the dorm life."',
-            'link': 'https://www.booking.com',
-            'badge_color': 'blue',
-            'cta': 'Book Stays',
-            'is_featured': True
-        },
-        {
-             'name': 'GetYourGuide',
-             'category': 'EXPERIENCES',
-             'logo_url': 'https://logo.clearbit.com/getyourguide.com',
-             'image_url': 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80',
-             'description': '"Skip the line at the Colosseum. Book experiences instantly."',
-             'link': 'https://www.getyourguide.com',
-             'badge_color': 'red',
-             'cta': 'View Tours',
-             'is_featured': True
-        },
-        {
-            'name': 'Discover Cars',
-            'category': 'GETTING AROUND',
-            'badge_color': 'orange', 
-            'logo_url': 'https://logo.clearbit.com/discovercars.com', 
-            'image_url': 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80',
-            'description': '"Don\'t get ripped off at the rental counter. We use this to compare prices across all major brands globally. Their full coverage insurance is often 50% cheaper than what you pay at the desk."',
-            'link': 'https://www.discovercars.com',
-            'cta': 'Compare Rental Prices',
-            'is_featured': True
-        }
-    ]
-
-    # 2. Use Local Logos (Downloaded via curl)
-    STATIC_TOOLS_DIR = os.path.join(DOCS_DIR, 'static', 'tools')
-    
-    for tool in tools_data:
-        # Expected filename from our curl commands
-        safe_name = "".join([c for c in tool['name'].lower() if c.isalnum() or c in (' ', '-', '_')]).strip().replace(' ', '_')
+            print(f"   ERROR updating {filename}: {e}")
         
-        # Handle specific naming from curl commands if needed
-        filename = f"{safe_name}.png"
-        
-        # Fix for Booking.com (Booking.com -> bookingcom, but file is booking_com.png)
-        if tool['name'] == 'Booking.com':
-            filename = 'booking_com.png'
-        
-        # Verify if file exists, if not use fallback (though we should have them now)
-        if os.path.exists(os.path.join(STATIC_TOOLS_DIR, filename)):
-            tool['local_logo'] = f"static/tools/{filename}"
-        else:
-            print(f"Warning: Logo not found for {tool['name']}, using remote URL")
-            tool['local_logo'] = tool['logo_url']
-
-    try:
-        toolkit_template = env.get_template('toolkit.html')
-        toolkit_html = toolkit_template.render(
-            all_countries=countries,
-            page_title="Travel Kit",
-            tools=tools_data
-        )
-        with open(os.path.join(DOCS_DIR, 'toolkit.html'), 'w', encoding='utf-8') as f:
-            f.write(toolkit_html)
-        print("Built toolkit.html")
-    except Exception as e:
-        print(f"Failed to render toolkit.html: {e}")
-
-    # Render Partners Page
-    print("Processing partners data...")
-    partners_data = [
-        {
-            'name': 'Airalo',
-            'link': 'https://tp.media/r?campaign_id=541&marker=689615&p=8310&trs=479661&u=https%3A%2F%2Fairalo.com',
-            'badge': 'Global Leader',
-            'badge_color': 'blue',
-            'description': 'The world’s first and largest eSIM store. We partner with them because their coverage spans 200+ countries, offering the most reliable connection for global travelers.'
-        },
-        {
-            'name': 'Maya Mobile',
-            'link': 'https://maya.net/?pid=QTsarrERAv1y',
-            'badge': 'Unlimited Data',
-            'badge_color': 'indigo',
-            'description': 'Known for their premium 5G networks and unlimited data plans. Maya is our top choice for power users who need fast, unthrottled internet for work and streaming.'
-        },
-        {
-            'name': 'Saily',
-            'link': 'https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com',
-            'badge': 'Security First',
-            'badge_color': 'emerald',
-            'description': 'Created by the team behind Nord Security. We recommend Saily for travelers who prioritize privacy and secure connections without compromising on speed.'
-        },
-        {
-            'name': 'Yesim',
-            'link': 'https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.tech',
-            'badge': 'Flexible Plans',
-            'badge_color': 'purple',
-            'description': 'The pay-as-you-go flexibility of Yesim makes it unique. Their "Ycoins" reward system and virtual number features are excellent for long-term nomads.'
-        },
-        {
-            'name': 'Drimsim',
-            'link': 'https://tp.media/r?campaign_id=102&marker=689615&p=2762&trs=479661&u=https%3A%2F%2Fw1.drimsim.com',
-            'badge': 'Universal Sim',
-            'badge_color': 'orange',
-            'description': 'A true universal SIM card that works almost everywhere. Great for cross-border trips where you do not want to switch profiles constantly.'
-        }
-    ]
-    
-    # Process Partner Logos (Using downloaded files)
-    for p in partners_data:
-        p['local_logo'] = f"static/tools/{p['name'].lower().replace(' ', '_')}.png"
-
-    ecosystem_data = [
-        {
-            'name': 'Booking.com', 
-            'logo': 'static/tools/booking_com.png',
-            'link': 'https://www.booking.com'
-        },
-        {
-            'name': 'Hostelworld', 
-            'logo': 'static/tools/hostelworld.png',
-            'link': 'https://www.hostelworld.com'
-        },
-        {
-            'name': 'NordVPN', 
-            'logo': 'static/tools/nordvpn.png',
-            'link': 'https://tp.media/click?shmarker=689615&promo_id=8986&source_type=link&type=click&campaign_id=631&trs=479661'
-        },
-        {
-            'name': 'AirHelp', 
-            'logo': 'static/tools/airhelp.png',
-            'link': 'https://tp.media/r?campaign_id=120&marker=689615&p=3670&trs=479661&u=https%3A%2F%2Fairhelp.com'
-        },
-        {
-            'name': 'GetYourGuide', 
-            'logo': 'static/tools/getyourguide.png',
-            'link': 'https://www.getyourguide.com'
-        },
-        {
-            'name': 'Discover Cars', 
-            'logo': 'static/tools/discover_cars.png',
-            'link': 'https://www.discovercars.com'
-        },
-    ]
-
-    try:
-        partners_template = env.get_template('partners.html')
-        partners_html = partners_template.render(
-            all_countries=countries,
-            page_title="Our Partners",
-            partners=partners_data,
-            ecosystem=ecosystem_data
-        )
-        with open(os.path.join(DOCS_DIR, 'partners.html'), 'w', encoding='utf-8') as f:
-            f.write(partners_html)
-        print("Built partners.html")
-    except Exception as e:
-        print(f"Failed to render partners.html: {e}")
-
-    print("Build complete.")
+    print(f"\n--- COMPLETED {count} FILES ---")
 
 if __name__ == '__main__':
     main()
