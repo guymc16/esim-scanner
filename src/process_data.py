@@ -7,7 +7,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 XML_FILE = DATA_DIR / "airalo_feed.xml"
-COUNTRIES_FILE = DATA_DIR / "countries.json"
+COUNTRIES_FILE = DATA_DIR / "world_data.json"
 
 # Phase 1: Region Mapping & Popularity Configuration
 POPULAR_CODES = ['US', 'JP', 'FR', 'GB', 'IT', 'TH', 'ES', 'DE', 'TR', 'CN', 'CH', 'PT', 'GR']
@@ -16,7 +16,11 @@ def load_country_map():
     with open(COUNTRIES_FILE, "r", encoding="utf-8") as f:
         countries = json.load(f)
     # Map lowercase country name to ISO code
-    return {c["name"].lower(): c["code"] for c in countries}
+    # world_data.json is Key=ISO, Val={name: "Name"}
+    # We need Name -> ISO
+    return {v["name"].lower(): k for k, v in countries.items()}
+
+
 
 def get_region(country_code):
     """
@@ -95,6 +99,50 @@ def analyze_feed():
     
     print(f"Found {len(vals)} items in XML.")
 
+    manual_map = {
+        "united states": "US",
+        "united kingdom": "GB",
+        "south korea": "KR",
+        "czech republic": "CZ",
+        "moldova": "MD",
+        # NEW MAPPINGS
+        "côte d'ivoire": "CI",
+        "curaçao": "CW",
+        "réunion": "RE",
+        "saint barthélemy": "BL",
+        "democratic republic of the congo": "CD",
+        "republic of the congo": "CG",
+        "timor - leste": "TL",
+        "virgin islands (u.s.)": "VI",
+        "palestine, state of": "PS",
+        "macao": "MO", 
+        "saint martin (french part)": "MF",
+        "sint eustatius": "BQ",
+        "bonaire": "BQ",
+        "saba": "BQ",
+        "turks and caicos islands": "TC",
+        "trinidad and tobago": "TT",
+        "saint vincent and the grenadines": "VC",
+        "saint kitts and nevis": "KN",
+        "antigua and barbuda": "AG",
+        "bosnia and herzegovina": "BA",
+        "cape verde": "CV",
+        "eswatini": "SZ",
+        "kosovo": "XK",
+        "north macedonia": "MK",
+        "guinea-bissau": "GW",
+        "central african republic": "CF",
+        "vatican city": "VA",
+        "brunei": "BN",
+        "burkina faso": "BF",
+        "sierra leone": "SL",
+        "fiji": "FJ",
+        "gambia": "GM",
+        "papua new guinea": "PG",
+        # UNMAPPED REGIONS (Explicitly ignored or mapped to placeholders if needed)
+        # "asia": "XA", 
+        # "europe": "XE", 
+    }
     for item in vals:
         price_elem = item.find('g:price', ns)
         product_type_elem = item.find('g:product_type', ns)
@@ -126,13 +174,6 @@ def analyze_feed():
         country_name = parts[2].lower()
         
         # Manual overrides for XML country names to ISO codes
-        manual_map = {
-            "united states": "US",
-            "united kingdom": "GB",
-            "south korea": "KR",
-            "czech republic": "CZ",
-            "moldova": "MD"
-        }
 
         # Check manual_map first, then country_map
         if country_name in manual_map:
