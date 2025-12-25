@@ -26,7 +26,8 @@ def create_social_card():
     # That fits nicely in 630 height with ~35px padding top/bottom.
     # But let's check if we want to resize it slightly smaller to have breathing room
     
-    target_logo_h = 400
+    # Target logo height (Increased for visibility)
+    target_logo_h = 580
     ratio = target_logo_h / logo.height
     new_w = int(logo.width * ratio)
     new_h = int(logo.height * ratio)
