@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Partners - eSim Scanner AI{% endblock %}
+
 {% block content %}
 <!-- Background: Global Business / Travel -->
 <div class="fixed inset-0 -z-10 bg-slate-50">
@@ -91,28 +93,28 @@
             {% for tool in ecosystem %}
             <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer"
                 class="flex-shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <img src="{{ tool.logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
+                <img src="{{ tool.local_logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
             </a>
             {% endfor %}
             <!-- Set 2 (Seamless) -->
             {% for tool in ecosystem %}
             <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer"
                 class="flex-shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <img src="{{ tool.logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
+                <img src="{{ tool.local_logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
             </a>
             {% endfor %}
             <!-- Set 3 (Seamless) -->
             {% for tool in ecosystem %}
             <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer"
                 class="flex-shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <img src="{{ tool.logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
+                <img src="{{ tool.local_logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
             </a>
             {% endfor %}
             <!-- Set 4 (Seamless - Extra safey for wide screens) -->
             {% for tool in ecosystem %}
             <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer"
                 class="flex-shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <img src="{{ tool.logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
+                <img src="{{ tool.local_logo }}" alt="{{ tool.name }}" class="h-12 md:h-16 w-auto object-contain">
             </a>
             {% endfor %}
         </div>

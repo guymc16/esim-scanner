@@ -1,0 +1,72 @@
+[
+    {
+        "name": "NordVPN",
+        "category": "ESSENTIAL",
+        "badge_color": "blue",
+        "description": "Public WiFi at airports is dangerous. We use this to protect our credit card info and watch Netflix from back home.",
+        "link": "https://tp.media/click?shmarker=689615&promo_id=8986&source_type=link&type=click&campaign_id=631&trs=479661",
+        "cta": "Get 63% Off Plan",
+        "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/nordvpn.png"
+    },
+    {
+        "name": "EKTA Insurance",
+        "category": "BEST VALUE",
+        "badge_color": "emerald",
+        "description": "Most insurance doesn't cover tech gear or Covid. This one is built for nomads and starts at just $3.",
+        "link": "https://tp.media/r?campaign_id=225&marker=689615&p=5869&trs=479661&u=https%3A%2F%2Fektatraveling.com",
+        "cta": "Check Prices",
+        "image_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/ekta_insurance.png"
+    },
+    {
+        "name": "AirHelp",
+        "category": "FREE CHECK",
+        "badge_color": "purple",
+        "description": "Flight delayed? Don't stress. Check if you are owed €600 compensation. It's totally free to check.",
+        "link": "https://tp.media/r?campaign_id=120&marker=689615&p=3670&trs=479661&u=https%3A%2F%2Fairhelp.com",
+        "cta": "Check Eligibility",
+        "image_url": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/airhelp.png"
+    },
+    {
+        "name": "Hostelworld",
+        "category": "SOCIAL VIBES",
+        "badge_color": "orange",
+        "description": "The backpacker's bible. Great for finding social vibes, not just a bed.",
+        "link": "https://www.hostelworld.com",
+        "cta": "Find Hostels",
+        "image_url": "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/hostelworld.png"
+    },
+    {
+        "name": "Booking.com",
+        "category": "HOTELS",
+        "badge_color": "blue",
+        "description": "For when you need a private room or a break from the dorm life.",
+        "link": "https://www.booking.com",
+        "cta": "Book Stays",
+        "image_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/booking_com.png"
+    },
+    {
+        "name": "GetYourGuide",
+        "category": "EXPERIENCES",
+        "badge_color": "red",
+        "description": "Skip the line at the Colosseum. Book experiences instantly.",
+        "link": "https://www.getyourguide.com",
+        "cta": "View Tours",
+        "image_url": "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/getyourguide.png"
+    },
+    {
+        "name": "Discover Cars",
+        "category": "GETTING AROUND",
+        "badge_color": "orange",
+        "description": "Don't get ripped off at the rental counter. We use this to compare prices across all major brands globally. Their full coverage insurance is often 50% cheaper than what you pay at the desk.",
+        "link": "https://www.discovercars.com",
+        "cta": "Compare Rental Prices",
+        "image_url": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80",
+        "local_logo": "static/tools/discover_cars.png"
+    }
+]

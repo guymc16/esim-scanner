@@ -302,6 +302,91 @@ def main():
     except Exception as e:
         print(f"ERROR generating index.html: {e}")
     
+        print(f"ERROR generating index.html: {e}")
+    
+    # Generate Static Pages (About, Partners, Toolkit)
+    # Load Tools Data
+    tools_data = load_json(os.path.join(DATA_DIR, 'tools.json'))
+    
+    # Prepare Partners Data (Enrich providers with UI fields for Partner Page)
+    partners_data = []
+    for p in providers_config:
+        # Defaults for UI
+        badge = "Trusted Partner"
+        badge_color = "blue"
+        desc = f"Global connectivity provider with excellent coverage in {p.get('review_count', '10k')}+ reviews."
+        
+        # Custom Overrides based on name
+        if "Airalo" in p['name']:
+            badge = "Global Leader"
+            badge_color = "blue"
+            desc = "The world’s first and largest eSIM store. best for coverage and app experience."
+        elif "Maya" in p['name']:
+            badge = "Top Rated"
+            badge_color = "green"
+            desc = "Excellent 5G/4G speeds and unlimited data options. Great for power users."
+        elif "Saily" in p['name']:
+            badge = "Secure Choice"
+            badge_color = "purple"
+            desc = "Built by Nord Security. Focuses on privacy and secure global connections."
+        elif "Yesim" in p['name']:
+            badge = "Pay As You Go"
+            badge_color = "yellow"
+            desc = "Unique pay-as-you-go options and non-expiring data coins."
+        elif "Drimsim" in p['name']:
+            badge = "Global Roaming"
+            badge_color = "orange"
+            desc = "One SIM for the whole world. Real pay-per-mb business model."
+        elif "Klook" in p['name']:
+            badge = "Travel Bundles"
+            badge_color = "red"
+            desc = "Perfect for Asia travel. Combine eSIM with train tickets and tours."
+
+        # Logo Logic (Reuse from above or simplified)
+        logo_filename = f"static/logos/{p['name'].lower().replace(' ', '_').replace('.', '')}.png"
+        if 'maya' in p['name'].lower(): logo_filename = "static/logos/maya_mobile.png"
+        if 'airalo' in p['name'].lower(): logo_filename = "static/logos/airalo.png"
+        if 'yesim' in p['name'].lower(): logo_filename = "static/logos/yesim.png"
+        if 'saily' in p['name'].lower(): logo_filename = "static/logos/saily.png"
+        if 'klook' in p['name'].lower(): logo_filename = "static/logos/klook.png"
+        if 'drimsim' in p['name'].lower(): logo_filename = "static/logos/drimsim.png"
+
+        partners_data.append({
+            "name": p['name'],
+            "local_logo": logo_filename,
+            "badge": badge,
+            "badge_color": badge_color,
+            "description": desc,
+            "link": p['affiliate_link'].replace('{country_slug}', 'global') # Fallback link
+        })
+
+    static_context = {
+        "partners": partners_data,
+        "tools": tools_data,
+        "ecosystem": tools_data # Reuse tools for the ecosystem marquee
+    }
+
+    static_pages = ['about.html', 'partners.html', 'toolkit.html']
+    for page in static_pages:
+        try:
+            tmpl = env.get_template(page)
+            # Pass the full context
+            output = tmpl.render(
+                countries=master_countries, 
+                current_year=datetime.datetime.now().year,
+                **static_context
+            )
+            path = os.path.join(DOCS_DIR, page)
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(output)
+            print(f"Generated {page} from template.")
+        except Exception as e:
+            print(f"WARNING: Could not generate {page}: {e}")
+    
+    # SYSTEM UPGRADE: Sync Backend SSOT -> Frontend JSON
+    # The frontend (index.html, search) relies on 'countries.json' in the same directory (docs/)
+    # We must update it to include all the new countries we just generated.
+    
     # SYSTEM UPGRADE: Sync Backend SSOT -> Frontend JSON
     # The frontend (index.html, search) relies on 'countries.json' in the same directory (docs/)
     # We must update it to include all the new countries we just generated.
