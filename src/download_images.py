@@ -34,10 +34,11 @@ def get_fallback_url(slug, name):
 def main():
     # Load countries
     try:
-        with open("data/countries.json", "r", encoding="utf-8") as f:
-            countries = json.load(f)
+        with open("data/world_data.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+            countries = list(data.values())
     except FileNotFoundError:
-        print("Error: data/countries.json not found.")
+        print("Error: data/world_data.json not found.")
         return
 
     print(f"--- Starting Download for {len(countries)} Countries ---")

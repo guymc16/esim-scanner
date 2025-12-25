@@ -6281,6 +6281,66 @@
   },
   {
     "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 1.0,
+    "days": 7,
+    "price": 4.5,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7685&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-7days-1gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 2.0,
+    "days": 15,
+    "price": 6.5,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7687&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-15days-2gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 3.0,
+    "days": 30,
+    "price": 7.5,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7689&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-30days-3gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 5.0,
+    "days": 30,
+    "price": 9.5,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7691&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-30days-5gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 10.0,
+    "days": 30,
+    "price": 16.0,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7697&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-30days-10gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": 20.0,
+    "days": 30,
+    "price": 19.0,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=7699&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-30days-20gb&intsrc=CATF_15506",
+    "region": "Europe",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
     "country_iso": "HK",
     "data_gb": 1.0,
     "days": 7,
@@ -7777,6 +7837,16 @@
     "price": 6.5,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=5609&u=https%3A%2F%2Fwww.airalo.com%2Fmorocco-esim%2Fchoukran-7days-1gb&intsrc=CATF_15506",
     "region": "Africa",
+    "is_popular": false
+  },
+  {
+    "provider": "Airalo",
+    "country_iso": "CY",
+    "data_gb": -1.0,
+    "days": 10,
+    "price": 35.0,
+    "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=8336&u=https%3A%2F%2Fwww.airalo.com%2Fcyprus-esim%2Fdekanet-10days-unlimited&intsrc=CATF_15506",
+    "region": "Europe",
     "is_popular": false
   },
   {
@@ -9951,62 +10021,62 @@
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 1.0,
     "days": 7,
     "price": 4.5,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10619&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-7days-1gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 2.0,
     "days": 15,
     "price": 6.5,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10621&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-15days-2gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 3.0,
     "days": 30,
     "price": 8.0,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10623&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-30days-3gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 5.0,
     "days": 30,
     "price": 11.0,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10625&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-30days-5gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 10.0,
     "days": 30,
     "price": 17.0,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10627&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-30days-10gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {
     "provider": "Airalo",
-    "country_iso": "CY",
+    "country_iso": "NC",
     "data_gb": 20.0,
     "days": 30,
     "price": 24.0,
     "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=10629&u=https%3A%2F%2Fwww.airalo.com%2Fnorthern-cyprus-esim%2Fadanet-30days-20gb&intsrc=CATF_15506",
-    "region": "Europe",
+    "region": "Oceania",
     "is_popular": false
   },
   {

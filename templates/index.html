@@ -668,7 +668,7 @@
                                     <div class="flex items-center gap-3">
                                         <div
                                             class="w-8 h-6 rounded border border-white/20 shadow-md shrink-0 overflow-hidden opacity-100">
-                                            <img src="https://flagcdn.com/w40/{{ country.code|lower }}.png"
+                                            <img src="{{ country.flag_url if country.flag_url else 'https://flagcdn.com/w40/' ~ country.code|lower ~ '.png' }}"
                                                 alt="{{ country.name }}" class="w-full h-full object-cover">
                                         </div>
                                         <h3
@@ -1078,7 +1078,7 @@
                             const li = document.createElement('li');
                             li.innerHTML = `
                             <a href="${c.slug}.html" class="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-white group">
-                                <img src="https://flagcdn.com/w40/${c.code.toLowerCase()}.png" class="w-6 h-auto rounded-sm shadow-sm" alt="${c.name}">
+                                <img src="${c.flag_url ? c.flag_url : 'https://flagcdn.com/w40/' + c.code.toLowerCase() + '.png'}" class="w-6 h-auto rounded-sm shadow-sm" alt="${c.name}">
                                 <span class="font-medium group-hover:text-blue-200 transition-colors">${c.name}</span>
                             </a>
                         `;

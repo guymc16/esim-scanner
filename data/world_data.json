@@ -1511,18 +1511,33 @@
     "image_source_url": "static/countries/niger.jpg"
   },
   "CY": {
+    "name": "Cyprus",
+    "slug": "cyprus",
+    "code": "CY",
+    "region": "Europe",
+    "network": "Cyta",
+    "capital": "Nicosia",
+    "landmark": "Aphrodite's Rock",
+    "plug": "Type G",
+    "intro": "Beaches, mountains, and history in the Mediterranean.",
+    "is_popular": false,
+    "image_source_url": "https://images.unsplash.com/photo-1530841377377-3ff06c0ca9d4?w=1600&q=80",
+    "image_url": "static/countries/cyprus.jpg"
+  },
+  "NC": {
     "name": "Northern Cyprus",
     "slug": "northern-cyprus",
-    "code": "CY",
+    "code": "NC",
     "region": "Europe",
     "network": "Best Local Network",
     "capital": "Nicosia",
-    "landmark": "City Center",
-    "plug": "Universal",
-    "intro": "Stay connected in Northern Cyprus with high-speed data.",
-    "image_url": "static/countries/northern-cyprus.jpg",
+    "landmark": "Kyrenia Harbour",
+    "plug": "Type G",
+    "intro": "Discover the northern coast and ancient castles.",
     "is_popular": false,
-    "image_source_url": "static/countries/northern-cyprus.jpg"
+    "image_source_url": "static/countries/northern-cyprus.jpg",
+    "image_url": "static/countries/northern-cyprus.jpg",
+    "flag_url": "static/countries/northern-cyprus-flag.svg"
   },
   "PG": {
     "name": "Papua New Guinea",
