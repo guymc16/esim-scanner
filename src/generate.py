@@ -111,8 +111,9 @@ def get_grouped_plans(country_code, country_slug, all_airalo_plans, providers):
         p_name = prov['name']
         if p_name == 'Airalo': continue
         
-        # 3. Drimsim Logic: Real Data Only (skip dummy generation)
+        # 3. Drimsim & Maya Logic: Real Data Only (skip dummy generation)
         if p_name == 'Drimsim': continue 
+        if p_name == 'Maya Mobile': continue 
         
         country_plans.extend(generate_dummy_plans(country_slug, prov))
         

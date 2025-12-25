@@ -7,6 +7,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 XML_FILE = DATA_DIR / "airalo_feed.xml"
+MAYA_FEED = DATA_DIR / "maya_feed.json"
 COUNTRIES_FILE = DATA_DIR / "world_data.json"
 
 # Phase 1: Region Mapping & Popularity Configuration
@@ -77,6 +78,65 @@ def parse_days(days_str):
     if match:
         return int(match.group(1))
     return 0
+
+def process_maya_feed():
+    if not MAYA_FEED.exists():
+        print("Maya feed not found.")
+        return []
+    
+    with open(MAYA_FEED, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        
+    products = data.get('products', [])
+    plans = []
+    
+    print(f"Processing {len(products)} Maya products...")
+    
+    for p in products:
+        # Filter: Prepaid only
+        if p.get('plan_type') != 'prepaid':
+            continue
+            
+        iso2 = p.get('country_iso2', '').upper()
+        if not iso2:
+             continue
+             
+        # Link Validation
+        link = p.get('url_direct', '')
+        if 'pid=QTsarrERAv1y' not in link:
+             sep = '&' if '?' in link else '?'
+             link += f"{sep}pid=QTsarrERAv1y"
+        
+        # Extract fields
+        try:
+            price_usd = float(p.get('price_usd', 0))
+            
+            # Smart Unlimited Handling
+            # If API flag is true OR URL contains 'unlimited', treat as -1.0
+            is_unlimited = bool(p.get('unlimited_data')) or 'unlimited' in link.lower()
+            
+            if is_unlimited:
+                 data_gb = -1.0
+            else:
+                 data_gb = float(p.get('data_gb', 0))
+
+            days = int(p.get('duration_days', 0))
+        except (ValueError, TypeError):
+            continue
+
+        plan = {
+            "provider": "Maya Mobile",
+            "country_iso": iso2,
+            "data_gb": data_gb,
+            "days": days,
+            "price": price_usd,
+            "link": link,
+            "region": get_region(iso2),
+            "is_popular": iso2 in POPULAR_CODES
+        }
+        plans.append(plan)
+        
+    return plans
 
 def analyze_feed():
     country_map = load_country_map()
@@ -209,15 +269,23 @@ def analyze_feed():
         
     print(f"Successfully parsed {len(parsed_plans)} plans.")
     
+    # --- MERGE MAYA PLANS ---
+    maya_plans = process_maya_feed()
+    print(f"Successfully parsed {len(maya_plans)} Maya plans.")
+    
+    all_plans = parsed_plans + maya_plans
+    print(f"Total plans merged: {len(all_plans)}")
+    
+
     # Save to data/data_plans.json
     output_file = DATA_DIR / "data_plans.json"
     with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(parsed_plans, f, indent=2)
+        json.dump(all_plans, f, indent=2)
         
     print(f"Saved parsed plans to {output_file}")
     
     # Verification for US plans
-    us_plans = [p for p in parsed_plans if p["country_iso"] == "US"]
+    us_plans = [p for p in all_plans if p["country_iso"] == "US"]
     print(f"Found {len(us_plans)} plans for US.")
 
 

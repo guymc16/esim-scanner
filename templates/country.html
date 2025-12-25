@@ -383,9 +383,18 @@
 
         function updateDurationOptions(scopeSize) {
             let validDays = new Set();
-            const targetSections = scopeSize === 'all'
-                ? sections
-                : document.querySelectorAll(`.plan-section[data-section-size="${scopeSize}"]`);
+            const targetSections = [];
+            if (scopeSize === 'all') {
+                sections.forEach(s => targetSections.push(s));
+            } else {
+                sections.forEach(sec => {
+                    let secSize = parseFloat(sec.getAttribute('data-section-size'));
+                    if (secSize === -1) secSize = 999;
+                    if (Math.abs(secSize - scopeSize) < 0.1) {
+                        targetSections.push(sec);
+                    }
+                });
+            }
 
             targetSections.forEach(sec => {
                 let secSize = parseFloat(sec.getAttribute('data-section-size'));
