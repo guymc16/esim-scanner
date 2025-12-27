@@ -97,14 +97,7 @@
   },
   "usa": {
     "yesim": [],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 3.49,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "japan": {
     "yesim": [
@@ -4848,14 +4841,7 @@
   },
   "cote-divoire": {
     "yesim": [],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 8.99,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "myanmar": {
     "yesim": [],
@@ -5770,14 +5756,7 @@
   },
   "dr-congo": {
     "yesim": [],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 8.99,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "republic-of-the-congo": {
     "yesim": [],
@@ -8147,14 +8126,7 @@
         "provider": "Yesim"
       }
     ],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 8.99,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "samoa": {
     "yesim": [],
@@ -8427,14 +8399,7 @@
   },
   "timor-leste": {
     "yesim": [],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 19.99,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "togo": {
     "yesim": [],
@@ -11414,14 +11379,7 @@
         "provider": "Yesim"
       }
     ],
-    "saily": [
-      {
-        "data_gb": 1,
-        "days": 7,
-        "price": 7.99,
-        "provider": "Saily"
-      }
-    ]
+    "saily": []
   },
   "malta": {
     "yesim": [

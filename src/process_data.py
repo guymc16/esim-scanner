@@ -212,6 +212,14 @@ def process_external_feed():
                     "region": get_region(iso_code),
                     "is_popular": iso_code in POPULAR_CODES
                 }
+                
+                # --- FILTER: IGNORE LOW DATA PLANS (< 1GB) ---
+                # User requested to ignore <1GB plans to clean up the UI.
+                # 9999 is Unlimited, so we only check if it is explicitly small (<1).
+                # Note: -1.0 also means unlimited in Airalo logic, but here we use 9999 or float.
+                if 0 < plan['data_gb'] < 1.0:
+                    continue
+                    
                 plans.append(plan)
                 count += 1
                 

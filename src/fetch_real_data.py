@@ -18,6 +18,25 @@ PROVIDERS_CONFIG = {
     }
 }
 
+# Specific overrides for countries where internal slug != provider slug
+SLUG_EXCEPTIONS = {
+    "yesim": {
+        "usa": "united-states",
+        "republic-of-the-congo": "congo",
+        "reunion": "reunion-islands"
+    },
+    "saily": {
+        "usa": "united-states",
+        "cote-divoire": "cote-d-ivoire",
+        "dr-congo": "democratic-republic-of-congo",
+        "republic-of-the-congo": "republic-of-the-congo",
+        "timor-leste": "east-timor",
+        "saint-vincent-and-the-grenadines": "saint-vincent-and-grenadines",
+        "north-macedonia": "macedonia"
+    }
+}
+
+
 TEST_COUNTRIES = ['japan', 'united-states', 'israel']
 
 def random_sleep(min_sec=2, max_sec=5):
@@ -258,7 +277,10 @@ def fetch_data(mode='test'):
             
             # YESIM
             try:
-                url = PROVIDERS_CONFIG["yesim"]["url_template"].format(country)
+                # Check for override
+                target_slug = SLUG_EXCEPTIONS["yesim"].get(country, country)
+                
+                url = PROVIDERS_CONFIG["yesim"]["url_template"].format(target_slug)
                 print(f"[Yesim] Navigating: {url}")
                 page.get(url)
                 random_sleep(3, 5)
@@ -272,7 +294,10 @@ def fetch_data(mode='test'):
 
             # SAILY
             try:
-                url = PROVIDERS_CONFIG["saily"]["url_template"].format(country)
+                # Check for override
+                target_slug = SLUG_EXCEPTIONS["saily"].get(country, country)
+                
+                url = PROVIDERS_CONFIG["saily"]["url_template"].format(target_slug)
                 print(f"[Saily] Navigating: {url}")
                 page.get(url)
                 random_sleep(3, 5)
