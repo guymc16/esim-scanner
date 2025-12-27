@@ -318,7 +318,7 @@
         let availableSizes = [];
         sections.forEach(sec => {
             let size = parseFloat(sec.getAttribute('data-section-size'));
-            if (size === -1) size = 999;
+            if (size === -1) size = 9999;
             if (!availableSizes.includes(size)) availableSizes.push(size);
         });
         availableSizes.sort((a, b) => a - b);
@@ -333,7 +333,7 @@
         // Create Size Buttons
         availableSizes.forEach(size => {
             const btn = document.createElement('button');
-            const isUnlimited = size === 999;
+            const isUnlimited = size === 9999;
             const label = isUnlimited ? 'Unlimited' : size + 'GB';
 
             btn.className = 'filter-btn px-5 py-2 text-sm font-bold text-slate-400 hover:text-white transition-all duration-200 whitespace-nowrap snap-center flex-shrink-0';
@@ -361,7 +361,7 @@
             let activeSection = null;
             sections.forEach(sec => {
                 let secSize = parseFloat(sec.getAttribute('data-section-size'));
-                if (secSize === -1) secSize = 999;
+                if (secSize === -1) secSize = 9999;
 
                 if (secSize === size) {
                     sec.style.display = 'block';
@@ -389,7 +389,7 @@
             } else {
                 sections.forEach(sec => {
                     let secSize = parseFloat(sec.getAttribute('data-section-size'));
-                    if (secSize === -1) secSize = 999;
+                    if (secSize === -1) secSize = 9999;
                     if (Math.abs(secSize - scopeSize) < 0.1) {
                         targetSections.push(sec);
                     }
@@ -398,7 +398,7 @@
 
             targetSections.forEach(sec => {
                 let secSize = parseFloat(sec.getAttribute('data-section-size'));
-                if (secSize === -1) secSize = 999;
+                if (secSize === -1) secSize = 9999;
 
                 const cards = sec.querySelectorAll('.provider-card');
 
@@ -406,7 +406,7 @@
                     try {
                         const plans = JSON.parse(card.getAttribute('data-plans') || '[]');
                         plans.forEach(p => {
-                            let pSize = p.data === -1 ? 999 : p.data;
+                            let pSize = p.data === -1 ? 9999 : p.data;
                             if (Math.abs(pSize - secSize) < 0.1) {
                                 validDays.add(p.day);
                             }
@@ -459,8 +459,7 @@
                     targetSections.push(sec);
                 } else {
                     let secSize = parseFloat(sec.getAttribute('data-section-size'));
-                    if (secSize === -1) secSize = 999;
-                    // Use small epsilon for float comparison just in case, though usually exact since both are from same source
+                    if (secSize === -1) secSize = 9999;
                     if (Math.abs(secSize - scopeSize) < 0.01) targetSections.push(sec);
                 }
             });
@@ -469,10 +468,24 @@
 
             targetSections.forEach(sec => {
                 let secSize = parseFloat(sec.getAttribute('data-section-size'));
-                if (secSize === -1) secSize = 999;
+                if (secSize === -1) secSize = 9999;
 
                 const visibleCount = updateCardsInSection(sec, secSize, selectedDay);
                 globalVisibleCards += visibleCount;
+
+                // NEW: Reactive Sort (Re-order DOM elements by Price)
+                const grid = sec.querySelector('.grid');
+                if (grid) {
+                    const cardsArr = Array.from(grid.querySelectorAll('.provider-card'));
+                    cardsArr.sort((a, b) => {
+                        // Sort by visible price text
+                        const pA = parseFloat(a.querySelector('.main-price').innerText.replace(/[^0-9.]/g, ''));
+                        const pB = parseFloat(b.querySelector('.main-price').innerText.replace(/[^0-9.]/g, ''));
+                        return pA - pB;
+                    });
+                    // Re-append to order them visually
+                    cardsArr.forEach(c => grid.appendChild(c));
+                }
 
                 if (scopeSize === 'all') {
                     if (visibleCount === 0) sec.style.display = 'none';
@@ -515,13 +528,13 @@
                     const initialDays = parseInt(card.getAttribute('data-initial-days'));
                     // 1. Initial Match
                     match = plans.find(p => {
-                        let pSize = p.data === -1 ? 999 : p.data;
+                        let pSize = p.data === -1 ? 9999 : p.data;
                         return Math.abs(pSize - size) < 0.1 && p.day === initialDays;
                     });
                     // 2. Cheapest Fallback
                     if (!match) {
                         const candidates = plans.filter(p => {
-                            let pSize = p.data === -1 ? 999 : p.data;
+                            let pSize = p.data === -1 ? 9999 : p.data;
                             return Math.abs(pSize - size) < 0.1;
                         });
                         if (candidates.length > 0) {
@@ -531,15 +544,12 @@
                     }
                 } else {
                     match = plans.find(p => {
-                        let pSize = p.data === -1 ? 999 : p.data;
+                        let pSize = p.data === -1 ? 9999 : p.data;
                         return Math.abs(pSize - size) < 0.1 && p.day === days;
                     });
                 }
 
                 if (match) {
-                    // Start of Card Display
-                    // Card is in a Grid, so we just toggle display: flex or none? 
-                    // Grid items with display:flex works.
                     card.style.display = 'flex';
                     visibleCount++;
 

@@ -9,7 +9,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
 DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
-# SRC_DATA_DIR REMOVED - using DATA_DIR
 TEMPLATES_DIR = os.path.join(PROJECT_ROOT, 'templates')
 DOCS_DIR = os.path.join(PROJECT_ROOT, 'docs')
 
@@ -52,77 +51,20 @@ def calculate_discount(price, provider_name):
         return price * 0.80
     return None
 
-def generate_dummy_plans(country_slug, provider):
-    """Generates realistic dummy plans for non-Airalo providers."""
-    plans = []
-    
-    # 2. Add 2GB size -> Fixed for Fair Comparison
-    sizes = [
-        {"gb": 1, "days": 7, "base": 4.5},
-        {"gb": 2, "days": 15, "base": 6.5}, 
-        {"gb": 3, "days": 30, "base": 9.0},
-        {"gb": 5, "days": 30, "base": 13.0},
-        {"gb": 10, "days": 30, "base": 22.0},
-        {"gb": 20, "days": 30, "base": 34.0},
-        {"gb": -1, "days": 10, "base": 35.0} # Unlimited
-    ]
-    
-    # Provider-specific price modifiers
-    modifier = 1.0
-    name = provider['name']
-    if name == 'Maya Mobile': modifier = 0.95
-    if name == 'Saily': modifier = 0.98
-    if name == 'Klook': modifier = 0.90
-    
-    link_template = provider.get('affiliate_link', '#')
-    
-    for s in sizes:
-        # small random variation
-        variance = random.uniform(0.95, 1.05)
-        price = round(s['base'] * modifier * variance, 2)
-        
-        link = link_template.replace('{country_slug}', country_slug)
-        
-        plans.append({
-            "provider": name,
-            "data_gb": float(s['gb']),
-            "days": s['days'],
-            "price": price,
-            "link": link,
-            "is_popular": False
-        })
-        
-    return plans
-
-def get_grouped_plans(country_code, country_slug, all_airalo_plans, providers):
+def get_grouped_plans(country_code, country_slug, all_real_plans, providers):
     """
     Groups plans by data size for the template.
     Returns: list of group objects
     """
-    # 1. Get Real Airalo Plans for this country
-    country_plans = [p for p in all_airalo_plans if p['country_iso'].upper() == country_code.upper()]
-    if country_code in ['PT', 'AU', 'US']:
-        print(f"DEBUG: Found {len(country_plans)} Airalo plans for {country_code}")
-        if not country_plans:
-            print(f"DEBUG: Sample Airalo ISOs: {[p['country_iso'] for p in all_airalo_plans[:5]]}")
+    # 1. Get Real Plans for this country (Airalo + Maya + Yesim + Saily)
+    country_plans = [p for p in all_real_plans if p['country_iso'].upper() == country_code.upper()]
     
-    # 2. Get Dummy Plans for others
-    for prov in providers:
-        p_name = prov['name']
-        if p_name == 'Airalo': continue
-        
-        # 3. Drimsim & Maya Logic: Real Data Only (skip dummy generation)
-        if p_name == 'Drimsim': continue 
-        if p_name == 'Maya Mobile': continue 
-        
-        country_plans.extend(generate_dummy_plans(country_slug, prov))
-        
     # 3. Group by Data Size
     sizes = sorted(list(set(p['data_gb'] for p in country_plans)))
     
-    # Custom Sort for Sizes: 1, 2, 3... -1 (Unlimited) last
+    # Custom Sort for Sizes: Unlimited (9999) last
     def size_sorter(s):
-        if s == -1: return 999999 # Unlimited at end
+        if s > 1000: return 999999 # Unlimited at end
         return s
     sizes.sort(key=size_sorter)
     
@@ -132,9 +74,9 @@ def get_grouped_plans(country_code, country_slug, all_airalo_plans, providers):
         if size == 0: continue
         
         # Title
-        if size == -1:
+        if size > 1000:
             title = "Unlimited Data Plans"
-            filter_val = -1
+            filter_val = 9999
         else:
             if size.is_integer():
                 title = f"{int(size)}GB Plans"
@@ -159,10 +101,6 @@ def get_grouped_plans(country_code, country_slug, all_airalo_plans, providers):
                 plans_for_size_by_prov[p_name] = []
             plans_for_size_by_prov[p_name].append(p)
             
-        # Now Key: We need to render ONE card per Provider that has plans in this size.
-        # We also need the "All Plans" JSON for the dropdown/toggle (if implemented).
-        # We'll use the FULL `country_plans` for the JSON payload, filtered by provider.
-        
         # Full Plan Map for JSON payload
         all_plans_by_prov = {}
         for p in country_plans:
@@ -247,10 +185,18 @@ def main():
          return
 
     # Load Plan Data (Project Data Root)
-    airalo_plans = load_json(os.path.join(DATA_DIR, 'data_plans.json'))
+    all_plans = load_json(os.path.join(DATA_DIR, 'data_plans.json'))
     providers_config = load_json(os.path.join(DATA_DIR, 'providers.json'))
     
-    print(f"Loaded {len(master_countries)} countries, {len(airalo_plans)} Airalo plans, {len(providers_config)} providers.")
+    # NORMALIZE UNLIMITED (-1 -> 9999)
+    # This ensures consistent grouping if input data is mixed
+    normalized_count = 0
+    for p in all_plans:
+        if p['data_gb'] == -1 or p['data_gb'] == -1.0:
+            p['data_gb'] = 9999.0
+            normalized_count += 1
+            
+    print(f"Loaded {len(master_countries)} countries, {len(all_plans)} Total plans (Normalized {normalized_count} Unlimiteds).")
     
     # Setup Jinja2
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
@@ -265,7 +211,7 @@ def main():
             code = country['code']
             
             # Prepare Data
-            grouped_plans = get_grouped_plans(code, slug, airalo_plans, providers_config)
+            grouped_plans = get_grouped_plans(code, slug, all_plans, providers_config)
             
             # SEO Variables
             current_year = datetime.datetime.now().year
@@ -301,8 +247,6 @@ def main():
             f.write(index_str)
         print("Generated index.html with SSOT data.")
     except Exception as e:
-        print(f"ERROR generating index.html: {e}")
-    
         print(f"ERROR generating index.html: {e}")
     
     # Generate Static Pages (About, Partners, Toolkit)
@@ -383,10 +327,6 @@ def main():
             print(f"Generated {page} from template.")
         except Exception as e:
             print(f"WARNING: Could not generate {page}: {e}")
-    
-    # SYSTEM UPGRADE: Sync Backend SSOT -> Frontend JSON
-    # The frontend (index.html, search) relies on 'countries.json' in the same directory (docs/)
-    # We must update it to include all the new countries we just generated.
     
     # SYSTEM UPGRADE: Sync Backend SSOT -> Frontend JSON
     # The frontend (index.html, search) relies on 'countries.json' in the same directory (docs/)

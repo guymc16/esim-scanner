@@ -8,10 +8,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 XML_FILE = DATA_DIR / "airalo_feed.xml"
 MAYA_FEED = DATA_DIR / "maya_feed.json"
+EXTERNAL_FEED = DATA_DIR / "external_providers.json"
 COUNTRIES_FILE = DATA_DIR / "world_data.json"
 
 # Phase 1: Region Mapping & Popularity Configuration
 POPULAR_CODES = ['US', 'JP', 'FR', 'GB', 'IT', 'TH', 'ES', 'DE', 'TR', 'CN', 'CH', 'PT', 'GR']
+
+# Affiliate Links Config
+EXTERNAL_LINKS = {
+    "yesim": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2F{country_slug}",
+    "saily": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-{country_slug}"
+}
 
 def load_country_map():
     with open(COUNTRIES_FILE, "r", encoding="utf-8") as f:
@@ -21,7 +28,11 @@ def load_country_map():
     # We need Name -> ISO
     return {v["name"].lower(): k for k, v in countries.items()}
 
-
+def load_slug_map():
+    """Returns {slug: iso_code} map from world_data.json"""
+    with open(COUNTRIES_FILE, "r", encoding="utf-8") as f:
+        countries = json.load(f)
+    return {v["slug"]: k for k, v in countries.items()}
 
 def get_region(country_code):
     """
@@ -107,6 +118,10 @@ def process_maya_feed():
              sep = '&' if '?' in link else '?'
              link += f"{sep}pid=QTsarrERAv1y"
         
+        # FIX: 'type=max' causes $0.00 cart on some plans (e.g. Israel 180 Days).
+        # We strip it to force default behavior (which works).
+        link = link.replace("type=max&", "").replace("&type=max", "")
+        
         # Extract fields
         try:
             price_usd = float(p.get('price_usd', 0))
@@ -138,6 +153,71 @@ def process_maya_feed():
         
     return plans
 
+def process_external_feed():
+    """Reads external_providers.json (Yesim, Saily)"""
+    if not EXTERNAL_FEED.exists():
+        print("External feed not found. Skipping Yesim/Saily.")
+        return []
+    
+    with open(EXTERNAL_FEED, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        
+    slug_map = load_slug_map()
+    plans = []
+    
+    # Structure: "japan": { "yesim": [...], "saily": [...] }
+    count = 0
+    for slug, providers in data.items():
+        # Manual fix for US legacy scraper slug
+        if slug == 'united-states':
+            iso_code = 'US'
+        elif slug not in slug_map:
+            print(f"Warning: Slug '{slug}' not found in world_data. Skipping.")
+            continue
+        else:
+            iso_code = slug_map[slug]
+        
+        for prov_name, items in providers.items():
+            # prov_name = "yesim" or "saily"
+            link_template = EXTERNAL_LINKS.get(prov_name)
+            
+            real_name = prov_name.capitalize() # "Yesim"
+            
+            for item in items:
+                # item = { "data_gb": 10, "days": 30, "price": 20.4 }
+                
+                # Link Generation
+                link = link_template.format(country_slug=slug)
+                
+                # GB Normalization?
+                # item['data_gb'] is already int/float. 9999 means unlimited.
+                # Airalo/Maya uses -1.0 for unlimited.
+                # We should probably standardize our INTERAL DB to -1.0 for consistency?
+                # OR generate.py handles 9999.
+                # Let's align on -1.0 for internal "SSOT" consistency if possible.
+                # But user said 9999 helps sorting?
+                # Wait, if we use -1.0, sort(key=lambda x: x) puts it at start (-1).
+                # User wants it at END (High GB).
+                # So user is RIGHT. 9999 is better for "Sort Ascending" -> it puts it last.
+                # Actually usually we check `if gb < 0`.
+                # Let's keep 9999 as requested by user.
+                
+                plan = {
+                    "provider": real_name,
+                    "country_iso": iso_code,
+                    "data_gb": float(item['data_gb']),
+                    "days": int(item['days']),
+                    "price": float(item['price']),
+                    "link": link,
+                    "region": get_region(iso_code),
+                    "is_popular": iso_code in POPULAR_CODES
+                }
+                plans.append(plan)
+                count += 1
+                
+    print(f"Processed {count} External plans (Yesim/Saily).")
+    return plans
+
 def analyze_feed():
     country_map = load_country_map()
     
@@ -148,9 +228,8 @@ def analyze_feed():
     ns = {'g': 'http://base.google.com/ns/1.0'}
     
     # Items are usually in channel/item. But root is rss.
-    # Structure: rss -> channel -> item
     channel = root.find('channel')
-    if channel is None: # Sometimes items are direct children or other structure, but usually rss > channel
+    if channel is None:
          vals = root.findall('item')
     else:
          vals = channel.findall('item')
@@ -165,7 +244,6 @@ def analyze_feed():
         "south korea": "KR",
         "czech republic": "CZ",
         "moldova": "MD",
-        # NEW MAPPINGS
         "côte d'ivoire": "CI",
         "curaçao": "CW",
         "réunion": "RE",
@@ -199,9 +277,6 @@ def analyze_feed():
         "fiji": "FJ",
         "gambia": "GM",
         "papua new guinea": "PG",
-        # UNMAPPED REGIONS (Explicitly ignored or mapped to placeholders if needed)
-        # "asia": "XA", 
-        # "europe": "XE", 
     }
     for item in vals:
         price_elem = item.find('g:price', ns)
@@ -214,43 +289,27 @@ def analyze_feed():
         price_val = parse_price(price_elem.text)
         link_val = link_elem.text
         
-        # Parse product_type: esim > region > country > type > data > duration
-        # Example: esim > europe & cis > italy > data > 1 gb > 7 days
-        # Parts can be varying, but usually:
-        # 0: esim
-        # 1: region (europe & cis, asia pacific, etc)
-        # 2: country (italy, south korea)
-        # 3: type ("data"?)
-        # 4: data amount ("1 gb", "unlimited")
-        # 5: duration ("7 days")
-        
         raw_type = product_type_elem.text
         parts = [p.strip() for p in raw_type.split('>')]
         
         if len(parts) < 6:
-            # Maybe a regional plan or different structure, skip for now to match user reqs for simple parsing
             continue
             
         country_name = parts[2].lower()
         
-        # Manual overrides for XML country names to ISO codes
-
-        # Check manual_map first, then country_map
         if country_name in manual_map:
             country_iso = manual_map[country_name]
         elif country_name in country_map:
             country_iso = country_map[country_name]
         else:
-            # Could be a regional plan not in our countries list, or name mismatch
             continue
             
-        data_part = parts[4] # "1 gb" or "unlimited"
-        duration_part = parts[5] # "7 days"
+        data_part = parts[4]
+        duration_part = parts[5]
         
         data_gb = parse_data_amount(data_part)
         days = parse_days(duration_part)
         
-        # New Logic: Region & Popularity
         region = get_region(country_iso)
         is_popular = country_iso in POPULAR_CODES
         
@@ -267,13 +326,17 @@ def analyze_feed():
         
         parsed_plans.append(plan)
         
-    print(f"Successfully parsed {len(parsed_plans)} plans.")
+    print(f"Successfully parsed {len(parsed_plans)} plans from Airalo.")
     
     # --- MERGE MAYA PLANS ---
     maya_plans = process_maya_feed()
     print(f"Successfully parsed {len(maya_plans)} Maya plans.")
     
-    all_plans = parsed_plans + maya_plans
+    # --- MERGE EXTERNAL (Yesim/Saily) PLANS ---
+    external_plans = process_external_feed()
+    print(f"Successfully parsed {len(external_plans)} Yesim/Saily plans.")
+    
+    all_plans = parsed_plans + maya_plans + external_plans
     print(f"Total plans merged: {len(all_plans)}")
     
 
@@ -286,7 +349,7 @@ def analyze_feed():
     
     # Verification for US plans
     us_plans = [p for p in all_plans if p["country_iso"] == "US"]
-    print(f"Found {len(us_plans)} plans for US.")
+    print(f"Found {len(us_plans)} total plans for US.")
 
 
 if __name__ == "__main__":
