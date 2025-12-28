@@ -37,11 +37,15 @@ SLUG_EXCEPTIONS = {
 }
 
 
+
 TEST_COUNTRIES = ['japan', 'united-states', 'israel']
 
 def random_sleep(min_sec=2, max_sec=5):
     """Sleeps for a random anti-detect interval."""
     time.sleep(random.uniform(min_sec, max_sec))
+
+
+
 
 def parse_yesim(page):
     plans = []
@@ -83,7 +87,7 @@ def parse_yesim(page):
                 seen_cards.add(full_text)
                 
                 # DEBUG: Uncomment to see card text
-                print(f"      [DEBUG] Yesim Card: '{full_text}'")
+                # print(f"      [DEBUG] Yesim Card: '{full_text}'")
                 
                 # Now Parse THIS SPECIFIC CARD
                 # Days
@@ -154,7 +158,7 @@ def parse_yesim(page):
                         
                         p_data = {"data_gb": gb, "days": days, "price": round(price, 2), "provider": "Yesim"}
                         plans.append(p_data)
-                        print(f"      ✅ Verified Card: {gb}GB | {days} Days | ${p_data['price']}")
+                        print(f"      [OK] Verified Card: {gb}GB | {days} Days | ${p_data['price']}")
                     
     except Exception as e:
         print(f"   [Yesim Loop Error] {e}")
@@ -236,7 +240,7 @@ def parse_saily(page):
                             "provider": "Saily"
                          }
                          plans.append(p_data)
-                         print(f"      ✅ Validated Card: {p_data['data_gb']}GB | {p_data['days']} Days | ${p_data['price']}")
+                         print(f"      [OK] Validated Card: {p_data['data_gb']}GB | {p_data['days']} Days | ${p_data['price']}")
 
     except Exception as e:
         print(f"   [Saily Error] {e}")
@@ -259,16 +263,28 @@ def fetch_data(mode='test'):
     
     # Decide which countries to scrape
     if mode == 'all':
-        print("--- 🌍 RUNNING IN FULL GLOBAL MODE (ALL COUNTRIES) ---")
+        print("--- [GLOBAL MODE] RUNNING IN FULL GLOBAL MODE (ALL COUNTRIES) ---")
         countries = load_countries()
         if not countries:
             print("Failed to load countries. Exiting.")
             return
     else:
-        print("--- 🧪 RUNNING IN TEST MODE (3 COUNTRIES) ---")
+        print("--- [TEST MODE] RUNNING IN TEST MODE (3 COUNTRIES) ---")
         countries = TEST_COUNTRIES
         
-    all_data = {} # Structure: { "japan": { "yesim": [...], "saily": [...] } }
+    # Load Existing Data to Merge (Permanent Feature)
+    output_file = 'data/external_providers.json'
+    all_data = {}
+    if os.path.exists(output_file):
+        try:
+            with open(output_file, 'r', encoding='utf-8') as f:
+                all_data = json.load(f)
+            print(f"[OK] Loaded existing data for {len(all_data)} countries. (Merge Mode)")
+        except:
+            print("Warning: Could not load existing data, starting fresh.")
+            all_data = {}
+            
+    # all_data = {} # Structure: { "japan": { "yesim": [...], "saily": [...] } }
     
     try:
         for country in countries:
@@ -323,10 +339,10 @@ def fetch_data(mode='test'):
         try:
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(all_data, f, indent=2)
-            print(f"✅ Data saved to {output_file}")
+            print(f"[OK] Data saved to {output_file}")
             print(f"Total Countries Scraped: {len(all_data)}")
         except Exception as e:
-            print(f"❌ Failed to save JSON: {e}")
+            print(f"[FAIL] Failed to save JSON: {e}")
 
         # page.quit() 
 

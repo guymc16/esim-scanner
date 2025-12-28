@@ -20,6 +20,25 @@ EXTERNAL_LINKS = {
     "saily": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-{country_slug}"
 }
 
+# Specific overrides for countries where internal slug != provider slug
+SLUG_EXCEPTIONS = {
+    "yesim": {
+        "usa": "united-states",
+        "republic-of-the-congo": "congo",
+        "reunion": "reunion-islands"
+    },
+    "saily": {
+        "usa": "united-states",
+        "cote-divoire": "cote-d-ivoire",
+        "dr-congo": "democratic-republic-of-congo",
+        "republic-of-the-congo": "republic-of-the-congo",
+        "timor-leste": "east-timor",
+        "saint-vincent-and-the-grenadines": "saint-vincent-and-grenadines",
+        "north-macedonia": "macedonia"
+    }
+}
+
+
 def load_country_map():
     with open(COUNTRIES_FILE, "r", encoding="utf-8") as f:
         countries = json.load(f)
@@ -187,7 +206,10 @@ def process_external_feed():
                 # item = { "data_gb": 10, "days": 30, "price": 20.4 }
                 
                 # Link Generation
-                link = link_template.format(country_slug=slug)
+                # Check for override
+                target_slug = SLUG_EXCEPTIONS.get(prov_name, {}).get(slug, slug)
+                
+                link = link_template.format(country_slug=target_slug)
                 
                 # GB Normalization?
                 # item['data_gb'] is already int/float. 9999 means unlimited.
