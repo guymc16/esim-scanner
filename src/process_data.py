@@ -343,11 +343,22 @@ def analyze_feed():
                 # But let's assume 'u' is there (it usually is).
                 
                 if decoded_target:
+                    # STRATEGY CHANGE: Force "Country Store" links to bypass App Deep Link bugs.
+                    # Complex slugs like /united-states-esim/change-30days... fail on iOS App.
+                    # Simple slugs like /united-states-esim (Store) work reliably.
+                    
+                    try:
+                        # If URL has 4+ slashes (e.g. https://.../country/plan), strip the last part.
+                        if decoded_target.count('/') >= 4:
+                            decoded_target = decoded_target.rsplit('/', 1)[0]
+                    except:
+                        pass
+
                     # 3. Strictly Re-Encode it (safe='' forces encoding of slashes/colons)
                     encoded_target = urllib.parse.quote(decoded_target, safe='')
                     
                     # 4. Construct Travelpayouts Link (Airalo Only)
-                    # https://tp.media/r?campaign_id=541&marker=689615&type=click&u=[ENCODED_DESTINATION_URL]
+                    # https://tp.media/r?campaign_id=541&marker=689615&p=8310&type=click&u=[ENCODED_DESTINATION_URL]
                     
                     tp_base = "https://tp.media/r"
                     tp_params = [
@@ -362,7 +373,7 @@ def analyze_feed():
                     link_val = f"{tp_base}?{'&'.join(tp_params)}"
                     
             except Exception as e:
-                print(f"Error fixing link for {country_iso}: {e}")
+                # print(f"Error fixing link for {country_iso}: {e}")
                 pass
                 
         # END FIX
