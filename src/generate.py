@@ -375,5 +375,54 @@ def main():
         
     print(f"SYNC COMPLETE: Updated frontend docs/countries.json with {len(master_countries)} countries.")
 
+    # Generate Sitemap
+    generate_sitemap(master_countries, static_pages, DOCS_DIR)
+
+def generate_sitemap(countries, static_pages, output_dir):
+    base_url = "https://esimscannerai.com"
+    sitemap_content = ['<?xml version="1.0" encoding="UTF-8"?>']
+    sitemap_content.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    
+    url_count = 0
+
+    # 1. Add Root URL (Homepage)
+    sitemap_content.append(f"""  <url>
+    <loc>{base_url}/</loc>
+    <lastmod>{datetime.date.today()}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>""")
+    url_count += 1
+
+    # 2. Add Static Pages
+    for page in static_pages:
+        url = f"{base_url}/{page}"
+        sitemap_content.append(f"""  <url>
+    <loc>{url}</loc>
+    <lastmod>{datetime.date.today()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>""")
+        url_count += 1
+
+    # 3. Add Dynamic Country Pages
+    for country in countries:
+        slug = country['slug']
+        url = f"{base_url}/{slug}.html"
+        sitemap_content.append(f"""  <url>
+    <loc>{url}</loc>
+    <lastmod>{datetime.date.today()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+        url_count += 1
+
+    sitemap_content.append('</urlset>')
+    
+    with open(os.path.join(output_dir, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(sitemap_content))
+    
+    print(f"OK: Sitemap generated with {url_count} URLs at docs/sitemap.xml")
+
 if __name__ == '__main__':
     main()
