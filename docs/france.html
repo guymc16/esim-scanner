@@ -71,6 +71,12 @@
         h4,
         h5,
         h6,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
         .font-heading {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -166,18 +172,20 @@
 <!-- Filter Navigation (Sticky Glass Capsule) -->
 <div class="sticky top-16 z-40 container mx-auto px-4 mb-16 pointer-events-none transition-all duration-300">
     <div
-        class="pointer-events-auto mx-auto max-w-fit bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-full p-1.5 shadow-2xl flex items-center gap-2 overflow-x-auto snap-x snap-mandatory scrollbar-hide max-w-[95vw]">
+        class="pointer-events-auto mx-auto w-fit bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-full p-1.5 shadow-2xl flex items-center max-w-[95vw]">
 
-        <div id="data-filters" class="flex items-center gap-1">
-            <!-- Buttons injected by JS -->
+        <!-- Scrollable Data Filters -->
+        <div class="overflow-x-auto scrollbar-hide flex-grow">
+            <div id="data-filters" class="flex items-center gap-1 px-1">
+                <!-- Buttons injected by JS -->
+            </div>
         </div>
 
-        <div class="w-px h-6 bg-white/10 mx-2"></div>
+        <!-- Fixed Divider -->
+        <div class="w-px h-6 bg-white/10 mx-2 flex-shrink-0"></div>
 
-        <div class="w-px h-6 bg-white/10 mx-2"></div>
-
-        <!-- Duration Dropdown (Restored & Refined) -->
-        <div class="relative group" id="duration-container" style="display:none;">
+        <!-- Fixed Duration Dropdown -->
+        <div class="relative group flex-shrink-0" id="duration-container" style="display:none;">
             <select id="duration-filter"
                 class="appearance-none bg-transparent text-white font-medium text-sm pl-3 pr-8 py-2 focus:outline-none cursor-pointer">
                 <option value="all" class="text-slate-900">Filter Plans</option>
@@ -230,8 +238,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="1" data-initial-price="1.79"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -263,7 +270,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $1.79
+                                            $1.79
                                             
                                         </span>
                                     </div>
@@ -356,8 +363,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="7" data-initial-price="4.5"
-                    data-initial-discount="3.8249999999999997"
-                    data-static="">
+                    data-initial-discount="3.8249999999999997" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -389,7 +395,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $3.82
+                                            $3.82
                                             
                                         </span>
                                     </div>
@@ -499,8 +505,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="7" data-initial-price="3.99"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -532,7 +537,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $3.99
+                                            $3.99
                                             
                                         </span>
                                     </div>
@@ -625,8 +630,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -658,7 +662,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -787,8 +791,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="15" data-initial-price="6.0"
-                    data-initial-discount="5.1"
-                    data-static="">
+                    data-initial-discount="5.1" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -820,7 +823,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $5.10
+                                            $5.10
                                             
                                         </span>
                                     </div>
@@ -930,8 +933,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -963,7 +965,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -1092,8 +1094,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="30" data-initial-price="7.0"
-                    data-initial-discount="5.95"
-                    data-static="">
+                    data-initial-discount="5.95" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1125,7 +1126,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $5.95
+                                            $5.95
                                             
                                         </span>
                                     </div>
@@ -1235,8 +1236,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="30" data-initial-price="8.99"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1268,7 +1268,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $8.99
+                                            $8.99
                                             
                                         </span>
                                     </div>
@@ -1361,8 +1361,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1394,7 +1393,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -1523,8 +1522,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="1" data-initial-price="3.59"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1556,7 +1554,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $3.59
+                                            $3.59
                                             
                                         </span>
                                     </div>
@@ -1649,8 +1647,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="30" data-initial-price="10.0"
-                    data-initial-discount="8.5"
-                    data-static="">
+                    data-initial-discount="8.5" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1682,7 +1679,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $8.50
+                                            $8.50
                                             
                                         </span>
                                     </div>
@@ -1792,8 +1789,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="30" data-initial-price="11.99"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1825,7 +1821,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $11.99
+                                            $11.99
                                             
                                         </span>
                                     </div>
@@ -1918,8 +1914,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -1951,7 +1946,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -2080,8 +2075,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="1" data-initial-price="7.19"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2113,7 +2107,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $7.19
+                                            $7.19
                                             
                                         </span>
                                     </div>
@@ -2206,8 +2200,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="30" data-initial-price="16.0"
-                    data-initial-discount="13.6"
-                    data-static="">
+                    data-initial-discount="13.6" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2239,7 +2232,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $13.60
+                                            $13.60
                                             
                                         </span>
                                     </div>
@@ -2349,8 +2342,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="30" data-initial-price="15.99"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2382,7 +2374,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $15.99
+                                            $15.99
                                             
                                         </span>
                                     </div>
@@ -2475,8 +2467,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="30" data-initial-price="21.6"
-                    data-initial-discount="17.28"
-                    data-static="">
+                    data-initial-discount="17.28" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2508,7 +2499,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $17.28
+                                            $17.28
                                             
                                         </span>
                                     </div>
@@ -2612,8 +2603,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2645,7 +2635,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -2774,8 +2764,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="1" data-initial-price="15.29"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2807,7 +2796,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $15.29
+                                            $15.29
                                             
                                         </span>
                                     </div>
@@ -2900,8 +2889,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 4.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6702&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-7days-1gb&intsrc=CATF_15506"}, {"data": 2.0, "day": 15, "price": 6.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6703&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-15days-2gb&intsrc=CATF_15506"}, {"data": 3.0, "day": 30, "price": 7.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6705&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-3gb&intsrc=CATF_15506"}, {"data": 5.0, "day": 30, "price": 10.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6708&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-5gb&intsrc=CATF_15506"}, {"data": 10.0, "day": 30, "price": 16.0, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6709&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-10gb&intsrc=CATF_15506"}, {"data": 20.0, "day": 30, "price": 23.5, "link": "https://airalo.pxf.io/c/1209822/1923897/15608?prodsku=6711&u=https%3A%2F%2Fwww.airalo.com%2Ffrance-esim%2Felan-30days-20gb&intsrc=CATF_15506"}]' data-provider="Airalo"
                     data-initial-days="30" data-initial-price="23.5"
-                    data-initial-discount="19.974999999999998"
-                    data-static="">
+                    data-initial-discount="19.974999999999998" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -2933,7 +2921,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $19.97
+                                            $19.97
                                             
                                         </span>
                                     </div>
@@ -3043,8 +3031,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="30" data-initial-price="26.4"
-                    data-initial-discount="21.12"
-                    data-static="">
+                    data-initial-discount="21.12" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3076,7 +3063,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $21.12
+                                            $21.12
                                             
                                         </span>
                                     </div>
@@ -3180,8 +3167,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="30" data-initial-price="25.59"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3213,7 +3199,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $25.59
+                                            $25.59
                                             
                                         </span>
                                     </div>
@@ -3306,8 +3292,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3339,7 +3324,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -3468,8 +3453,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="30" data-initial-price="33.6"
-                    data-initial-discount="26.880000000000003"
-                    data-static="">
+                    data-initial-discount="26.880000000000003" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3501,7 +3485,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $26.88
+                                            $26.88
                                             
                                         </span>
                                     </div>
@@ -3605,8 +3589,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3638,7 +3621,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -3767,8 +3750,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="365" data-initial-price="82.8"
-                    data-initial-discount="66.24"
-                    data-static="">
+                    data-initial-discount="66.24" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3800,7 +3782,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $66.24
+                                            $66.24
                                             
                                         </span>
                                     </div>
@@ -3904,8 +3886,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -3937,7 +3918,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -4066,8 +4047,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="5" data-initial-price="27.89"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4099,7 +4079,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $27.89
+                                            $27.89
                                             
                                         </span>
                                     </div>
@@ -4192,8 +4172,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4225,7 +4204,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -4354,8 +4333,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="365" data-initial-price="130.8"
-                    data-initial-discount="104.64000000000001"
-                    data-static="">
+                    data-initial-discount="104.64000000000001" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4387,7 +4365,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $104.64
+                                            $104.64
                                             
                                         </span>
                                     </div>
@@ -4491,8 +4469,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4524,7 +4501,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -4653,8 +4630,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="5" data-initial-price="45.89"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4686,7 +4662,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $45.89
+                                            $45.89
                                             
                                         </span>
                                     </div>
@@ -4779,8 +4755,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4812,7 +4787,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -4941,8 +4916,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 9999.0, "day": 1, "price": 8.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 10.0, "day": 30, "price": 21.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 20.0, "day": 30, "price": 26.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 7, "price": 31.2, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 30.0, "day": 30, "price": 33.6, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 15, "price": 46.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 9999.0, "day": 30, "price": 56.4, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 40.0, "day": 365, "price": 82.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}, {"data": 80.0, "day": 365, "price": 130.8, "link": "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app%2Fcountry%2Ffrance"}]' data-provider="Yesim"
                     data-initial-days="1" data-initial-price="8.4"
-                    data-initial-discount="6.720000000000001"
-                    data-static="">
+                    data-initial-discount="6.720000000000001" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -4974,7 +4948,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $6.72
+                                            $6.72
                                             
                                         </span>
                                     </div>
@@ -5078,8 +5052,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 1, "price": 1.79, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 5, "price": 2.69, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 10, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 1, "price": 3.59, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 15, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 5, "price": 4.49, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 10, "price": 5.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 30, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 15, "price": 6.29, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 1, "price": 7.19, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 5, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 30, "price": 8.09, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 10, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 15, "price": 8.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 60, "price": 9.89, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 30, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 60, "price": 11.69, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 90, "price": 12.59, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 5, "price": 13.49, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 90, "price": 14.39, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 60, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 1, "price": 15.29, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=1&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 5, "price": 16.19, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 1.0, "day": 180, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=1&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 10, "price": 17.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 90, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 15, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 10, "price": 17.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 5.0, "day": 180, "price": 18.89, "link": "https://maya.net/order/new?region=fr&data=5&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 30, "price": 19.79, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 10.0, "day": 180, "price": 22.49, "link": "https://maya.net/order/new?region=fr&data=10&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 60, "price": 23.39, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 90, "price": 26.09, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 15, "price": 26.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 5, "price": 27.89, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 10, "price": 28.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 15, "price": 29.69, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 20.0, "day": 180, "price": 30.59, "link": "https://maya.net/order/new?region=fr&data=20&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 30, "price": 31.49, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 60, "price": 35.09, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 90, "price": 37.79, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 50.0, "day": 180, "price": 42.29, "link": "https://maya.net/order/new?region=fr&data=50&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 5, "price": 45.89, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=5&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 10, "price": 46.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=10&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 15, "price": 47.69, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=15&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 30, "price": 51.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 30, "price": 53.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=30&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 60, "price": 55.79, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 90, "price": 60.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 100.0, "day": 180, "price": 69.29, "link": "https://maya.net/order/new?region=fr&data=100&billing=prepaid&days=180&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 60, "price": 89.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=60&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 90, "price": 143.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=90&pid=QTsarrERAv1y"}, {"data": 9999.0, "day": 180, "price": 269.99, "link": "https://maya.net/order/new?region=fr&data=unlimited&billing=prepaid&days=180&pid=QTsarrERAv1y"}]' data-provider="Maya Mobile"
                     data-initial-days="5" data-initial-price="13.49"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -5111,7 +5084,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $13.49
+                                            $13.49
                                             
                                         </span>
                                     </div>
@@ -5204,8 +5177,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[{"data": 1.0, "day": 7, "price": 3.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 3.0, "day": 30, "price": 8.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 5.0, "day": 30, "price": 11.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 10.0, "day": 30, "price": 15.99, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 20.0, "day": 30, "price": 25.59, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}, {"data": 9999.0, "day": 10, "price": 39.19, "link": "https://tp.media/r?campaign_id=629&marker=689615&p=8979&trs=479661&u=https%3A%2F%2Fsaily.com%2Fesim-france"}]' data-provider="Saily"
                     data-initial-days="10" data-initial-price="39.19"
-                    data-initial-discount="None"
-                    data-static="">
+                    data-initial-discount="None" data-static="">
 
                     <!-- Hover Gradient -->
                     <div
@@ -5237,7 +5209,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                $39.19
+                                            $39.19
                                             
                                         </span>
                                     </div>
@@ -5330,8 +5302,7 @@
                 <div class="provider-card w-full relative bg-white rounded-[1.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 group overflow-hidden flex flex-col border border-transparent hover:border-slate-100"
                     data-plans='[]' data-provider="Klook"
                     data-initial-days="1-30 Days" data-initial-price="Check Price"
-                    data-initial-discount="None"
-                    data-static="True">
+                    data-initial-discount="None" data-static="True">
 
                     <!-- Hover Gradient -->
                     <div
@@ -5363,7 +5334,7 @@
                                         <!-- Smaller Price: text-2xl -->
                                         <span class="text-2xl font-bold text-slate-900 tracking-tight main-price">
                                             
-                                                Check Price
+                                            Check Price
                                             
                                         </span>
                                     </div>
@@ -5528,7 +5499,7 @@
 
         // Create 'All' Button
         const allBtn = document.createElement('button');
-        allBtn.className = 'filter-btn active px-5 py-2 text-sm font-bold text-white bg-white/20 border border-white/10 rounded-full transition-all duration-200 whitespace-nowrap backdrop-blur-md snap-center flex-shrink-0';
+        allBtn.className = 'filter-btn active px-5 py-2 text-sm font-bold text-white bg-white/20 border-white/10 rounded-full transition-all duration-200 whitespace-nowrap backdrop-blur-md snap-center flex-shrink-0';
         allBtn.innerText = 'All';
         allBtn.onclick = () => showAll();
         filterContainer.appendChild(allBtn);
@@ -5709,7 +5680,7 @@
                 if (card.dataset.static === 'True') {
                     card.style.display = 'flex';
                     // We don't update internal elements because they are static
-                    return; 
+                    return;
                 }
 
                 const plans = JSON.parse(card.getAttribute('data-plans') || '[]');
@@ -5829,11 +5800,22 @@
 
         function updateButtons(activeBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('active', 'bg-white/20', 'text-white', 'border-white/10');
+                b.classList.remove('active', 'bg-white/20', 'text-white', 'border-white/10', 'border');
                 b.classList.add('text-slate-400');
             });
             activeBtn.classList.remove('text-slate-400');
-            activeBtn.classList.add('active', 'bg-white/20', 'text-white', 'border-white/10');
+            activeBtn.classList.add('active', 'bg-white/20', 'text-white', 'border-white/10', 'border');
+        }
+
+        // Horizontal Scroll for Filter Capsule
+        const filterScrollArea = document.getElementById('data-filters').parentElement;
+        if (filterScrollArea) {
+            filterScrollArea.addEventListener('wheel', (evt) => {
+                // Only hijack if we are actually scrolling (prevents blocking normal page scroll if empty?)
+                // Actually, for this specific element, we want to convert Y to X.
+                evt.preventDefault();
+                filterScrollArea.scrollLeft += evt.deltaY;
+            });
         }
     });
 </script>
