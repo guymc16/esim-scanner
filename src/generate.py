@@ -349,7 +349,7 @@ def main():
         "ecosystem": tools_data # Reuse tools for the ecosystem marquee
     }
 
-    static_pages = ['about.html', 'partners.html', 'toolkit.html']
+    static_pages = ['about.html', 'partners.html', 'toolkit.html', 'privacy.html']
     for page in static_pages:
         try:
             tmpl = env.get_template(page)
