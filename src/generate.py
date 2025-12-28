@@ -334,13 +334,21 @@ def main():
         if 'klook' in p['name'].lower(): logo_filename = "static/logos/klook.png"
         if 'drimsim' in p['name'].lower(): logo_filename = "static/logos/drimsim.png"
 
+        
+        # Generic fallback
+        partner_link = p['affiliate_link'].replace('{country_slug}', 'global')
+        
+        # FIX: Yesim "Global" link doesn't exist at /country/global -> Point to Homepage
+        if "Yesim" in p['name']:
+            partner_link = "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app"
+
         partners_data.append({
             "name": p['name'],
             "local_logo": logo_filename,
             "badge": badge,
             "badge_color": badge_color,
             "description": desc,
-            "link": p['affiliate_link'].replace('{country_slug}', 'global') # Fallback link
+            "link": partner_link
         })
 
     static_context = {
