@@ -443,6 +443,13 @@
             let visibleCount = 0;
 
             cards.forEach(card => {
+                // Static Card Bypass (Klook etc)
+                if (card.dataset.static === 'True') {
+                    card.style.display = 'flex';
+                    // We don't update internal elements because they are static
+                    return; 
+                }
+
                 const plans = JSON.parse(card.getAttribute('data-plans') || '[]');
                 const buyBtn = card.querySelector('a');
                 const priceEl = card.querySelector('.main-price');

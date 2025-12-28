@@ -12,6 +12,13 @@ DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 TEMPLATES_DIR = os.path.join(PROJECT_ROOT, 'templates')
 DOCS_DIR = os.path.join(PROJECT_ROOT, 'docs')
 
+KLOOK_WHITELIST = [
+    'japan', 'south-korea', 'thailand', 'singapore', 'taiwan', 'hong-kong',
+    'vietnam', 'malaysia', 'indonesia', 'philippines', 'china', 'india',
+    'usa', 'united-kingdom', 'france', 'italy', 'spain', 'germany',
+    'australia', 'new-zealand', 'turkey', 'united-arab-emirates'
+]
+
 # --- Helper Functions ---
 
 def load_json(path):
@@ -163,6 +170,37 @@ def get_grouped_plans(country_code, country_slug, all_real_plans, providers):
         
         # 1. Fix Sorting (Price Priority)
         # Sort cards strictly by effective price
+        section_plans.sort(key=lambda x: x['sort_price'])
+        
+
+
+        # 2. Inject Klook Card (Static) if Country is Whitelisted
+        # We add it to EVERY group so it shows up regardless of filter
+        if country_slug in KLOOK_WHITELIST:
+             # print(f"DEBUG: Process Klook for {country_slug}")
+             # Find Klook config
+             klook_conf = next((p for p in providers if 'Klook' in p['name']), None)
+             if klook_conf:
+                 # Construct Static Card
+                 klook_link = klook_conf['affiliate_link'].replace('{country_slug}', country_slug)
+                 klook_card = {
+                    "name": "Klook",
+                    "json_data": "[]", # No dynamic plans
+                    "data_amount": "Various Plans",
+                    "duration": "1-30 Days",
+                    "price": "Check Price", # String display
+                    "discounted_price": None,
+                    "logo_url": "static/logos/klook.png",
+                    "rating": klook_conf.get('base_rating', 4.6),
+                    "benefits": klook_conf.get('benefits', []),
+                    "coupons": None,
+                    "link": klook_link,
+                    "sort_price": 9999, # Force to bottom
+                    "is_static": True
+                 }
+                 section_plans.append(klook_card)
+
+        # 3. Sort again to ensure Klook is last
         section_plans.sort(key=lambda x: x['sort_price'])
         
         if section_plans:
