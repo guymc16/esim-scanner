@@ -187,7 +187,7 @@ def get_grouped_plans(country_code, country_slug, all_real_plans, providers):
                     "name": "Klook",
                     "json_data": "[]", # No dynamic plans
                     "data_amount": "Various Plans",
-                    "duration": "1-30 Days",
+                    "duration": "Various",
                     "price": "Check Price", # String display
                     "discounted_price": None,
                     "logo_url": "static/logos/klook.png",
