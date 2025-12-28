@@ -327,38 +327,40 @@ def analyze_feed():
                 parsed = urlparse(link_val)
                 query = parse_qs(parsed.query) # Returns dict with lists
                 
+                # Default to None so we don't break logic if 'u' missing
+                decoded_target = None
+
                 if 'u' in query:
                     # 1. Extract the raw target URL (It might be partially encoded or not)
                     raw_target = query['u'][0]
-                    
                     # 2. Fully Decode it (to ensure we start from clean "https://...")
                     decoded_target = unquote(raw_target)
-                    
+                
+                # If we couldn't find/decode 'u', fallback to manual construction if possible,
+                # or just use the link as is (but that's pxf.io, which user doesn't want).
+                # However, for Airalo XML feed, link_elem.text IS pxf.io.
+                # If we fail to extract, we should probably warn.
+                # But let's assume 'u' is there (it usually is).
+                
+                if decoded_target:
                     # 3. Strictly Re-Encode it (safe='' forces encoding of slashes/colons)
                     encoded_target = urllib.parse.quote(decoded_target, safe='')
                     
-                    # 4. Reconstruct the query params with the FIXED encoded target
-                    # keeping other params (like prodsku, intsrc) untouched if possible,
-                    # or just rebuilding the known structure.
+                    # 4. Construct Travelpayouts Link (Airalo Only)
+                    # https://tp.media/r?campaign_id=541&marker=689615&type=click&u=[ENCODED_DESTINATION_URL]
                     
-                    # Safer: Rebuild the whole QD.
-                    # Note: parse_qs decoded everything. We need to re-encode them properly.
-                    
-                    # Let's reconstruct manually to be safe like the request asked:
-                    # [Base_Affiliate_URL]?subId1=[...]&u=[Encoded_Target_URL]
-                    
-                    # Base: https://airalo.pxf.io/c/1209822/1923897/15608
-                    base_url = "https://airalo.pxf.io/c/1209822/1923897/15608"
-                    
-                    # Params we want to keep
-                    new_params = []
-                    if 'prodsku' in query: new_params.append(f"prodsku={query['prodsku'][0]}")
-                    if 'intsrc' in query: new_params.append(f"intsrc={query['intsrc'][0]}")
-                    
-                    new_params.append(f"u={encoded_target}")
+                    tp_base = "https://tp.media/r"
+                    tp_params = [
+                        "campaign_id=541",
+                        "marker=689615",
+                        "p=8310",
+                        "type=click",
+                        f"u={encoded_target}"
+                    ]
                     
                     # Join
-                    link_val = f"{base_url}?{'&'.join(new_params)}"
+                    link_val = f"{tp_base}?{'&'.join(tp_params)}"
+                    
             except Exception as e:
                 print(f"Error fixing link for {country_iso}: {e}")
                 pass

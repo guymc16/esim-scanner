@@ -335,12 +335,19 @@ def main():
         if 'drimsim' in p['name'].lower(): logo_filename = "static/logos/drimsim.png"
 
         
+        
         # Generic fallback
         partner_link = p['affiliate_link'].replace('{country_slug}', 'global')
         
         # FIX: Yesim "Global" link doesn't exist at /country/global -> Point to Homepage
         if "Yesim" in p['name']:
             partner_link = "https://tp.media/r?campaign_id=224&marker=689615&p=5998&trs=479661&u=https%3A%2F%2Fyesim.app"
+            
+        # FIX: Airalo Partners Link (Travelpayouts)
+        if "Airalo" in p['name']:
+            # Base Airalo Homepage encoded
+            encoded_home = "https%3A%2F%2Fwww.airalo.com"
+            partner_link = f"https://tp.media/r?campaign_id=541&marker=689615&p=8310&type=click&u={encoded_home}"
 
         partners_data.append({
             "name": p['name'],
