@@ -1,6 +1,8 @@
 import xml.etree.ElementTree as ET
 import json
 import re
+import urllib.parse
+from urllib.parse import urlparse, parse_qs, unquote, quote
 from pathlib import Path
 
 # Paths
@@ -318,6 +320,50 @@ def analyze_feed():
             
         price_val = parse_price(price_elem.text)
         link_val = link_elem.text
+        
+        # FIX: Ensure strict URL encoding for Deep Link (Australia Fix)
+        if "airalo.pxf.io" in link_val:
+            try:
+                parsed = urlparse(link_val)
+                query = parse_qs(parsed.query) # Returns dict with lists
+                
+                if 'u' in query:
+                    # 1. Extract the raw target URL (It might be partially encoded or not)
+                    raw_target = query['u'][0]
+                    
+                    # 2. Fully Decode it (to ensure we start from clean "https://...")
+                    decoded_target = unquote(raw_target)
+                    
+                    # 3. Strictly Re-Encode it (safe='' forces encoding of slashes/colons)
+                    encoded_target = urllib.parse.quote(decoded_target, safe='')
+                    
+                    # 4. Reconstruct the query params with the FIXED encoded target
+                    # keeping other params (like prodsku, intsrc) untouched if possible,
+                    # or just rebuilding the known structure.
+                    
+                    # Safer: Rebuild the whole QD.
+                    # Note: parse_qs decoded everything. We need to re-encode them properly.
+                    
+                    # Let's reconstruct manually to be safe like the request asked:
+                    # [Base_Affiliate_URL]?subId1=[...]&u=[Encoded_Target_URL]
+                    
+                    # Base: https://airalo.pxf.io/c/1209822/1923897/15608
+                    base_url = "https://airalo.pxf.io/c/1209822/1923897/15608"
+                    
+                    # Params we want to keep
+                    new_params = []
+                    if 'prodsku' in query: new_params.append(f"prodsku={query['prodsku'][0]}")
+                    if 'intsrc' in query: new_params.append(f"intsrc={query['intsrc'][0]}")
+                    
+                    new_params.append(f"u={encoded_target}")
+                    
+                    # Join
+                    link_val = f"{base_url}?{'&'.join(new_params)}"
+            except Exception as e:
+                print(f"Error fixing link for {country_iso}: {e}")
+                pass
+                
+        # END FIX
         
         raw_type = product_type_elem.text
         parts = [p.strip() for p in raw_type.split('>')]
