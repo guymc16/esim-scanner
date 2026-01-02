@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Best eSIM for {{ country.name }} (2025) | Cheapest & Student Plans{% endblock %}
+{% block title %}Best eSIM for {{ country.name }} ({{ current_year }}) | Cheapest & Student Plans{% endblock %}
 
 {% block meta_description %}
 <meta name="description"
@@ -278,7 +278,7 @@
         <summary
             class="flex items-center justify-between p-5 cursor-pointer bg-white hover:bg-gray-50 transition-colors list-none select-none">
             <span class="flex items-center gap-3 text-lg font-semibold text-gray-800">
-                <span>🌍</span> Traveler's Guide: Connectivity in {{ country.name }} (2025)
+                <span>🌍</span> Traveler's Guide: Connectivity in {{ country.name }} ({{ current_year }})
             </span>
             <svg class="w-5 h-5 text-gray-400 transform group-open:rotate-180 transition-transform duration-200"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor">

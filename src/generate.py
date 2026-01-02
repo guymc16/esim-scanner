@@ -279,7 +279,10 @@ def main():
     # Generate Index Page (SSOT-Driven)
     try:
         index_template = env.get_template('index.html')
-        index_str = index_template.render(countries=master_countries)
+        index_str = index_template.render(
+            countries=master_countries,
+            current_year=datetime.datetime.now().year
+        )
         index_path = os.path.join(DOCS_DIR, 'index.html')
         with open(index_path, 'w', encoding='utf-8') as f:
             f.write(index_str)
